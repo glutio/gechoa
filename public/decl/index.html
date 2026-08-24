@@ -53,6 +53,11 @@
         <button class="global-mode-btn mode-current-btn active" onclick="setGlobalDiffMode('current')">Current</button>
         <button class="global-mode-btn mode-amend-btn" onclick="setGlobalDiffMode('inline')">Amendments</button>
       </div>
+      <div class="text-size-selector" role="group" aria-label="Text size">
+        <button class="text-size-btn" onclick="stepReadingScale(-1)" aria-label="Smaller text" title="Smaller text">A&minus;</button>
+        <button class="text-size-btn text-size-reset" onclick="resetReadingScale()" aria-label="Reset text size" title="Reset text size">A</button>
+        <button class="text-size-btn" onclick="stepReadingScale(1)" aria-label="Larger text" title="Larger text">A+</button>
+      </div>
     </div>
   </div>
 
@@ -95,6 +100,7 @@
 
   // Handle direct page load / refresh
   window.addEventListener('DOMContentLoaded', () => {
+    applyReadingScale();
     renderAll();
     buildTOC();
     loadFavorites();
@@ -103,6 +109,30 @@
       setTimeout(() => performScroll(id), 50);
     }
   });
+
+  /* --- READING TEXT SIZE (scales section + TOC text only, not chrome) --- */
+  const READING_SCALE_MIN = 0.8, READING_SCALE_MAX = 1.8, READING_SCALE_STEP = 0.1;
+  function getReadingScale() {
+    const v = parseFloat(localStorage.getItem('gec_reading_scale'));
+    return (isFinite(v) && v > 0) ? v : 1;
+  }
+  function applyReadingScale() {
+    const s = Math.min(READING_SCALE_MAX, Math.max(READING_SCALE_MIN, getReadingScale()));
+    document.body.style.setProperty('--reading-scale', String(s));
+    document.querySelectorAll('.text-size-reset').forEach(b => {
+      b.classList.toggle('active', Math.abs(s - 1) > 0.001);
+    });
+  }
+  function stepReadingScale(dir) {
+    let s = getReadingScale() + dir * READING_SCALE_STEP;
+    s = Math.round(Math.min(READING_SCALE_MAX, Math.max(READING_SCALE_MIN, s)) * 100) / 100;
+    localStorage.setItem('gec_reading_scale', String(s));
+    applyReadingScale();
+  }
+  function resetReadingScale() {
+    localStorage.setItem('gec_reading_scale', '1');
+    applyReadingScale();
+  }
 
   /* --- DYNAMIC COLLAPSIBLE TABLE OF CONTENTS --- */
   let tocAutoId = 0;
