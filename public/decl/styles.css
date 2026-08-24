@@ -200,7 +200,9 @@
   /* Main Container */
   #main {
     flex: 1;
+    min-width: 0;
     overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     scroll-behavior: auto !important;
@@ -247,10 +249,11 @@
     transition: all 0.15s;
   }
   .global-mode-btn.active {
-    background: #1e3a8a;
     color: #ffffff;
     box-shadow: 0 1px 2px rgba(0,0,0,0.1);
   }
+  .global-mode-btn.mode-current-btn.active { background: #4e7a5e; }
+  .global-mode-btn.mode-amend-btn.active { background: #8a5c3f; }
 
   .content-wrapper {
     max-width: 1040px;
@@ -311,6 +314,8 @@
     font-size: 15.5px;
     line-height: 1.7;
     color: #334155;
+    overflow-wrap: break-word;
+    word-break: normal;
   }
 
   .section-body h3 {
@@ -605,7 +610,17 @@
     body.nav-open #navOverlay { display: block; }
     .burger { display: inline-flex !important; }
     .topbar { padding: 10px 14px; }
-    .content-wrapper { padding: 20px 16px 100px; }
+    .content-wrapper { padding: 16px 10px 90px; }
+
+    /* No horizontal panning on mobile: everything stays within the viewport. */
+    html, body { overflow-x: hidden; max-width: 100%; }
+    #main { width: 100%; max-width: 100vw; }
+
+    /* Tighter section chrome so text gets the width on small screens. */
+    section.doc-section { padding: 14px 12px; margin-bottom: 16px; border-radius: 6px; }
+    .section-header { margin-bottom: 12px; padding-bottom: 10px; }
+    .section-body { font-size: 15px; }
+    table { display: block; overflow-x: auto; max-width: 100%; }
   }
   .burger {
     display: none;
