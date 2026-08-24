@@ -44,6 +44,11 @@
     --reading-scale: 1;
   }
 
+  /* Prevent iOS double-tap-to-zoom on controls (keeps pinch-zoom intact). */
+  button, .nav-item, a.nav-item, .text-size-selector, .global-mode-selector {
+    touch-action: manipulation;
+  }
+
   /* Sidebar */
   #sidebar {
     width: var(--sidebar-w);
