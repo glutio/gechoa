@@ -117,20 +117,21 @@
     .sort(function (x, y) { return x - y; });
   // Matte, muted amendment colors (readable on white). First three are the
   // established 2001/2006/2016 hues; the rest extend the set for documents with
-  // more amendment layers. Intentionally no bright, purple, or brown tones.
+  // more amendment layers. Ordered for maximum hue separation between adjacent
+  // amendments. Intentionally no bright, purple, or brown tones.
   var AMEND_PALETTE = [
     '#46688f', // dusty blue
     '#4e7a5e', // sage green
     '#9c5566', // dusty rose
-    '#4a7f80', // muted teal
-    '#5f7392', // slate blue
-    '#6b8e5a', // moss green
-    '#a05f7e', // dusty pink
-    '#607d8b', // blue-gray
-    '#4d8577', // seafoam
     '#b0705f', // muted coral
-    '#7089a0', // steel blue
-    '#55707e'  // slate teal
+    '#4a8080', // muted teal
+    '#a05f85', // dusty magenta
+    '#6b8e5a', // moss green
+    '#5c6f9c', // muted indigo
+    '#a85a5a', // brick red
+    '#4d8a72', // seafoam
+    '#607d8b', // blue-gray
+    '#8f8a4f'  // muted olive
   ];
   function yearColor(y) {
     var i = AMEND_YEARS.indexOf(y);
