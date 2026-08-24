@@ -140,8 +140,6 @@
     transition: transform 0.15s ease;
   }
   .fav-panel.collapsed .fav-caret { transform: rotate(-90deg); }
-  .fav-clear { font-size: 10px; cursor: pointer; color: #94a3b8; }
-  .fav-clear:hover { color: #e2e8f0; }
   .fav-list {
     max-height: 34vh;
     overflow-y: auto;
