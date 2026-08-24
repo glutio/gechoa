@@ -582,8 +582,14 @@
     width: 13px; height: 13px; border-radius: 3px; display: inline-block;
   }
 
-  /* Inserted / surviving amendment text: colored per year via --amc. */
-  ins.amend-ins { text-decoration: none; }
+  /* Inserted / surviving amendment text: colored per year via --amc.
+     Keep identical box metrics in every mode so toggling never reflows
+     the surrounding (unchanged) text — only color/background change. */
+  ins.amend-ins {
+    text-decoration: none;
+    padding: 0 1px;
+    border-radius: 2px;
+  }
   del.amend-del { text-decoration: none; }
   .amend-chip {
     font-family: var(--sans);
@@ -609,8 +615,6 @@
   body.mode-inline ins.amend-ins {
     color: var(--amc, #15803d);
     background: color-mix(in srgb, var(--amc, #15803d) 12%, transparent);
-    border-radius: 2px;
-    padding: 0 1px;
   }
   body.mode-inline del.amend-del {
     color: var(--amc, #b91c1c);
