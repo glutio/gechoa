@@ -595,8 +595,10 @@
     font-family: var(--sans);
     font-size: 9px;
     font-weight: 700;
-    line-height: 1;
-    vertical-align: super;
+    line-height: 0;
+    vertical-align: baseline;
+    position: relative;
+    top: -0.55em;
     margin-left: 2px;
     padding: 1px 3px;
     border-radius: 3px;
