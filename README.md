@@ -12,9 +12,38 @@ public/            Static site served by Cloudflare
   index.html       Landing page (single hero section)
   styles.css       Responsive styling
   GEC.jpg          Aerial image used as the hero background
+  decl/            Declaration & amendments viewer (served at /decl/)
+    index.html     Viewer shell (HTML + nav/TOC/favorites/mode JS)
+    styles.css     Viewer styles
+    app.js         Deterministic renderer (consumes window.DECL_DATA)
+    data.js        GENERATED from tools/source — do not hand-edit
+tools/             Build + verification for the viewer data
+  source/          Canonical source text
+    GEC-Declaration.txt       Pristine original text
+    GEC-Declaration-Full.md   Same text in Markdown, annotated with <!--op--> directives
+  build-data.js    Builds public/decl/data.js from the source
+  render-check.js  Headless render assertions
+  golden.json      Regression baseline
+docs/              Archived reference material
+AGENTS.md          How the viewer, data model, and directives work
 wrangler.toml      Cloudflare Workers (static assets) configuration
 package.json       Scripts + wrangler dev dependency
 ```
+
+## The Declaration viewer
+
+`/decl/` renders the GEC Declaration plus every amendment, in either a clean
+**current** consolidated view or an **inline** redline. The data is raw
+(1980 base + first-class amendment operations) and the renderer applies operations
+deterministically. To rebuild after editing the source Markdown:
+
+```sh
+node tools/build-data.js     # regenerate public/decl/data.js (prints COMPOSE VERIFY)
+node tools/render-check.js   # headless render assertions
+```
+
+See [AGENTS.md](AGENTS.md) for the data model, the `<!--op-->` directive convention,
+and how to onboard a new document.
 
 ## Develop locally
 

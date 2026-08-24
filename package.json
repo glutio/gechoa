@@ -6,9 +6,12 @@
   "scripts": {
     "dev": "wrangler dev",
     "start": "wrangler dev",
-    "deploy": "wrangler deploy"
+    "deploy": "wrangler deploy",
+    "build:data": "node tools/build-data.js",
+    "check:render": "node tools/render-check.js"
   },
   "devDependencies": {
+    "jsdom": "^29",
     "wrangler": "^4"
   }
 }

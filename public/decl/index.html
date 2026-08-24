@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glendale Estates Condominium — Declaration & Amendments Explorer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="mode-current">
+
+<!-- SIDEBAR -->
+<div id="navOverlay" onclick="toggleNav(false)"></div>
+<div id="sidebar">
+  <div class="sidebar-header">
+    <h1>Glendale Estates</h1>
+    <div class="sub">Declaration &amp; Amendments</div>
+  </div>
+
+  <div class="search-box">
+    <input type="text" id="secSearch" placeholder="Filter sections or topics..." onkeyup="filterNav()">
+  </div>
+
+  <div class="nav-scroll" id="navScroll">
+    <!-- DYNAMIC FAVORITES LIST -->
+    <div class="nav-group-title">
+      <span>⭐ Bookmarked / Favorites</span>
+      <span style="font-size:10px; cursor:pointer; color:#94a3b8;" onclick="clearAllFavorites()">Clear</span>
+    </div>
+    <div id="favoritesNavList">
+      <div style="padding: 6px 18px; font-size: 12px; color: #64748b; font-style: italic;" id="noFavNotice">
+        Click any ⭐ in text or TOC to pin here
+      </div>
+    </div>
+
+    <!-- DETAILED GRANULAR TOC -->
+    <div id="tocRoot"></div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="burger" onclick="toggleNav()" aria-label="Toggle contents">&#9776;</button>
+      <span style="font-size: 13px; font-weight: 600; color: #475569;">View:</span>
+      <div class="global-mode-selector">
+        <button class="global-mode-btn active" onclick="setGlobalDiffMode('current')">✅ Current</button>
+        <button class="global-mode-btn" onclick="setGlobalDiffMode('inline')">🔍 Inline (amendments)</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+    <div id="docRoot"></div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script>
+  // Mobile TOC drawer
+  function toggleNav(force) {
+    const open = force === undefined ? !document.body.classList.contains('nav-open') : force;
+    document.body.classList.toggle('nav-open', open);
+  }
+
+  // Unified single point of navigation logic
+  function performScroll(targetId) {
+    if (window.matchMedia('(max-width: 880px)').matches) toggleNav(false);
+    if (!targetId) {
+      document.getElementById('main').scrollTop = 0;
+      updateActiveNavItem('');
+      return;
+    }
+    const el = document.getElementById(targetId);
+    if (el) {
+      revealNavFor(targetId);
+      const main = document.getElementById('main');
+      main.scrollTop = el.offsetTop - 70;
+      updateActiveNavItem(targetId);
+    }
+  }
+
+  // Handle all hash changes natively (TOC, Favorites, Back/Forward browser buttons)
+  window.addEventListener('hashchange', () => {
+    const id = window.location.hash.replace('#', '');
+    performScroll(id);
+  });
+
+  // Handle direct page load / refresh
+  window.addEventListener('DOMContentLoaded', () => {
+    renderAll();
+    buildTOC();
+    loadFavorites();
+    const id = window.location.hash.replace('#', '');
+    if (id) {
+      setTimeout(() => performScroll(id), 50);
+    }
+  });
+
+  /* --- DYNAMIC COLLAPSIBLE TABLE OF CONTENTS --- */
+  let tocAutoId = 0;
+
+  function escAttr(s) {
+    return String(s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function prettySectionTitle(raw) {
+    let t = (raw || '').replace(/\s+/g, ' ').trim();
+    let m = t.match(/^SECTION\s+(\S+?):?\s+(.*)$/i);
+    if (m) return 'Sec ' + m[1] + ': ' + titleCase(m[2]);
+    m = t.match(/^(APPENDIX|EXHIBIT)\s+"?([A-Z0-9]+)"?:?\s*(.*)$/i);
+    if (m) {
+      const kind = m[1].charAt(0).toUpperCase() + m[1].slice(1).toLowerCase();
+      return kind + ' ' + m[2] + (m[3] ? ': ' + titleCase(m[3]) : '');
+    }
+    return t;
+  }
+
+  function titleCase(s) {
+    return String(s).toLowerCase().replace(/\b([a-z])/g, c => c.toUpperCase());
+  }
+
+  // Gather subsections in document order via .toc-node markers emitted by the renderer.
+  function collectSubsections(sec) {
+    const body = sec.querySelector('.section-body');
+    if (!body) return [];
+    const out = [];
+    body.querySelectorAll('.toc-node').forEach(el => {
+      const id = el.id;
+      if (!id) return;
+      out.push({ id, label: el.getAttribute('data-toc-label') || id });
+    });
+    return out;
+  }
+
+  function buildTOC() {
+    const root = document.getElementById('tocRoot');
+    if (!root) return;
+    const sections = document.querySelectorAll('#main section.doc-section');
+    let html = '';
+    html += '<div class="nav-group-title">Table of Contents</div>';
+    html += '<div class="toc-controls">'
+          + '<span onclick="tocExpandAll(true)">Expand all</span>'
+          + '<span onclick="tocExpandAll(false)">Collapse all</span>'
+          + '</div>';
+    let appendixHeaderDone = false;
+
+    sections.forEach(sec => {
+      const secId = sec.id;
+      if (!secId) return; // skip preamble / unlabeled sections
+      if (/^(appendix|exhibit)/i.test(secId) && !appendixHeaderDone) {
+        html += '<div class="nav-group-title">Appendices &amp; Schedules</div>';
+        appendixHeaderDone = true;
+      }
+      const titleEl = sec.querySelector('.section-header h2 span') || sec.querySelector('.section-header h2');
+      const rawTitle = titleEl ? titleEl.textContent : secId;
+      const secTitle = prettySectionTitle(rawTitle);
+      const subs = collectSubsections(sec);
+      const hasSubs = subs.length > 0;
+
+      html += '<div class="toc-sec" data-sec="' + escAttr(secId) + '">';
+      html += '<div class="toc-sec-row">';
+      html += hasSubs
+        ? '<span class="toc-toggle">\u25B8</span>'
+        : '<span class="toc-toggle empty"></span>';
+      html += '<a href="#' + escAttr(secId) + '" class="nav-item toc-sec-link">'
+            + '<span>' + escAttr(secTitle) + '</span>'
+            + '<button class="nav-star-btn" data-target="' + escAttr(secId) + '" data-title="' + escAttr(secTitle) + '">\u2605</button>'
+            + '</a>';
+      html += '</div>';
+      if (hasSubs) {
+        html += '<div class="toc-sublist" style="display:none;">';
+        subs.forEach(s => {
+          html += '<a href="#' + escAttr(s.id) + '" class="nav-item sub-item">'
+                + '<span>' + escAttr(s.label) + '</span>'
+                + '<button class="nav-star-btn" data-target="' + escAttr(s.id) + '" data-title="' + escAttr(s.label) + '">\u2605</button>'
+                + '</a>';
+        });
+        html += '</div>';
+      }
+      html += '</div>';
+    });
+
+    root.innerHTML = html;
+
+    // Wire up interactions (avoids inline-onclick quoting issues with labels).
+    root.querySelectorAll('.nav-star-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleFavorite(btn.getAttribute('data-target'), btn.getAttribute('data-title'));
+      });
+    });
+    root.querySelectorAll('.toc-toggle:not(.empty)').forEach(t => {
+      t.addEventListener('click', () => tocToggle(t));
+    });
+  }
+
+  function tocToggle(el) {
+    const sec = el.closest('.toc-sec');
+    if (!sec) return;
+    const sl = sec.querySelector('.toc-sublist');
+    if (!sl) return;
+    const open = sl.style.display !== 'none';
+    sl.style.display = open ? 'none' : 'block';
+    el.textContent = open ? '\u25B8' : '\u25BE';
+  }
+
+  function tocExpandAll(open) {
+    document.querySelectorAll('#tocRoot .toc-sec').forEach(sec => {
+      const sl = sec.querySelector('.toc-sublist');
+      if (!sl) return;
+      sl.style.display = open ? 'block' : 'none';
+      const tg = sec.querySelector('.toc-toggle');
+      if (tg && !tg.classList.contains('empty')) tg.textContent = open ? '\u25BE' : '\u25B8';
+    });
+  }
+
+  // Expand the section that contains the target so the active item is visible.
+  function revealNavFor(id) {
+    const link = document.querySelector('#tocRoot a.nav-item[href="#' + id + '"]');
+    if (!link) return;
+    let sl = link.closest('.toc-sublist');
+    if (!sl) {
+      const sec = link.closest('.toc-sec');
+      sl = sec && sec.querySelector('.toc-sublist');
+    }
+    if (sl) {
+      sl.style.display = 'block';
+      const sec = sl.closest('.toc-sec');
+      const tg = sec && sec.querySelector('.toc-toggle');
+      if (tg && !tg.classList.contains('empty')) tg.textContent = '\u25BE';
+    }
+  }
+
+  function updateActiveNavItem(id) {
+    const navLinks = document.querySelectorAll('#navScroll a.nav-item');
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      const href = link.getAttribute('href') || '';
+      if (href === '#' + id && id !== '') {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  /* --- FAVORITES MANAGEMENT --- */
+  let favorites = JSON.parse(localStorage.getItem('gec_favorites') || '[]');
+
+  function saveFavorites() {
+    localStorage.setItem('gec_favorites', JSON.stringify(favorites));
+    renderFavorites();
+  }
+
+  function toggleFavorite(id, title) {
+    const idx = favorites.findIndex(f => f.id === id);
+    if (idx >= 0) {
+      favorites.splice(idx, 1);
+    } else {
+      favorites.push({ id, title });
+    }
+    saveFavorites();
+  }
+
+  function toggleFavEvent(e, id, title) {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleFavorite(id, title);
+  }
+
+  function removeFavorite(id) {
+    favorites = favorites.filter(f => f.id !== id);
+    saveFavorites();
+  }
+
+  function clearAllFavorites() {
+    favorites = [];
+    saveFavorites();
+  }
+
+  function renderFavorites() {
+    const container = document.getElementById('favoritesNavList');
+
+    // Update star icons across page & TOC
+    document.querySelectorAll('.star-btn, .nav-star-btn').forEach(btn => {
+      const target = btn.getAttribute('data-target');
+      if (favorites.some(f => f.id === target)) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+
+    if (favorites.length === 0) {
+      container.innerHTML = '<div style="padding: 6px 18px; font-size: 12px; color: #64748b; font-style: italic;" id="noFavNotice">Click any ⭐ in text or TOC to pin here</div>';
+      return;
+    }
+
+    let html = '';
+    favorites.forEach(f => {
+      html += `
+        <a href="#${f.id}" class="nav-item">
+          <span style="font-size:12px; color:#fef08a;">★ ${f.title}</span>
+          <span style="color:#ef4444; font-size:15px; font-weight:bold; padding:0 4px;" onclick="event.preventDefault(); event.stopPropagation(); removeFavorite('${f.id}')" title="Remove">×</span>
+        </a>
+      `;
+    });
+    container.innerHTML = html;
+  }
+
+  function loadFavorites() {
+    renderFavorites();
+  }
+
+  /* --- DIFF VIEW CONTROLS (data-pane = amendment id or 'redline') --- */
+  function activeClassFor(box, mode) {
+    if (mode === 'redline') return 'active-redline';
+    if (box && box.getAttribute('data-earliest') === mode) return 'active-orig';
+    if (box && box.getAttribute('data-latest') === mode) return 'active-current';
+    return 'active-mid';
+  }
+
+  function setDiffBoxMode(boxId, mode) {
+    const box = document.getElementById(boxId);
+    if (!box) return;
+    box.querySelectorAll('.diff-view-pane').forEach(pane => {
+      pane.style.display = (pane.getAttribute('data-pane') === mode) ? 'block' : 'none';
+    });
+    box.querySelectorAll('.diff-mode-btn').forEach(btn => {
+      btn.classList.remove('active-redline', 'active-current', 'active-orig', 'active-mid');
+      if (btn.getAttribute('data-mode') === mode) btn.classList.add(activeClassFor(box, mode));
+    });
+    // Consolidated subsections: hide when viewing a year before they existed.
+    const sub = box.querySelector(':scope > .diff-subnodes');
+    if (sub) {
+      const subAdded = parseInt(box.getAttribute('data-subadded') || '0', 10);
+      const ym = mode === 'redline' ? 9999 : (parseInt(mode, 10) || 9999);
+      sub.style.display = (subAdded && ym < subAdded) ? 'none' : 'block';
+    }
+  }
+
+  // Global modes: Current (clean final text) vs Inline (amendment provenance).
+  // A single body class drives all styling — no per-node rebuilding needed.
+  function setGlobalDiffMode(mode) {
+    document.querySelectorAll('.global-mode-btn').forEach(btn => {
+      const onc = btn.getAttribute('onclick') || '';
+      btn.classList.toggle('active', onc.indexOf("'" + mode + "'") >= 0);
+    });
+    document.body.classList.toggle('mode-inline', mode === 'inline');
+    document.body.classList.toggle('mode-current', mode !== 'inline');
+  }
+
+  function filterNav() {
+    const input = document.getElementById('secSearch').value.toLowerCase().trim();
+
+    // Favorites list items live outside the TOC tree — filter them directly.
+    document.querySelectorAll('#favoritesNavList a.nav-item').forEach(item => {
+      item.style.display = (!input || item.textContent.toLowerCase().includes(input)) ? 'flex' : 'none';
+    });
+
+    const secs = document.querySelectorAll('#tocRoot .toc-sec');
+
+    if (!input) {
+      // Restore default: all sections visible, sublists collapsed.
+      secs.forEach(sec => {
+        sec.style.display = '';
+        sec.querySelectorAll('a.nav-item').forEach(l => l.style.display = 'flex');
+        const sl = sec.querySelector('.toc-sublist');
+        if (sl) sl.style.display = 'none';
+        const tg = sec.querySelector('.toc-toggle');
+        if (tg && !tg.classList.contains('empty')) tg.textContent = '\u25B8';
+      });
+      return;
+    }
+
+    secs.forEach(sec => {
+      let any = false;
+      sec.querySelectorAll('.toc-sublist a.nav-item').forEach(l => {
+        const m = l.textContent.toLowerCase().includes(input);
+        l.style.display = m ? 'flex' : 'none';
+        if (m) any = true;
+      });
+      const secLink = sec.querySelector('.toc-sec-link');
+      const secMatch = secLink && secLink.textContent.toLowerCase().includes(input);
+      const visible = any || secMatch;
+      sec.style.display = visible ? '' : 'none';
+      if (secLink) secLink.style.display = visible ? 'flex' : 'none';
+      const sl = sec.querySelector('.toc-sublist');
+      if (sl) sl.style.display = any ? 'block' : 'none';
+      const tg = sec.querySelector('.toc-toggle');
+      if (tg && !tg.classList.contains('empty')) tg.textContent = any ? '\u25BE' : '\u25B8';
+    });
+  }
+</script>
+
+</body>
+</html>
