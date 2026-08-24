@@ -111,7 +111,7 @@
   });
 
   /* --- READING TEXT SIZE (scales section + TOC text only, not chrome) --- */
-  const READING_SCALE_MIN = 0.8, READING_SCALE_MAX = 1.8, READING_SCALE_STEP = 0.1;
+  const READING_SCALE_MIN = 0.8, READING_SCALE_MAX = 2.6, READING_SCALE_STEP = 0.1;
   function getReadingScale() {
     const v = parseFloat(localStorage.getItem('gec_reading_scale'));
     return (isFinite(v) && v > 0) ? v : 1;
