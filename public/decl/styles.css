@@ -99,6 +99,33 @@
     color: #fff;
   }
 
+  .header-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .header-actions .orig-doc-link { margin-top: 0; }
+  .header-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    line-height: 1;
+    color: #cbd5e1;
+    background: transparent;
+    padding: 5px 9px;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+  .header-btn:hover { background: #1e293b; border-color: #475569; color: #fff; }
+  .header-btn.active { background: #1e293b; border-color: #64748b; color: #fff; }
+
+  .search-box.search-hidden { display: none; }
+
   .search-box {
     padding: 10px 16px;
     border-bottom: 1px solid #1e293b;
@@ -122,31 +149,18 @@
     padding: 10px 0;
   }
 
-  /* Fixed, collapsible favorites panel (does not scroll with the TOC). */
+  /* Fixed favorites panel, toggled from the header button (hidden by default). */
   .fav-panel {
     flex-shrink: 0;
     background: #0b1220;
     border-bottom: 1px solid #1e293b;
   }
-  .fav-panel .fav-header {
-    cursor: pointer;
-    padding-top: 10px;
-    padding-bottom: 8px;
-  }
-  .fav-caret {
-    display: inline-block;
-    width: 16px;
-    font-size: 15px;
-    font-weight: 700;
-    text-align: center;
-    transition: none;
-  }
+  .fav-panel.fav-hidden { display: none; }
   .fav-list {
     max-height: 34vh;
     overflow-y: auto;
-    padding-bottom: 4px;
+    padding: 6px 0 4px;
   }
-  .fav-panel.collapsed .fav-list { display: none; }
 
   .nav-group-title {
     font-size: 11px;
@@ -206,13 +220,13 @@
   .toc-controls span:hover { color: #fff; }
   .toc-sec-row { display: flex; align-items: stretch; }
   .toc-toggle {
-    flex: 0 0 24px;
+    flex: 0 0 22px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     color: #94a3b8;
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 700;
     line-height: 1;
     user-select: none;
