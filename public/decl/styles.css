@@ -689,7 +689,13 @@
     /* Save vertical space: keep only the PDF link in the sidebar header. */
     .sidebar-header { padding: 10px 16px; }
     .sidebar-header h1, .sidebar-header .sub { display: none; }
-    .sidebar-header .orig-doc-link { margin-top: 0; }
+    .sidebar-header .orig-doc-link {
+      margin-top: 0;
+      font-size: 14px;
+      padding: 5px 9px;
+      line-height: 1;
+    }
+    .orig-doc-link .doc-label { display: none; }
     #navOverlay {
       display: none;
       position: fixed; inset: 0;
