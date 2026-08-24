@@ -35,7 +35,7 @@
     </div>
     <div id="favoritesNavList">
       <div style="padding: 6px 18px; font-size: 12px; color: #64748b; font-style: italic;" id="noFavNotice">
-        Click any ⭐ in text or TOC to pin here
+        Click any ⭐ in the TOC to pin here
       </div>
     </div>
 
@@ -104,6 +104,7 @@
     renderAll();
     buildTOC();
     loadFavorites();
+    initScrollSpy();
     const id = window.location.hash.replace('#', '');
     if (id) {
       setTimeout(() => performScroll(id), 50);
@@ -283,6 +284,50 @@
     });
   }
 
+  /* --- SCROLL SPY: keep the TOC in sync with the section/subsection in view --- */
+  function scrollTocActiveIntoView() {
+    const pane = document.getElementById('navScroll');
+    if (!pane) return;
+    const link = pane.querySelector('#tocRoot a.nav-item.active');
+    if (!link) return;
+    const lr = link.getBoundingClientRect();
+    const pr = pane.getBoundingClientRect();
+    if (lr.top < pr.top + 16 || lr.bottom > pr.bottom - 16) {
+      pane.scrollTop += (lr.top - pr.top) - (pane.clientHeight / 2) + (link.offsetHeight / 2);
+    }
+  }
+
+  function initScrollSpy() {
+    const main = document.getElementById('main');
+    if (!main) return;
+    const targets = Array.from(
+      document.querySelectorAll('#main section.doc-section[id], #main .toc-node[id]')
+    );
+    if (!targets.length) return;
+    let ticking = false, lastId = null;
+    function update() {
+      ticking = false;
+      const mainTop = main.getBoundingClientRect().top;
+      const probe = 96; // px below the top of the reading pane
+      let currentId = targets[0].id;
+      for (const el of targets) {
+        if (el.getBoundingClientRect().top - mainTop <= probe) currentId = el.id;
+        else break;
+      }
+      if (currentId === lastId) return;
+      lastId = currentId;
+      revealNavFor(currentId);
+      updateActiveNavItem(currentId);
+      scrollTocActiveIntoView();
+    }
+    main.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }, { passive: true });
+    update();
+  }
+
   /* --- FAVORITES MANAGEMENT --- */
   let favorites = JSON.parse(localStorage.getItem('gec_favorites') || '[]');
 
@@ -331,7 +376,7 @@
     });
 
     if (favorites.length === 0) {
-      container.innerHTML = '<div style="padding: 6px 18px; font-size: 12px; color: #64748b; font-style: italic;" id="noFavNotice">Click any ⭐ in text or TOC to pin here</div>';
+      container.innerHTML = '<div style="padding: 6px 18px; font-size: 12px; color: #64748b; font-style: italic;" id="noFavNotice">Click any ⭐ in the TOC to pin here</div>';
       return;
     }
 

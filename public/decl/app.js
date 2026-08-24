@@ -367,27 +367,10 @@
   }
 
   /* ---------- section renderer ---------- */
-  function sectionBadge(sec) {
-    var yrs = {};
-    (function walk(ns) {
-      ns.forEach(function (n) {
-        (n.revisions || []).forEach(function (r) { if (r.amend !== BASE_ID) yrs[YR[r.amend]] = 1; });
-        if (n.addedBy) yrs[YR[n.addedBy]] = 1;
-        if (n.deletedBy) yrs[YR[n.deletedBy]] = 1;
-        if (n.children) walk(n.children);
-      });
-    })(sec.nodes || []);
-    var arr = Object.keys(yrs).sort();
-    if (!arr.length) return '';
-    return '<span class="badge badge-amended">Amended ' + arr.join(' &amp; ') + '</span>';
-  }
-
   function renderSection(sec) {
     var secId = 'sec-' + sec.num;
     var h = '<section class="doc-section" id="' + secId + '">';
-    h += '<div class="section-header"><h2><span>SECTION ' + esc(sec.num) + ': ' + esc(sec.title) + '</span>'
-      + '<button class="star-btn" data-target="' + secId + '" data-title="' + escQ('Section ' + sec.num + ': ' + sec.title) + '">\u2605</button></h2>'
-      + sectionBadge(sec) + '</div>';
+    h += '<div class="section-header"><h2><span>SECTION ' + esc(sec.num) + ': ' + esc(sec.title) + '</span></h2></div>';
     h += '<div class="section-body">';
     if (sec.preamble) h += '<p>' + mdInline(sec.preamble) + '</p>';
     h += renderNodes(sec.nodes, 0);
@@ -468,17 +451,14 @@
   function renderAppendix(ap) {
     var id = 'appendix-' + String(ap.num).toLowerCase();
     return '<section class="doc-section" id="' + id + '">'
-      + '<div class="section-header"><h2><span>APPENDIX "' + esc(ap.num) + '": ' + esc(ap.title) + '</span>'
-      + '<button class="star-btn" data-target="' + id + '" data-title="' + escQ('Appendix ' + ap.num + ': ' + ap.title) + '">\u2605</button></h2></div>'
+      + '<div class="section-header"><h2><span>APPENDIX "' + esc(ap.num) + '": ' + esc(ap.title) + '</span></h2></div>'
       + '<div class="section-body">' + renderBlocks(ap.blocks) + '</div></section>';
   }
 
   function renderExhibit(ex) {
     var id = ex.id;
     return '<section class="doc-section" id="' + id + '">'
-      + '<div class="section-header"><h2><span>' + esc(ex.label) + '</span>'
-      + '<button class="star-btn" data-target="' + id + '" data-title="' + escQ(ex.label) + '">\u2605</button></h2>'
-      + '<span class="badge badge-amended">' + ex.year + ' Amendment</span></div>'
+      + '<div class="section-header"><h2><span>' + esc(ex.label) + '</span></h2></div>'
       + '<div class="section-body">' + renderBlocks(ex.blocks) + '</div></section>';
   }
 
@@ -491,9 +471,7 @@
       }).join('') + '</tbody></table>';
     }
     return '<section class="doc-section" id="' + id + '">'
-      + '<div class="section-header"><h2><span>' + esc(r.label) + '</span>'
-      + '<button class="star-btn" data-target="' + id + '" data-title="' + escQ(r.label) + '">\u2605</button></h2>'
-      + '<span class="badge" style="background:#6366f1;color:#fff;">Related ' + r.year + '</span></div>'
+      + '<div class="section-header"><h2><span>' + esc(r.label) + '</span></h2></div>'
       + '<div class="section-body">' + rec + renderBlocks(r.blocks) + '</div></section>';
   }
 
@@ -510,14 +488,6 @@
     (D.exhibits || []).forEach(function (e) { h += renderExhibit(e); });
     (D.related || []).forEach(function (r) { h += renderRelated(r); });
     root.innerHTML = h;
-
-    root.querySelectorAll('.star-btn').forEach(function (btn) {
-      btn.addEventListener('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        toggleFavorite(btn.getAttribute('data-target'), btn.getAttribute('data-title'));
-      });
-    });
   };
 
   /* ---------- reusable redline pane rebuild (layer amendments up to a target year) ---------- */
