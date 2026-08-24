@@ -661,6 +661,11 @@
       box-shadow: 2px 0 16px rgba(0,0,0,0.35);
     }
     body.nav-open #sidebar { transform: translateX(0); }
+
+    /* Save vertical space: keep only the PDF link in the sidebar header. */
+    .sidebar-header { padding: 10px 16px; }
+    .sidebar-header h1, .sidebar-header .sub { display: none; }
+    .sidebar-header .orig-doc-link { margin-top: 0; }
     #navOverlay {
       display: none;
       position: fixed; inset: 0;
