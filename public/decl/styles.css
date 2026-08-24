@@ -271,9 +271,9 @@
     border: 1px solid #cbd5e1;
   }
   .text-size-btn {
-    min-width: 38px;
-    padding: 7px 11px;
-    font-size: 14px;
+    min-width: 30px;
+    padding: 5px 8px;
+    font-size: 12px;
     font-weight: 700;
     line-height: 1;
     border-radius: 4px;
@@ -284,7 +284,7 @@
     transition: all 0.15s;
   }
   .text-size-btn:hover { background: #e2e8f0; color: #0f172a; }
-  .text-size-btn.text-size-reset { font-size: 15px; }
+  .text-size-btn.text-size-reset { font-size: 13px; }
   .text-size-btn.text-size-reset.active {
     background: #475569;
     color: #ffffff;
@@ -646,6 +646,8 @@
     .burger { display: inline-flex !important; }
     .topbar {
       padding: 10px 14px;
+      min-height: 56px;
+      box-sizing: border-box;
       justify-content: flex-start;
       overflow-x: auto;
       overflow-y: hidden;
