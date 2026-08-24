@@ -115,7 +115,23 @@
   var AMEND_YEARS = AM.slice(1).map(function (a) { return a.year; })
     .filter(function (y, i, arr) { return arr.indexOf(y) === i; })
     .sort(function (x, y) { return x - y; });
-  var AMEND_PALETTE = ['#b45309', '#7c3aed', '#0e7490', '#be123c', '#15803d', '#a16207', '#c2410c'];
+  // Matte, muted amendment colors (readable on white). First three are the
+  // established 2001/2006/2016 hues; the rest extend the set for documents with
+  // more amendment layers. Intentionally no bright, purple, or brown tones.
+  var AMEND_PALETTE = [
+    '#46688f', // dusty blue
+    '#4e7a5e', // sage green
+    '#9c5566', // dusty rose
+    '#4a7f80', // muted teal
+    '#5f7392', // slate blue
+    '#6b8e5a', // moss green
+    '#a05f7e', // dusty pink
+    '#607d8b', // blue-gray
+    '#4d8577', // seafoam
+    '#b0705f', // muted coral
+    '#7089a0', // steel blue
+    '#55707e'  // slate teal
+  ];
   function yearColor(y) {
     var i = AMEND_YEARS.indexOf(y);
     return AMEND_PALETTE[(i < 0 ? 0 : i) % AMEND_PALETTE.length];
@@ -130,7 +146,7 @@
     }).join('');
     return '<div id="amendLegend" class="amend-legend">'
       + '<span class="legend-label">Amendment colors:</span>' + items
-      + '<span class="legend-item"><span class="legend-swatch legend-del-swatch"></span>removed</span></div>';
+      + '</div>';
   }
 
   function tokensOf(md) {
