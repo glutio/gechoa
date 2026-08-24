@@ -82,12 +82,14 @@
   }
 
   .sidebar-header .orig-doc-link {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    height: 28px;
     margin-top: 10px;
     font-size: 11px;
     color: #cbd5e1;
     text-decoration: none;
-    padding: 4px 9px;
+    padding: 0 9px;
     border: 1px solid #334155;
     border-radius: 6px;
     transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
@@ -111,11 +113,12 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    height: 28px;
     font-size: 14px;
     line-height: 1;
     color: #cbd5e1;
     background: transparent;
-    padding: 5px 9px;
+    padding: 0 9px;
     border: 1px solid #334155;
     border-radius: 6px;
     cursor: pointer;
