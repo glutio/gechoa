@@ -391,9 +391,8 @@
     favorites.forEach(f => {
       html += `
         <a href="#${f.id}" class="nav-item fav-item" onclick="favJump(event, '${f.id}')">
-          <span class="fav-star">&#9733;</span>
+          <span class="fav-star" onclick="event.preventDefault(); event.stopPropagation(); removeFavorite('${f.id}')" title="Remove bookmark">&#9733;</span>
           <span class="fav-title">${f.title}</span>
-          <span class="fav-remove" onclick="event.preventDefault(); event.stopPropagation(); removeFavorite('${f.id}')" title="Remove">×</span>
         </a>
       `;
     });

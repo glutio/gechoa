@@ -31,6 +31,8 @@
   * { box-sizing: border-box; }
   html {
     scroll-behavior: auto !important;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
   body {
     margin: 0;
@@ -174,28 +176,21 @@
     scrollbar-gutter: stable;
     padding: 6px 0 4px;
   }
-  .fav-list .nav-item { padding-left: 10px; }
+  .fav-list .nav-item { padding-left: 10px; align-items: flex-start; }
   .fav-star {
     flex: 0 0 12px;
     text-align: center;
     color: #fef08a;
     font-size: 15px;
     line-height: 1.4;
+    cursor: pointer;
+    transition: transform 0.15s, color 0.15s;
   }
+  .fav-star:hover { color: #ef4444; transform: scale(1.15); }
   .fav-title {
     flex: 1;
     padding-left: 6px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .fav-remove {
-    flex: 0 0 auto;
-    color: #ef4444;
-    font-size: 19px;
-    font-weight: bold;
-    padding: 0 6px;
-    cursor: pointer;
+    overflow-wrap: anywhere;
   }
 
   .nav-group-title {
@@ -231,13 +226,16 @@
   }
   .nav-item.sub-item:hover { color: #fff; }
 
+  /* TOC rows: pull the favorite star closer to the right edge. */
+  #tocRoot .nav-item { padding-right: 8px; }
+
   .nav-star-btn {
     background: none;
     border: none;
     color: #64748b;
     cursor: pointer;
     font-size: 19px;
-    padding: 0 5px;
+    padding: 0 4px;
     line-height: 1;
     transition: transform 0.15s, color 0.15s;
   }
