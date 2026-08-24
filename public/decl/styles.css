@@ -145,6 +145,7 @@
 
   .nav-scroll {
     overflow-y: auto;
+    scrollbar-gutter: stable;
     flex: 1;
     padding: 10px 0;
   }
@@ -165,8 +166,10 @@
   .fav-list {
     max-height: 34vh;
     overflow-y: auto;
+    scrollbar-gutter: stable;
     padding: 6px 0 4px;
   }
+  .fav-list .nav-item { padding-left: 28px; }
 
   .nav-group-title {
     font-size: 11px;
