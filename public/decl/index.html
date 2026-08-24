@@ -30,13 +30,9 @@
   <!-- FIXED, COLLAPSIBLE FAVORITES -->
   <div class="fav-panel" id="favPanel">
     <div class="nav-group-title fav-header" onclick="toggleFavPanel()">
-      <span><span class="fav-caret">&#9662;</span> &#11088; Bookmarked</span>
+      <span><span class="fav-caret">&#8722;</span> &#11088; Bookmarked</span>
     </div>
-    <div id="favoritesNavList" class="fav-list">
-      <div style="padding: 6px 18px; font-size: 12px; color: #64748b; font-style: italic;" id="noFavNotice">
-        Click any ⭐ in the TOC to pin here
-      </div>
-    </div>
+    <div id="favoritesNavList" class="fav-list"></div>
   </div>
 
   <div class="nav-scroll" id="navScroll">
@@ -214,7 +210,7 @@
       html += '<div class="toc-sec" data-sec="' + escAttr(secId) + '">';
       html += '<div class="toc-sec-row">';
       html += hasSubs
-        ? '<span class="toc-toggle">\u25B8</span>'
+        ? '<span class="toc-toggle">+</span>'
         : '<span class="toc-toggle empty"></span>';
       html += '<a href="#' + escAttr(secId) + '" class="nav-item toc-sec-link">'
             + '<span>' + escAttr(secTitle) + '</span>'
@@ -256,7 +252,7 @@
     if (!sl) return;
     const open = sl.style.display !== 'none';
     sl.style.display = open ? 'none' : 'block';
-    el.textContent = open ? '\u25B8' : '\u25BE';
+    el.textContent = open ? '+' : '\u2212';
   }
 
   function tocExpandAll(open) {
@@ -265,7 +261,7 @@
       if (!sl) return;
       sl.style.display = open ? 'block' : 'none';
       const tg = sec.querySelector('.toc-toggle');
-      if (tg && !tg.classList.contains('empty')) tg.textContent = open ? '\u25BE' : '\u25B8';
+      if (tg && !tg.classList.contains('empty')) tg.textContent = open ? '\u2212' : '+';
     });
   }
 
@@ -282,7 +278,7 @@
       sl.style.display = 'block';
       const sec = sl.closest('.toc-sec');
       const tg = sec && sec.querySelector('.toc-toggle');
-      if (tg && !tg.classList.contains('empty')) tg.textContent = '\u25BE';
+      if (tg && !tg.classList.contains('empty')) tg.textContent = '\u2212';
     }
   }
 
@@ -384,7 +380,7 @@
     });
 
     if (favorites.length === 0) {
-      container.innerHTML = '<div style="padding: 6px 18px; font-size: 12px; color: #64748b; font-style: italic;" id="noFavNotice">Click any ⭐ in the TOC to pin here</div>';
+      container.innerHTML = '';
       return;
     }
 
@@ -405,16 +401,23 @@
   }
 
   /* --- FIXED/COLLAPSIBLE FAVORITES PANEL --- */
+  function updateFavCaret(collapsed) {
+    const c = document.querySelector('#favPanel .fav-caret');
+    if (c) c.textContent = collapsed ? '+' : '\u2212';
+  }
   function toggleFavPanel() {
     const p = document.getElementById('favPanel');
     if (!p) return;
     const collapsed = p.classList.toggle('collapsed');
     localStorage.setItem('gec_fav_collapsed', collapsed ? '1' : '0');
+    updateFavCaret(collapsed);
   }
   function applyFavCollapsed() {
     const p = document.getElementById('favPanel');
     if (!p) return;
-    if (localStorage.getItem('gec_fav_collapsed') === '1') p.classList.add('collapsed');
+    const collapsed = localStorage.getItem('gec_fav_collapsed') === '1';
+    p.classList.toggle('collapsed', collapsed);
+    updateFavCaret(collapsed);
   }
 
   /* --- DIFF VIEW CONTROLS (data-pane = amendment id or 'redline') --- */
@@ -473,7 +476,7 @@
         const sl = sec.querySelector('.toc-sublist');
         if (sl) sl.style.display = 'none';
         const tg = sec.querySelector('.toc-toggle');
-        if (tg && !tg.classList.contains('empty')) tg.textContent = '\u25B8';
+        if (tg && !tg.classList.contains('empty')) tg.textContent = '+';
       });
       return;
     }
@@ -493,7 +496,7 @@
       const sl = sec.querySelector('.toc-sublist');
       if (sl) sl.style.display = any ? 'block' : 'none';
       const tg = sec.querySelector('.toc-toggle');
-      if (tg && !tg.classList.contains('empty')) tg.textContent = any ? '\u25BE' : '\u25B8';
+      if (tg && !tg.classList.contains('empty')) tg.textContent = any ? '\u2212' : '+';
     });
   }
 </script>
