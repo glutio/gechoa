@@ -75,6 +75,24 @@
     letter-spacing: 0.5px;
   }
 
+  .sidebar-header .orig-doc-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 11px;
+    color: #cbd5e1;
+    text-decoration: none;
+    padding: 4px 9px;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .sidebar-header .orig-doc-link:hover {
+    background: #1e293b;
+    border-color: #475569;
+    color: #fff;
+  }
+
   .search-box {
     padding: 10px 16px;
     border-bottom: 1px solid #1e293b;
