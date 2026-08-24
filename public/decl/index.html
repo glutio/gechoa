@@ -388,9 +388,10 @@
     let html = '';
     favorites.forEach(f => {
       html += `
-        <a href="#${f.id}" class="nav-item" onclick="favJump(event, '${f.id}')">
-          <span style="font-size:12px; color:#fef08a;">★ ${f.title}</span>
-          <span style="color:#ef4444; font-size:19px; font-weight:bold; padding:0 6px;" onclick="event.preventDefault(); event.stopPropagation(); removeFavorite('${f.id}')" title="Remove">×</span>
+        <a href="#${f.id}" class="nav-item fav-item" onclick="favJump(event, '${f.id}')">
+          <span class="fav-star">&#9733;</span>
+          <span class="fav-title">${f.title}</span>
+          <span class="fav-remove" onclick="event.preventDefault(); event.stopPropagation(); removeFavorite('${f.id}')" title="Remove">×</span>
         </a>
       `;
     });
