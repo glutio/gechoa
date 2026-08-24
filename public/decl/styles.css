@@ -172,9 +172,9 @@
     scrollbar-gutter: stable;
     padding: 6px 0 4px;
   }
-  .fav-list .nav-item { padding-left: 0; }
+  .fav-list .nav-item { padding-left: 10px; }
   .fav-star {
-    flex: 0 0 22px;
+    flex: 0 0 12px;
     text-align: center;
     color: #fef08a;
     font-size: 15px;
@@ -253,9 +253,9 @@
   }
   .toc-controls span { cursor: pointer; text-decoration: underline; }
   .toc-controls span:hover { color: #fff; }
-  .toc-sec-row { display: flex; align-items: stretch; }
+  .toc-sec-row { display: flex; align-items: stretch; padding-left: 10px; }
   .toc-toggle {
-    flex: 0 0 22px;
+    flex: 0 0 12px;
     display: flex;
     align-items: center;
     justify-content: center;
