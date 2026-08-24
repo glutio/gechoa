@@ -639,7 +639,17 @@
     }
     body.nav-open #navOverlay { display: block; }
     .burger { display: inline-flex !important; }
-    .topbar { padding: 10px 14px; }
+    .topbar {
+      padding: 10px 14px;
+      justify-content: flex-start;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .topbar::-webkit-scrollbar { display: none; }
+    .topbar-left { gap: 10px; flex-wrap: nowrap; }
+    .topbar-left > * { flex-shrink: 0; }
     .content-wrapper { padding: 16px 10px 90px; }
 
     /* No horizontal panning on mobile: everything stays within the viewport. */
@@ -649,7 +659,7 @@
     /* Tighter section chrome so text gets the width on small screens. */
     section.doc-section { padding: 14px 12px; margin-bottom: 16px; border-radius: 6px; }
     .section-header { margin-bottom: 12px; padding-bottom: 10px; }
-    .section-body { font-size: 15px; }
+    .section-body { font-size: calc(15px * var(--reading-scale)); }
     table { display: block; overflow-x: auto; max-width: 100%; }
   }
   .burger {
