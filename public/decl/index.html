@@ -99,6 +99,17 @@
     performScroll(id);
   });
 
+  // Favorite clicks must always act, even when the hash is unchanged
+  // (you may already be at that section), so route them through performScroll.
+  function favJump(e, id) {
+    e.preventDefault();
+    if (window.location.hash === '#' + id) {
+      performScroll(id);
+    } else {
+      window.location.hash = id;
+    }
+  }
+
   // Handle direct page load / refresh
   window.addEventListener('DOMContentLoaded', () => {
     applyReadingScale();
@@ -380,7 +391,7 @@
     let html = '';
     favorites.forEach(f => {
       html += `
-        <a href="#${f.id}" class="nav-item">
+        <a href="#${f.id}" class="nav-item" onclick="favJump(event, '${f.id}')">
           <span style="font-size:12px; color:#fef08a;">★ ${f.title}</span>
           <span style="color:#ef4444; font-size:15px; font-weight:bold; padding:0 4px;" onclick="event.preventDefault(); event.stopPropagation(); removeFavorite('${f.id}')" title="Remove">×</span>
         </a>
