@@ -4034,7 +4034,7 @@ window.GEC_DOCS = {
             "id": "III.2",
             "num": "III.2",
             "kind": "num",
-            "base": "**2. Annual Meeting.** The annual meeting of the Association shall be held in the month of January of each year on a date fixed by the Board of Directors. At the annual meeting, the unit owners shall elect Directors or fill vacancies in the Board of Directors as provided in the Declaration and shall consider such other business as may properly come before the meeting."
+            "base": "**2. Annual Meeting.** The annual meeting of the Association shall be held in the first quarter of each year on a date fixed by the Board of Directors. At the annual meeting, the unit owners shall elect Directors or fill vacancies in the Board of Directors as provided in the Declaration and shall consider such other business as may properly come before the meeting."
           },
           {
             "id": "III.3",
