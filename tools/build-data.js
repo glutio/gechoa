@@ -453,6 +453,7 @@ const DECL = {
   meta: {
     title: cfg.meta.title,
     subtitle: cfg.meta.subtitle,
+    heading: cfg.meta.heading,
     generated: new Date().toISOString().slice(0, 10),
   },
   sectionLabel: cfg.sectionLabel || 'SECTION',
@@ -542,7 +543,7 @@ const DOC_CONFIGS = [
     golden: path.join(__dirname, 'golden.json'),
     baseKey: 'V', relatedKey: 'IV',
     baseAmend: { id: '1980', year: 1980, label: '1980 Original Declaration', short: 'Original (1980)' },
-    meta: { title: 'Glendale Estates, A Condominium', subtitle: 'Declaration & Recorded Amendments' },
+    meta: { title: 'Glendale Estates, A Condominium', subtitle: 'Declaration & Recorded Amendments', heading: 'DECLARATION FOR GLENDALE ESTATES, A CONDOMINIUM' },
     sectionLabel: 'SECTION',
     amendmentsMeta: {
       '2001': { part: 'III', year: 2001, label: '2001 Amendment No. 1', short: 'Amendment No. 1 (2001)' },
@@ -558,7 +559,7 @@ const DOC_CONFIGS = [
     golden: path.join(__dirname, 'golden-bylaws.json'),
     baseKey: 'V', relatedKey: null,
     baseAmend: { id: '1980', year: 1980, label: '1980 Original Bylaws', short: 'Original (1980)' },
-    meta: { title: 'Glendale Estates, A Condominium', subtitle: 'Bylaws & Recorded Amendments' },
+    meta: { title: 'Glendale Estates, A Condominium', subtitle: 'Bylaws & Recorded Amendments', heading: 'BYLAWS OF GLENDALE ESTATES CONDOMINIUM ASSOCIATION' },
     sectionLabel: 'ARTICLE',
     amendmentsMeta: {
       '2001': { part: 'II', year: 2001, label: '2001 First Amendment', short: 'First Amendment (2001)' },

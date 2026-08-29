@@ -4,6 +4,7 @@ window.GEC_DOCS = {
     "meta": {
       "title": "Glendale Estates, A Condominium",
       "subtitle": "Declaration & Recorded Amendments",
+      "heading": "DECLARATION FOR GLENDALE ESTATES, A CONDOMINIUM",
       "generated": "2026-08-29"
     },
     "sectionLabel": "SECTION",
@@ -5976,6 +5977,7 @@ window.GEC_DOCS = {
     "meta": {
       "title": "Glendale Estates, A Condominium",
       "subtitle": "Bylaws & Recorded Amendments",
+      "heading": "BYLAWS OF GLENDALE ESTATES CONDOMINIUM ASSOCIATION",
       "generated": "2026-08-29"
     },
     "sectionLabel": "ARTICLE",

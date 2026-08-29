@@ -75,6 +75,7 @@ const bHtml = w2.document.getElementById('docRoot').innerHTML;
 const bBody = bHtml.replace(/<[^>]+>/g, ' ');
 assert(bHtml.length > 5000, 'bylaws rendered (' + bHtml.length + ' chars)');
 assert(/ARTICLE\s+III/i.test(bBody), 'bylaws uses ARTICLE label');
+assert(/BYLAWS OF GLENDALE ESTATES/i.test(bBody), 'bylaws main heading is doc-specific');
 assert(/A five \(5\) person Board of Directors/.test(bBody), 'IV.1 shows five (5) person board (2006)');
 assert(/Step One - Pick A Hearing Board/.test(bBody), 'XII.1 (2001-added) present');
 const bStray = (bBody.match(/\*\*/g) || []).length;

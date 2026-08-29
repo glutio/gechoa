@@ -503,7 +503,7 @@
     var root = document.getElementById('docRoot');
     if (!root) return;
     var h = '<style id="amendColors">' + amendColorCSS() + '</style>';
-    h += '<h1 class="doc-title">DECLARATION FOR GLENDALE ESTATES, A CONDOMINIUM</h1>';
+    h += '<h1 class="doc-title">' + esc((D.meta && D.meta.heading) || 'DECLARATION FOR GLENDALE ESTATES, A CONDOMINIUM') + '</h1>';
     h += '<div class="doc-subtitle">' + esc((D.meta && D.meta.subtitle) || '') + '</div>';
     h += buildLegend();
     (D.sections || []).forEach(function (s) { h += renderSection(s); });
