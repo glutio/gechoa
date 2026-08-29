@@ -223,7 +223,7 @@
     for (var r = 1; r < revs.length; r++) {
       var rev = revs[r], y = YR[rev.amend];
       if (rev.deleted) {
-        items.forEach(function (it) { if (it.alive) { it.alive = false; it.origin = 'del'; it.fb = true; } });
+        items.forEach(function (it) { if (it.alive) { it.alive = false; it.origin = 'del'; it.fb = true; it.remYear = y; } });
         continue;
       }
       var newToks = tokensOf(rev.md);
@@ -246,7 +246,7 @@
           var insToks = tokensOf(rev.op.text);
           if (opType === 'replace-sentence') {
             for (var q = start; q < start + slen; q++) {
-              var itd = items[aIx[q]]; itd.alive = false; itd.origin = 'del';
+              var itd = items[aIx[q]]; itd.alive = false; itd.origin = 'del'; itd.remYear = y;
             }
           }
           var outS = [];
@@ -262,10 +262,11 @@
       }
       // Whole-block replacement: strike the entire live text, insert the new text.
       // A struck token keeps its ORIGIN tag (the amendment that introduced it, or
-      // none for base) — the strike is orthogonal. The replacing amendment's year
-      // is carried by the inserted span below.
+      // none for base) for its text color/chip — the strike is orthogonal. The
+      // strike LINE is colored by the removing amendment (remYear); the inserted
+      // span below carries that amendment's year as its own origin.
       if (opType === 'replace') {
-        items.forEach(function (it) { if (it.alive) { it.alive = false; it.origin = 'del'; it.fb = true; } });
+        items.forEach(function (it) { if (it.alive) { it.alive = false; it.origin = 'del'; it.fb = true; it.remYear = y; } });
         newToks.forEach(function (t) { items.push({ tok: t, alive: true, origin: 'ins', year: y, fb: true }); });
         continue;
       }
@@ -275,7 +276,7 @@
         continue;
       }
       // Any other/unknown op: treat as a whole-block replacement (safe, no diffing).
-      items.forEach(function (it) { if (it.alive) { it.alive = false; it.origin = 'del'; it.fb = true; } });
+      items.forEach(function (it) { if (it.alive) { it.alive = false; it.origin = 'del'; it.fb = true; it.remYear = y; } });
       newToks.forEach(function (t) { items.push({ tok: t, alive: true, origin: 'ins', year: y, fb: true }); });
     }
     return items;
@@ -288,9 +289,10 @@
     items.forEach(function (it) {
       var kind = it.alive ? (it.origin === 'base' ? 'eq' : 'ins') : 'del';
       var year = kind === 'eq' ? null : it.year;
+      var rem = kind === 'del' ? (it.remYear != null ? it.remYear : null) : null;
       var last = segs[segs.length - 1];
-      if (last && last.kind === kind && last.year === year) { last.toks.push(it.tok); if (it.fb) last.block = true; }
-      else segs.push({ kind: kind, year: year, toks: [it.tok], block: !!it.fb });
+      if (last && last.kind === kind && last.year === year && last.rem === rem) { last.toks.push(it.tok); if (it.fb) last.block = true; }
+      else segs.push({ kind: kind, year: year, rem: rem, toks: [it.tok], block: !!it.fb });
     });
     return segs;
   }
@@ -304,7 +306,11 @@
       var hasYear = (s.year != null && s.year !== '');
       var chip = hasYear ? '<sup class="amend-chip">' + esc(s.year) + '</sup>' : '';
       var ycls = hasYear ? ' amend-y' + s.year : '';
-      return '<' + tag + ' class="amend-' + s.kind + ycls + blk + '" data-year="' + esc(hasYear ? s.year : '') + '">'
+      // Strike LINE is colored by the removing amendment (rem), independent of the
+      // text's origin color/chip. Provided as an inline --rmc custom property.
+      var style = '';
+      if (s.kind === 'del' && s.rem != null && s.rem !== '') style = ' style="--rmc:' + esc(yearColor(s.rem)) + '"';
+      return '<' + tag + ' class="amend-' + s.kind + ycls + blk + '" data-year="' + esc(hasYear ? s.year : '') + '"' + style + '>'
         + inner + chip + '</' + tag + '>';
     }).join(' ');
   }

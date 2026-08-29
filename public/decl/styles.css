@@ -649,7 +649,8 @@
   body.mode-inline del.amend-del {
     color: var(--amc, #b91c1c);
     text-decoration: line-through;
-    text-decoration-color: var(--amc, #b91c1c);
+    text-decoration-color: var(--rmc, var(--amc, #b91c1c));
+    text-decoration-thickness: 2px;
     opacity: 0.85;
   }
   body.mode-inline .amend-block {
