@@ -262,9 +262,8 @@
       }
       // Whole-block replacement: strike the entire live text, insert the new text.
       // A struck token keeps its ORIGIN tag (the amendment that introduced it, or
-      // none for base) for its text color/chip — the strike is orthogonal. The
-      // strike LINE is colored by the removing amendment (remYear); the inserted
-      // span below carries that amendment's year as its own origin.
+      // none for base) for its text color; the strike is orthogonal. remYear records
+      // the removing amendment so the chip can label it (see provenanceHTML).
       if (opType === 'replace') {
         items.forEach(function (it) { if (it.alive) { it.alive = false; it.origin = 'del'; it.fb = true; it.remYear = y; } });
         newToks.forEach(function (t) { items.push({ tok: t, alive: true, origin: 'ins', year: y, fb: true }); });
@@ -303,14 +302,18 @@
       if (s.kind === 'eq') return inner;
       var tag = s.kind === 'ins' ? 'ins' : 'del';
       var blk = s.block ? ' amend-block' : '';
+      // Text color = the amendment that AUTHORED the span (origin year); base text
+      // (no origin) stays default black with a black strike. The chip labels the
+      // amendment that ACTED on the span: for an insertion, the amendment that
+      // added it (its origin); for a deletion, the amendment that removed it. The
+      // chip is colored to match the year it names, so on a struck span the chip
+      // (remover) can differ in color from the struck text (its origin).
       var hasYear = (s.year != null && s.year !== '');
-      var chip = hasYear ? '<sup class="amend-chip">' + esc(s.year) + '</sup>' : '';
       var ycls = hasYear ? ' amend-y' + s.year : '';
-      // Strike LINE is colored by the removing amendment (rem), independent of the
-      // text's origin color/chip. Provided as an inline --rmc custom property.
-      var style = '';
-      if (s.kind === 'del' && s.rem != null && s.rem !== '') style = ' style="--rmc:' + esc(yearColor(s.rem)) + '"';
-      return '<' + tag + ' class="amend-' + s.kind + ycls + blk + '" data-year="' + esc(hasYear ? s.year : '') + '"' + style + '>'
+      var chipYear = s.kind === 'del' ? s.rem : s.year;
+      var hasChip = (chipYear != null && chipYear !== '');
+      var chip = hasChip ? '<sup class="amend-chip amend-y' + chipYear + '">' + esc(chipYear) + '</sup>' : '';
+      return '<' + tag + ' class="amend-' + s.kind + ycls + blk + '" data-year="' + esc(hasYear ? s.year : '') + '">'
         + inner + chip + '</' + tag + '>';
     }).join(' ');
   }
