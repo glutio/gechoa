@@ -555,7 +555,7 @@
     const meta = doc.meta || {};
     const subEl = document.querySelector('.sidebar-header .sub');
     if (subEl && meta.subtitle) subEl.textContent = meta.subtitle;
-    if (meta.title) document.title = meta.title + (meta.subtitle ? ' — ' + meta.subtitle : '');
+    document.title = docLabel(key, doc) + (meta.title ? ' — ' + meta.title : '');
     const link = document.getElementById('pdfDownloadLink');
     if (link) link.setAttribute('href', DOC_PDF[key] || 'GEC-Declaration.pdf');
     normalizeDocUrl();

@@ -481,8 +481,11 @@ const DECL = {
 // ---- COMPOSE VERIFICATION: reconstruct revisions from raw base+operations and compare to golden ----
 // This mirrors composeData() in the runtime renderer — proving JSON is complete & renderer-derivable.
 function composeForVerify(sections, amendments) {
+  // Work on a deep clone so this verification pass never mutates the emitted raw
+  // nodes (otherwise its _revs/_added/_deleted scratch fields leak into data.js).
+  const clone = JSON.parse(JSON.stringify(sections));
   const fl = {};
-  (function idx(l) { l.forEach(n => { fl[n.id] = n; if (n.children) idx(n.children); }); })(sections.flatMap(s => s.nodes));
+  (function idx(l) { l.forEach(n => { fl[n.id] = n; if (n.children) idx(n.children); }); })(clone.flatMap(s => s.nodes));
   const baseId = amendments[0].id;
   Object.values(fl).forEach(n => { n._revs = (n.base != null) ? [{ amend: baseId, md: n.base }] : []; n._added = null; n._deleted = null; });
   const work = {};
