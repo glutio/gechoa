@@ -408,14 +408,14 @@ The limited common areas and facilities which are reserved for the use of design
 
 ### SECTION 7: PARKING SPACES AND STORAGE FACILITIES
 There are a total of ninety-three (93) parking spaces in Glendale Estates, a Condominium. Fifty-two (52) parking spaces are covered carports detached from the buildings. Forty-one (41) parking spaces are uncovered. There are fifty-two (52) storage spaces located on the decks or patios adjacent to each unit. All of the parking spaces and storage spaces are shown on the Survey Map and Plans.
-* **7.1 Designation of Parking Spaces.** The Developer shall designate and convey one (1) covered parking space for each unit at the time of and as part of the first conveyance. Thereafter, the parking spaces so conveyed shall be part of that unit. The assignment or reassignment of uncovered parking spaces for guest parking or for any other specific use shall be made by the Owners' Association or its designated representative.
-* **7.2 Assignment of Storage Spaces.** The Developer shall assign and convey at the time of and as part of the first conveyance, to each unit, the storage space located on the deck or patio adjacent to that unit.
+* **7.1 Designation of Parking Spaces.** The Developer shall designate and convey by deed one (1) covered parking space for each unit at the time of and as part of the first conveyance. Thereafter, the parking spaces so conveyed shall be part of that unit. The assignment and reassignment of uncovered parking spaces for guest parking or for any other specific use shall be made by the Owners' Association or its designated representative.
+* **7.2 Assignment of Storage Spaces.** The Developer shall assign and convey by deed, at the time of and as part of the first conveyance, to each unit, the storage space located on the deck or patio adjacent to that unit.
 
 ---
 
 ### SECTION 8: VALUE OF THE PROPERTY AND OF EACH UNIT; PERCENTAGE OF UNDIVIDED INTEREST IN THE COMMON AREAS AND FACILITIES
 * **8.1 The Property.** The total value of the property is $4,527,950.00.
-* **8.2 The Units.** The value of each unit, including all of the limited common areas appertaining thereto, and the percentage of undivided interest in the common areas and facilities appertaining to each unit, for all purposes, including voting in the Association and assessments for common expenses, is as set forth in Appendix "C" hereto. These values are provided in order to establish the percentages of ownership, also shown in Appendix "C", required to be set forth by the Act and do not necessarily reflect either the actual market value of said units, at the time this Declaration is filed for record, or the amount for which they may be sold, from time to time, by Declarant or others.
+* **8.2 The Units.** The value of each unit, including all of the limited common areas appertaining thereto, and the percentage of individual interest in the common areas and limited common areas appertaining to each unit, for all purposes, including voting in the Association assessments for common expenses, is as set forth in Appendix "C" hereto. These values are provided in order to establish the percentages of ownership, also shown in Appendix "C", required to be set forth by the Act and do not necessarily reflect either the actual market value of said units, at the time this Declaration is filed for record, or the amount for which they may be sold, from time to time, by Declarant or others.
 
 ---
 
@@ -633,7 +633,7 @@ The Association shall have the right to have access to each unit from time to ti
 
 ### SECTION 22: EASEMENTS
 * **22.1 In General.** In addition to rights reserved or provided under the Act, each unit has an easement in and through each other unit and the common and limited common areas and facilities for all support elements and utility, wiring, heat and service elements, and for reasonable access thereto, as required to effectuate and continue proper operation of this condominium plan. Without limiting the generality of the foregoing, each unit and all common and limited common areas and facilities are specifically subject to an easement for the benefit of each of the other units in the building for all duct work for fireplaces and associated flues or chimneys, electrical wiring, plumbing, and for the location and maintenance of all the original equipment and utilities as constructed or installed in each unit.
-* **22.2 Association Functions.** There are hereby reserved to the Association (and to the Developer prior to the election of the Board of Directors pursuant to Section 12.4.2), such easements as are necessary to perform the duties and obligations of the Association as set forth in this Declaration, the Bylaws, and the Act.
+* **22.2 Association Functions.** There are hereby reserved to the Association (and to the Developer prior to the election of the Board pursuant to Section 12.4.2), such easements as are necessary to perform the duties and obligations of the Association as set forth in this Declaration, the Bylaws, and the Act.
 * **22.3 Encroachments.** Each unit and all common and limited common areas and facilities are hereby declared to have easements over all adjoining units and common and limited common areas and facilities for the purpose of accommodating and maintaining any encroachment due to engineering errors, errors in original construction, settlement or shifting of any buildings, or any other similar cause, and any encroachment due to building overhang or projection; provided, that in no event shall a valid easement for encroachment be created in favor of a unit owner if said encroachment occurred due to the willful act or acts with full knowledge of said unit owner. In the event a unit area or common or limited common area is partially or totally destroyed, and subsequently repaired or rebuilt, minor encroachments over adjoining units and common and limited common areas and facilities shall be permitted, and there shall be valid easements for the maintenance of said encroachments so long as they shall exist. Said encroachments, if any, and resulting easements, shall not be construed to be encumbrances affecting the marketability of title to any unit.
 
 ---
@@ -693,63 +693,63 @@ The legal description of the property is as follows:
 | Unit | Floor | Square Footage | Floor Plan | Assigned Parking Space |
 | :--- | :--- | :--- | :--- | :--- |
 | **BUILDING "A"** | | | | |
-| A1 | 1 | 1149 | Plan 5 | A1 |
-| A2 | 1 | 1149 | Plan 5 | A2 |
-| A3 | 1 | 1149 | Plan 5 | A3 |
-| A4 | 2 | 1167 | Plan 5 | A4 |
-| A5 | 2 | 1167 | Plan 5 | A5 |
-| A6 | 2 | 1167 | Plan 5 | A6 |
-| A7 | 3 | 1167 | Plan 5 | A7 |
-| A8 | 3 | 1167 | Plan 5 | A8 |
-| A9 | 3 | 1167 | Plan 5 | A9 |
+| A1 | 1 | 1149 | 5 | A1 |
+| A2 | 1 | 1149 | 5 | A2 |
+| A3 | 1 | 1149 | 5 | A3 |
+| A4 | 2 | 1167 | 5 | A4 |
+| A5 | 2 | 1167 | 5 | A5 |
+| A6 | 2 | 1167 | 5 | A6 |
+| A7 | 3 | 1167 | 5 | A7 |
+| A8 | 3 | 1167 | 5 | A8 |
+| A9 | 3 | 1167 | 5 | A9 |
 | **BUILDING "B"** | | | | |
-| B1 | 1 | 1048 | Plan 5 | B1 |
-| B2 | 1 | 1048 | Plan 5 | B2 |
-| B3 | 2 | 1066 | Plan 5 | B3 |
-| B4 | 2 | 1066 | Plan 5 | B4 |
-| B5 | 3 | 1066 | Plan 5 | B5 |
-| B6 | 3 | 1066 | Plan 5 | B6 |
+| B1 | 1 | 1048 | 5 | B1 |
+| B2 | 1 | 1048 | 5 | B2 |
+| B3 | 2 | 1066 | 5 | B3 |
+| B4 | 2 | 1066 | 5 | B4 |
+| B5 | 3 | 1066 | 5 | B5 |
+| B6 | 3 | 1066 | 5 | B6 |
 | **BUILDING "C"** | | | | |
-| C1 | 1 | 952 | Plan 4 | C1 |
-| C2 | 1 | 952 | Plan 4 | C2 |
-| C3 | 2 | 970 | Plan 4 | C3 |
-| C4 | 2 | 970 | Plan 4 | C4 |
-| C5 | 3 | 970 | Plan 4 | C5 |
-| C6 | 3 | 970 | Plan 4 | C6 |
+| C1 | 1 | 952 | 4 | C1 |
+| C2 | 1 | 952 | 4 | C2 |
+| C3 | 2 | 970 | 4 | C3 |
+| C4 | 2 | 970 | 4 | C4 |
+| C5 | 3 | 970 | 4 | C5 |
+| C6 | 3 | 970 | 4 | C6 |
 | **BUILDING "D"** | | | | |
-| D1 | 1 | 970 | Plan 4 | D1 |
-| D2 | 1 | 952 | Plan 4 | D2 |
-| D3 | 1 | 869 | Plan 4 | D3 |
-| D4 | 2 | 869 | Plan 4 | D4 |
-| D5 | 2 | 869 | Plan 4 | D5 |
-| D6 | 3 | 869 | Plan 4 | D6 |
-| D7 | 3 | 869 | Plan 4 | D7 |
+| D1 | 1 | 970 | 4 | D1 |
+| D2 | 1 | 952 | 4 | D2 |
+| D3 | 1 | 869 | 4 | D3 |
+| D4 | 2 | 869 | 4 | D4 |
+| D5 | 2 | 869 | 4 | D5 |
+| D6 | 3 | 869 | 4 | D6 |
+| D7 | 3 | 869 | 4 | D7 |
 | **BUILDING "E"** | | | | |
-| E1 | 1 | 998 | Plan 10 | E1 |
-| E2 | 1 | 998 | Plan 10 | E2 |
-| E3 | 2 | 1022 | Plan 10 | E3 |
-| E4 | 2 | 1022 | Plan 10 | E4 |
-| E5 | 3 | 1022 | Plan 10 | E5 |
-| E6 | 3 | 1022 | Plan 10 | E6 |
+| E1 | 1 | 998 | 10 | E1 |
+| E2 | 1 | 998 | 10 | E2 |
+| E3 | 2 | 1022 | 10 | E3 |
+| E4 | 2 | 1022 | 10 | E4 |
+| E5 | 3 | 1022 | 10 | E5 |
+| E6 | 3 | 1022 | 10 | E6 |
 | **BUILDING "F"** | | | | |
-| F1 | 1 | 998 | Plan 10 | F1 |
-| F2 | 1 | 998 | Plan 10 | F2 |
-| F3 | 1 | 998 | Plan 10 | F3 |
-| F4 | 1 | 998 | Plan 10 | F4 |
-| F5 | 1 | 998 | Plan 10 | F5 |
-| F6 | 1 | 998 | Plan 10 | F6 |
-| F7 | 2 | 1022 | Plan 10 | F7 |
-| F8 | 2 | 1022 | Plan 10 | F8 |
-| F9 | 2 | 1022 | Plan 10 | F9 |
-| F10 | 2 | 1022 | Plan 10 | F10 |
-| F11 | 2 | 1022 | Plan 10 | F11 |
-| F12 | 2 | 1022 | Plan 10 | F12 |
-| F13 | 3 | 1022 | Plan 10 | F13 |
-| F14 | 3 | 1022 | Plan 10 | F14 |
-| F15 | 3 | 1022 | Plan 10 | F15 |
-| F16 | 3 | 1022 | Plan 10 | F16 |
-| F17 | 3 | 1022 | Plan 10 | F17 |
-| F18 | 3 | 1022 | Plan 10 | F18 |
+| F1 | 1 | 998 | 10 | F1 |
+| F2 | 1 | 998 | 10 | F2 |
+| F3 | 1 | 998 | 10 | F3 |
+| F4 | 1 | 998 | 10 | F4 |
+| F5 | 1 | 998 | 10 | F5 |
+| F6 | 1 | 998 | 10 | F6 |
+| F7 | 2 | 1022 | 10 | F7 |
+| F8 | 2 | 1022 | 10 | F8 |
+| F9 | 2 | 1022 | 10 | F9 |
+| F10 | 2 | 1022 | 10 | F10 |
+| F11 | 2 | 1022 | 10 | F11 |
+| F12 | 2 | 1022 | 10 | F12 |
+| F13 | 3 | 1022 | 10 | F13 |
+| F14 | 3 | 1022 | 10 | F14 |
+| F15 | 3 | 1022 | 10 | F15 |
+| F16 | 3 | 1022 | 10 | F16 |
+| F17 | 3 | 1022 | 10 | F17 |
+| F18 | 3 | 1022 | 10 | F18 |
 
 #### NOTE 1. Description of Floor Plans.
 Floor Plan "4" contains the following rooms: Living-dining room, kitchen, two (2) bedrooms, one (1) bath and an entry hallway.

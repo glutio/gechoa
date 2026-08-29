@@ -971,13 +971,13 @@ window.DECL_DATA = {
           "id": "7.1",
           "num": "7.1",
           "kind": "num",
-          "base": "**7.1 Designation of Parking Spaces.** The Developer shall designate and convey one (1) covered parking space for each unit at the time of and as part of the first conveyance. Thereafter, the parking spaces so conveyed shall be part of that unit. The assignment or reassignment of uncovered parking spaces for guest parking or for any other specific use shall be made by the Owners' Association or its designated representative."
+          "base": "**7.1 Designation of Parking Spaces.** The Developer shall designate and convey by deed one (1) covered parking space for each unit at the time of and as part of the first conveyance. Thereafter, the parking spaces so conveyed shall be part of that unit. The assignment and reassignment of uncovered parking spaces for guest parking or for any other specific use shall be made by the Owners' Association or its designated representative."
         },
         {
           "id": "7.2",
           "num": "7.2",
           "kind": "num",
-          "base": "**7.2 Assignment of Storage Spaces.** The Developer shall assign and convey at the time of and as part of the first conveyance, to each unit, the storage space located on the deck or patio adjacent to that unit."
+          "base": "**7.2 Assignment of Storage Spaces.** The Developer shall assign and convey by deed, at the time of and as part of the first conveyance, to each unit, the storage space located on the deck or patio adjacent to that unit."
         }
       ]
     },
@@ -996,7 +996,7 @@ window.DECL_DATA = {
           "id": "8.2",
           "num": "8.2",
           "kind": "num",
-          "base": "**8.2 The Units.** The value of each unit, including all of the limited common areas appertaining thereto, and the percentage of undivided interest in the common areas and facilities appertaining to each unit, for all purposes, including voting in the Association and assessments for common expenses, is as set forth in Appendix \"C\" hereto. These values are provided in order to establish the percentages of ownership, also shown in Appendix \"C\", required to be set forth by the Act and do not necessarily reflect either the actual market value of said units, at the time this Declaration is filed for record, or the amount for which they may be sold, from time to time, by Declarant or others."
+          "base": "**8.2 The Units.** The value of each unit, including all of the limited common areas appertaining thereto, and the percentage of individual interest in the common areas and limited common areas appertaining to each unit, for all purposes, including voting in the Association assessments for common expenses, is as set forth in Appendix \"C\" hereto. These values are provided in order to establish the percentages of ownership, also shown in Appendix \"C\", required to be set forth by the Act and do not necessarily reflect either the actual market value of said units, at the time this Declaration is filed for record, or the amount for which they may be sold, from time to time, by Declarant or others."
         }
       ]
     },
@@ -2290,7 +2290,7 @@ window.DECL_DATA = {
           "id": "22.2",
           "num": "22.2",
           "kind": "num",
-          "base": "**22.2 Association Functions.** There are hereby reserved to the Association (and to the Developer prior to the election of the Board of Directors pursuant to Section 12.4.2), such easements as are necessary to perform the duties and obligations of the Association as set forth in this Declaration, the Bylaws, and the Act."
+          "base": "**22.2 Association Functions.** There are hereby reserved to the Association (and to the Developer prior to the election of the Board pursuant to Section 12.4.2), such easements as are necessary to perform the duties and obligations of the Association as set forth in this Declaration, the Bylaws, and the Act."
         },
         {
           "id": "22.3",
@@ -2466,7 +2466,7 @@ window.DECL_DATA = {
                 "A1",
                 "1",
                 "1149",
-                "Plan 5",
+                "5",
                 "A1"
               ]
             },
@@ -2475,7 +2475,7 @@ window.DECL_DATA = {
                 "A2",
                 "1",
                 "1149",
-                "Plan 5",
+                "5",
                 "A2"
               ]
             },
@@ -2484,7 +2484,7 @@ window.DECL_DATA = {
                 "A3",
                 "1",
                 "1149",
-                "Plan 5",
+                "5",
                 "A3"
               ]
             },
@@ -2493,7 +2493,7 @@ window.DECL_DATA = {
                 "A4",
                 "2",
                 "1167",
-                "Plan 5",
+                "5",
                 "A4"
               ]
             },
@@ -2502,7 +2502,7 @@ window.DECL_DATA = {
                 "A5",
                 "2",
                 "1167",
-                "Plan 5",
+                "5",
                 "A5"
               ]
             },
@@ -2511,7 +2511,7 @@ window.DECL_DATA = {
                 "A6",
                 "2",
                 "1167",
-                "Plan 5",
+                "5",
                 "A6"
               ]
             },
@@ -2520,7 +2520,7 @@ window.DECL_DATA = {
                 "A7",
                 "3",
                 "1167",
-                "Plan 5",
+                "5",
                 "A7"
               ]
             },
@@ -2529,7 +2529,7 @@ window.DECL_DATA = {
                 "A8",
                 "3",
                 "1167",
-                "Plan 5",
+                "5",
                 "A8"
               ]
             },
@@ -2538,7 +2538,7 @@ window.DECL_DATA = {
                 "A9",
                 "3",
                 "1167",
-                "Plan 5",
+                "5",
                 "A9"
               ]
             },
@@ -2550,7 +2550,7 @@ window.DECL_DATA = {
                 "B1",
                 "1",
                 "1048",
-                "Plan 5",
+                "5",
                 "B1"
               ]
             },
@@ -2559,7 +2559,7 @@ window.DECL_DATA = {
                 "B2",
                 "1",
                 "1048",
-                "Plan 5",
+                "5",
                 "B2"
               ]
             },
@@ -2568,7 +2568,7 @@ window.DECL_DATA = {
                 "B3",
                 "2",
                 "1066",
-                "Plan 5",
+                "5",
                 "B3"
               ]
             },
@@ -2577,7 +2577,7 @@ window.DECL_DATA = {
                 "B4",
                 "2",
                 "1066",
-                "Plan 5",
+                "5",
                 "B4"
               ]
             },
@@ -2586,7 +2586,7 @@ window.DECL_DATA = {
                 "B5",
                 "3",
                 "1066",
-                "Plan 5",
+                "5",
                 "B5"
               ]
             },
@@ -2595,7 +2595,7 @@ window.DECL_DATA = {
                 "B6",
                 "3",
                 "1066",
-                "Plan 5",
+                "5",
                 "B6"
               ]
             },
@@ -2607,7 +2607,7 @@ window.DECL_DATA = {
                 "C1",
                 "1",
                 "952",
-                "Plan 4",
+                "4",
                 "C1"
               ]
             },
@@ -2616,7 +2616,7 @@ window.DECL_DATA = {
                 "C2",
                 "1",
                 "952",
-                "Plan 4",
+                "4",
                 "C2"
               ]
             },
@@ -2625,7 +2625,7 @@ window.DECL_DATA = {
                 "C3",
                 "2",
                 "970",
-                "Plan 4",
+                "4",
                 "C3"
               ]
             },
@@ -2634,7 +2634,7 @@ window.DECL_DATA = {
                 "C4",
                 "2",
                 "970",
-                "Plan 4",
+                "4",
                 "C4"
               ]
             },
@@ -2643,7 +2643,7 @@ window.DECL_DATA = {
                 "C5",
                 "3",
                 "970",
-                "Plan 4",
+                "4",
                 "C5"
               ]
             },
@@ -2652,7 +2652,7 @@ window.DECL_DATA = {
                 "C6",
                 "3",
                 "970",
-                "Plan 4",
+                "4",
                 "C6"
               ]
             },
@@ -2664,7 +2664,7 @@ window.DECL_DATA = {
                 "D1",
                 "1",
                 "970",
-                "Plan 4",
+                "4",
                 "D1"
               ]
             },
@@ -2673,7 +2673,7 @@ window.DECL_DATA = {
                 "D2",
                 "1",
                 "952",
-                "Plan 4",
+                "4",
                 "D2"
               ]
             },
@@ -2682,7 +2682,7 @@ window.DECL_DATA = {
                 "D3",
                 "1",
                 "869",
-                "Plan 4",
+                "4",
                 "D3"
               ]
             },
@@ -2691,7 +2691,7 @@ window.DECL_DATA = {
                 "D4",
                 "2",
                 "869",
-                "Plan 4",
+                "4",
                 "D4"
               ]
             },
@@ -2700,7 +2700,7 @@ window.DECL_DATA = {
                 "D5",
                 "2",
                 "869",
-                "Plan 4",
+                "4",
                 "D5"
               ]
             },
@@ -2709,7 +2709,7 @@ window.DECL_DATA = {
                 "D6",
                 "3",
                 "869",
-                "Plan 4",
+                "4",
                 "D6"
               ]
             },
@@ -2718,7 +2718,7 @@ window.DECL_DATA = {
                 "D7",
                 "3",
                 "869",
-                "Plan 4",
+                "4",
                 "D7"
               ]
             },
@@ -2730,7 +2730,7 @@ window.DECL_DATA = {
                 "E1",
                 "1",
                 "998",
-                "Plan 10",
+                "10",
                 "E1"
               ]
             },
@@ -2739,7 +2739,7 @@ window.DECL_DATA = {
                 "E2",
                 "1",
                 "998",
-                "Plan 10",
+                "10",
                 "E2"
               ]
             },
@@ -2748,7 +2748,7 @@ window.DECL_DATA = {
                 "E3",
                 "2",
                 "1022",
-                "Plan 10",
+                "10",
                 "E3"
               ]
             },
@@ -2757,7 +2757,7 @@ window.DECL_DATA = {
                 "E4",
                 "2",
                 "1022",
-                "Plan 10",
+                "10",
                 "E4"
               ]
             },
@@ -2766,7 +2766,7 @@ window.DECL_DATA = {
                 "E5",
                 "3",
                 "1022",
-                "Plan 10",
+                "10",
                 "E5"
               ]
             },
@@ -2775,7 +2775,7 @@ window.DECL_DATA = {
                 "E6",
                 "3",
                 "1022",
-                "Plan 10",
+                "10",
                 "E6"
               ]
             },
@@ -2787,7 +2787,7 @@ window.DECL_DATA = {
                 "F1",
                 "1",
                 "998",
-                "Plan 10",
+                "10",
                 "F1"
               ]
             },
@@ -2796,7 +2796,7 @@ window.DECL_DATA = {
                 "F2",
                 "1",
                 "998",
-                "Plan 10",
+                "10",
                 "F2"
               ]
             },
@@ -2805,7 +2805,7 @@ window.DECL_DATA = {
                 "F3",
                 "1",
                 "998",
-                "Plan 10",
+                "10",
                 "F3"
               ]
             },
@@ -2814,7 +2814,7 @@ window.DECL_DATA = {
                 "F4",
                 "1",
                 "998",
-                "Plan 10",
+                "10",
                 "F4"
               ]
             },
@@ -2823,7 +2823,7 @@ window.DECL_DATA = {
                 "F5",
                 "1",
                 "998",
-                "Plan 10",
+                "10",
                 "F5"
               ]
             },
@@ -2832,7 +2832,7 @@ window.DECL_DATA = {
                 "F6",
                 "1",
                 "998",
-                "Plan 10",
+                "10",
                 "F6"
               ]
             },
@@ -2841,7 +2841,7 @@ window.DECL_DATA = {
                 "F7",
                 "2",
                 "1022",
-                "Plan 10",
+                "10",
                 "F7"
               ]
             },
@@ -2850,7 +2850,7 @@ window.DECL_DATA = {
                 "F8",
                 "2",
                 "1022",
-                "Plan 10",
+                "10",
                 "F8"
               ]
             },
@@ -2859,7 +2859,7 @@ window.DECL_DATA = {
                 "F9",
                 "2",
                 "1022",
-                "Plan 10",
+                "10",
                 "F9"
               ]
             },
@@ -2868,7 +2868,7 @@ window.DECL_DATA = {
                 "F10",
                 "2",
                 "1022",
-                "Plan 10",
+                "10",
                 "F10"
               ]
             },
@@ -2877,7 +2877,7 @@ window.DECL_DATA = {
                 "F11",
                 "2",
                 "1022",
-                "Plan 10",
+                "10",
                 "F11"
               ]
             },
@@ -2886,7 +2886,7 @@ window.DECL_DATA = {
                 "F12",
                 "2",
                 "1022",
-                "Plan 10",
+                "10",
                 "F12"
               ]
             },
@@ -2895,7 +2895,7 @@ window.DECL_DATA = {
                 "F13",
                 "3",
                 "1022",
-                "Plan 10",
+                "10",
                 "F13"
               ]
             },
@@ -2904,7 +2904,7 @@ window.DECL_DATA = {
                 "F14",
                 "3",
                 "1022",
-                "Plan 10",
+                "10",
                 "F14"
               ]
             },
@@ -2913,7 +2913,7 @@ window.DECL_DATA = {
                 "F15",
                 "3",
                 "1022",
-                "Plan 10",
+                "10",
                 "F15"
               ]
             },
@@ -2922,7 +2922,7 @@ window.DECL_DATA = {
                 "F16",
                 "3",
                 "1022",
-                "Plan 10",
+                "10",
                 "F16"
               ]
             },
@@ -2931,7 +2931,7 @@ window.DECL_DATA = {
                 "F17",
                 "3",
                 "1022",
-                "Plan 10",
+                "10",
                 "F17"
               ]
             },
@@ -2940,7 +2940,7 @@ window.DECL_DATA = {
                 "F18",
                 "3",
                 "1022",
-                "Plan 10",
+                "10",
                 "F18"
               ]
             }
