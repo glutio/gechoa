@@ -143,18 +143,24 @@
 
   // Handle all hash changes natively (TOC, Favorites, Back/Forward browser buttons)
   window.addEventListener('hashchange', () => {
-    const id = window.location.hash.replace('#', '');
-    performScroll(id);
+    const p = parseHash();
+    // Back/forward into a different document -> reload so the renderer rebuilds.
+    if (p.doc && window.GEC_DOCS && window.GEC_DOCS[p.doc] && p.doc !== activeDoc()) {
+      try { localStorage.setItem('gec_doc', p.doc); } catch (_) {}
+      location.reload();
+      return;
+    }
+    performScroll(p.sec);
   });
 
   // Favorite clicks must always act, even when the hash is unchanged
   // (you may already be at that section), so route them through performScroll.
   function favJump(e, id) {
     e.preventDefault();
-    if (window.location.hash === '#' + id) {
+    if (currentHashDecoded() === activeDoc() + '/' + id) {
       performScroll(id);
     } else {
-      window.location.hash = id;
+      location.hash = secHref(id);
     }
   }
 
@@ -168,9 +174,9 @@
     loadFavorites();
     applyBookmarksState();
     initScrollSpy();
-    const id = window.location.hash.replace('#', '');
-    if (id) {
-      setTimeout(() => performScroll(id), 50);
+    const sec = parseHash().sec;
+    if (sec) {
+      setTimeout(() => performScroll(sec), 50);
     }
   });
 
@@ -266,7 +272,7 @@
       html += hasSubs
         ? '<span class="toc-toggle">+</span>'
         : '<span class="toc-toggle empty"></span>';
-      html += '<a href="#' + escAttr(secId) + '" class="nav-item toc-sec-link">'
+      html += '<a href="' + escAttr(secHref(secId)) + '" class="nav-item toc-sec-link">'
             + '<span>' + escAttr(secTitle) + '</span>'
             + '<button class="nav-star-btn" data-target="' + escAttr(secId) + '" data-title="' + escAttr(secTitle) + '">\u2605</button>'
             + '</a>';
@@ -274,7 +280,7 @@
       if (hasSubs) {
         html += '<div class="toc-sublist" style="display:none;">';
         subs.forEach(s => {
-          html += '<a href="#' + escAttr(s.id) + '" class="nav-item sub-item">'
+          html += '<a href="' + escAttr(secHref(s.id)) + '" class="nav-item sub-item">'
                 + '<span>' + escAttr(s.label) + '</span>'
                 + '<button class="nav-star-btn" data-target="' + escAttr(s.id) + '" data-title="' + escAttr(s.label) + '">\u2605</button>'
                 + '</a>';
@@ -321,7 +327,7 @@
 
   // Expand the section that contains the target so the active item is visible.
   function revealNavFor(id) {
-    const link = document.querySelector('#tocRoot a.nav-item[href="#' + id + '"]');
+    const link = document.querySelector('#tocRoot a.nav-item[href="' + secHref(id) + '"]');
     if (!link) return;
     let sl = link.closest('.toc-sublist');
     if (!sl) {
@@ -341,7 +347,7 @@
     navLinks.forEach(link => {
       link.classList.remove('active');
       const href = link.getAttribute('href') || '';
-      if (href === '#' + id && id !== '') {
+      if (href === secHref(id) && id !== '') {
         link.classList.add('active');
       }
     });
@@ -456,7 +462,7 @@
     let html = '';
     favorites.forEach(f => {
       html += `
-        <a href="#${f.id}" class="nav-item fav-item" onclick="favJump(event, '${f.id}')">
+        <a href="${escAttr(secHref(f.id))}" class="nav-item fav-item" onclick="favJump(event, '${f.id}')">
           <span class="fav-star" onclick="event.preventDefault(); event.stopPropagation(); removeFavorite('${f.id}')" title="Remove bookmark">&#9733;</span>
           <span class="fav-title">${f.title}</span>
         </a>
@@ -510,11 +516,38 @@
       btn.addEventListener('click', () => switchDoc(btn.getAttribute('data-doc')));
     });
   }
+  /* --- URL FRAGMENT SCHEME: #<doc>/<section> (doc travels with the anchor) --- */
+  function activeDoc() { return window.GEC_ACTIVE_DOC || 'declaration'; }
+  function currentHashDecoded() {
+    try { return decodeURIComponent((location.hash || '').replace(/^#/, '')); }
+    catch (_) { return (location.hash || '').replace(/^#/, ''); }
+  }
+  // Parse "#<doc>/<sec>" -> {doc, sec}. A bare legacy "#12.4.5" is treated as sec only.
+  function parseHash() {
+    const h = currentHashDecoded();
+    if (!h) return { doc: null, sec: '' };
+    const slash = h.indexOf('/');
+    if (slash < 0) {
+      if (window.GEC_DOCS && window.GEC_DOCS[h]) return { doc: h, sec: '' };
+      return { doc: null, sec: h };
+    }
+    return { doc: h.slice(0, slash), sec: h.slice(slash + 1) };
+  }
+  function secHref(id) { return '#' + activeDoc() + (id ? '/' + id : ''); }
+
   function switchDoc(key) {
-    if (!key || key === window.GEC_ACTIVE_DOC) { toggleDocs(); return; }
+    if (!key || key === activeDoc()) { toggleDocs(); return; }
     try { localStorage.setItem('gec_doc', key); } catch (_) {}
-    location.hash = '';
+    location.hash = key;   // drop the section; app.js reads the doc token on reload
     location.reload();
+  }
+  // Keep the fragment's doc prefix in sync with the active doc so links are shareable.
+  function normalizeDocUrl() {
+    const p = parseHash();
+    const want = activeDoc() + (p.sec ? '/' + p.sec : '');
+    if (currentHashDecoded() !== want) {
+      history.replaceState(null, '', location.pathname + location.search + '#' + want);
+    }
   }
   function applyActiveDoc() {
     const key = window.GEC_ACTIVE_DOC;
@@ -525,6 +558,7 @@
     if (meta.title) document.title = meta.title + (meta.subtitle ? ' — ' + meta.subtitle : '');
     const link = document.getElementById('pdfDownloadLink');
     if (link) link.setAttribute('href', DOC_PDF[key] || 'GEC-Declaration.pdf');
+    normalizeDocUrl();
     renderDocList();
   }
   function toggleSearch() {

@@ -6,6 +6,10 @@
   var DOCS = window.GEC_DOCS || (window.DECL_DATA ? { declaration: window.DECL_DATA } : null);
   if (!DOCS) { console.error('GEC_DOCS / DECL_DATA not loaded'); return; }
   var DOC_KEY = (function () {
+    try {
+      var tok = decodeURIComponent((location.hash || '').replace(/^#/, '')).split('/')[0];
+      if (tok && DOCS[tok]) { try { localStorage.setItem('gec_doc', tok); } catch (_) {} return tok; }
+    } catch (_) {}
     try { var k = localStorage.getItem('gec_doc'); if (k && DOCS[k]) return k; } catch (_) {}
     return DOCS.declaration ? 'declaration' : Object.keys(DOCS)[0];
   })();
