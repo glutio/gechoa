@@ -344,7 +344,10 @@
     var deleted = !!node.deletedBy;
     var classes = [];
     var dataAttr = '';
-    if (!deleted && node.num && node.kind === 'num') {
+    // A ".0" node is a section intro/lead-in: render it under the article header
+    // (not as its own TOC entry) so the article anchor lands on it.
+    var isIntro = /\.0$/.test(String(node.num || ''));
+    if (!deleted && node.num && node.kind === 'num' && !isIntro) {
       classes.push('toc-node');
       var lbl = descLabel(node, node.current || (node.revisions[0] && node.revisions[0].md) || '');
       dataAttr = ' data-toc-label="' + escQ(lbl) + '"';

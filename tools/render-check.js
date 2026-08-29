@@ -86,10 +86,12 @@ assert(xii14 && xii14.getAttribute('data-toc-label') === 'XII.14 Other Details',
 const xii1 = w2.document.getElementById('sub-XII-1');
 assert(xii1 && /^XII\.1 Step One - Pick A Hearing Board/.test(xii1.getAttribute('data-toc-label') || ''),
   'XII.1 toc-label keeps "Step One" (' + (xii1 && xii1.getAttribute('data-toc-label')) + ')');
-// Headingless intro node (XII.0) gets a prose-snippet label, not a bare number.
+// The ".0" intro node is a section lead-in, not its own TOC entry — the Article XII
+// anchor lands on it instead.
 const xii0 = w2.document.getElementById('sub-XII-0');
-assert(xii0 && /^XII\.0 This procedure establishes/.test(xii0.getAttribute('data-toc-label') || ''),
-  'XII.0 toc-label has prose snippet (' + (xii0 && xii0.getAttribute('data-toc-label')) + ')');
+assert(xii0 && !xii0.classList.contains('toc-node') && !xii0.getAttribute('data-toc-label'),
+  'XII.0 intro is not a TOC node');
+assert(/This procedure establishes thirteen steps/.test(bBody), 'XII.0 intro text still renders');
 const bStray = (bBody.match(/\*\*/g) || []).length;
 assert(bStray === 0, 'no stray ** in bylaws body (' + bStray + ')');
 
