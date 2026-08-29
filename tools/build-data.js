@@ -6,13 +6,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const MD = process.env.GEC_MD ||
-  path.join(__dirname, 'source', 'GEC-Declaration-Full.md');
 const OUT = path.join(__dirname, '..', 'public', 'decl', 'data.js');
 
-const raw = fs.readFileSync(MD, 'utf8');
-const lines = raw.split(/\r?\n/);
-const warnings = [];
+let warnings = [];
 const warn = m => warnings.push(m);
 
 // ---- deterministic, heading-aware sentence splitter -------------------------
@@ -58,12 +54,16 @@ function stripNotes(s) {
 }
 
 // ---- split into PARTS ----
-const parts = {};
-let curPart = null;
-for (let i = 0; i < lines.length; i++) {
-  const m = lines[i].match(/^# PART ([IV]+):\s*(.+)$/);
-  if (m) { curPart = m[1]; parts[curPart] = { title: m[2].trim(), lines: [] }; continue; }
-  if (curPart) parts[curPart].lines.push(lines[i]);
+function loadParts(mdText) {
+  const parts = {};
+  let curPart = null;
+  const lines = mdText.split(/\r?\n/);
+  for (let i = 0; i < lines.length; i++) {
+    const m = lines[i].match(/^# PART ([IV]+):\s*(.+)$/);
+    if (m) { curPart = m[1]; parts[curPart] = { title: m[2].trim(), lines: [] }; continue; }
+    if (curPart) parts[curPart].lines.push(lines[i]);
+  }
+  return parts;
 }
 
 // ---- parse recording metadata block (lines like  **Key:** value ) ----
@@ -94,7 +94,7 @@ function parseBase(L) {
 
   for (let i = 0; i < L.length; i++) {
     const line = L[i];
-    const secM = line.match(/^### SECTION (\d+):\s*(.+)$/);
+    const secM = line.match(/^### SECTION ([\dIVXLCDM]+):\s*(.+)$/);
     const appM = line.match(/^### APPENDIX "?([A-C])"?[:\s]*(.*)$/);
     if (secM) { sec = { num: secM[1], title: secM[2].trim(), preamble: '', nodes: [], kind: 'section' }; sections.push(sec); lastByDepth = {}; lastNumeric = null; mode = 'sec'; continue; }
     if (appM) { sec = { num: appM[1], title: appM[2].trim(), rawLines: [], kind: 'appendix' }; appendices.push(sec); mode = 'app'; continue; }
@@ -105,14 +105,24 @@ function parseBase(L) {
     const bm = line.match(/^(\s*)\*\s+(.*)$/);
     if (bm) {
       const depth = Math.floor(bm[1].length / 2);
-      const content = stripNotes(bm[2].trim());
+      let rawContent = bm[2].trim();
+      // Optional explicit id marker  {#III.5}  — sets a unique (article-scoped) id
+      // while the displayed heading stays verbatim. Used by docs (e.g. Bylaws) whose
+      // section numbers restart per article, so bare "5." is not globally unique.
+      let explicitId = null;
+      const idm = rawContent.match(/^\{#([^}]+)\}\s*/);
+      if (idm) { explicitId = idm[1].trim(); rawContent = rawContent.slice(idm[0].length); }
+      const content = stripNotes(rawContent);
       if (!content) continue;
       let id = null, num = null, kind = 'num';
-      const nm = content.match(/^\*\*\(?(\d+(?:\.\d+)*)\.?\)?/);
-      if (nm) { num = nm[1]; id = num; }
+      if (explicitId) { id = explicitId; num = explicitId; }
       else {
-        const lm = content.match(/^\((\w+)\)/);
-        if (lm) { kind = 'letter'; const par = lastNumeric ? lastNumeric.id : sec.num; id = par + '(' + lm[1] + ')'; num = '(' + lm[1] + ')'; }
+        const nm = content.match(/^\*\*\(?(\d+(?:\.\d+)*)\.?\)?/);
+        if (nm) { num = nm[1]; id = num; }
+        else {
+          const lm = content.match(/^\((\w+)\)/);
+          if (lm) { kind = 'letter'; const par = lastNumeric ? lastNumeric.id : sec.num; id = par + '(' + lm[1] + ')'; num = '(' + lm[1] + ')'; }
+        }
       }
       const node = { id, num, md: content, kind };
       pushNode(node, depth);
@@ -223,36 +233,46 @@ function parseAmendment(L) {
     let cur = null, lead = '';
     for (const l of bq) {
       const t = l.replace(/^>\s?/, '');
-      const nm = t.match(/^\*\*\(?(\d+(?:\.\d+)*)\.?\)?/);
-      if (nm) { cur = { id: nm[1], md: stripNotes(t.trim()) }; nodes.push(cur); continue; }
-      // A blockquote line that is a markdown list item ("1. " / "(a) ") is a genuine
-      // line break in the source. Preserve it as a newline in the node text so the
-      // renderer can present a real list; ordinary continuation lines still flow with a
+      // Optional explicit id marker {#XII.1} (see parseBase); strips from display.
+      let markId = null, tt = t;
+      const idm = tt.match(/^\{#([^}]+)\}\s*/);
+      if (idm) { markId = idm[1].trim(); tt = tt.slice(idm[0].length); }
+      const nm = markId ? null : tt.match(/^\*\*\(?(\d+(?:\.\d+)*)\.?\)?/);
+      if (markId) { cur = { id: markId, md: stripNotes(tt.trim()) }; nodes.push(cur); continue; }
+      if (nm) { cur = { id: nm[1], md: stripNotes(tt.trim()) }; nodes.push(cur); continue; }
+      // A blockquote line that is a markdown list item ("1. " / "(a) " / "· ") is a
+      // genuine line break in the source. Preserve it as a newline in the node text so
+      // the renderer can present a real list; ordinary continuation lines flow with a
       // space. Deterministic: respect the source's line structure, do not detect lists.
-      const isListLine = /^(\d+\.|\([A-Za-z]+\))\s+\S/.test(t);
-      if (cur && t.trim()) cur.md = stripNotes((cur.md + (isListLine ? '\n' : ' ') + t.trim()).trim());
-      else if (!cur && t.trim()) lead = stripNotes((lead + ' ' + t.trim()).trim());
+      const isListLine = /^(\d+\.|\([A-Za-z]+\)|[·•‣])\s+\S/.test(tt);
+      if (cur && tt.trim()) cur.md = stripNotes((cur.md + (isListLine ? '\n' : ' ') + tt.trim()).trim());
+      else if (!cur && tt.trim()) lead = stripNotes((lead + ' ' + tt.trim()).trim());
     }
     parsed.push({ letters: it.letters, intro: intro.replace(/\s+/g, ' ').trim(), nodes, lead, directives });
   }
   return { meta, items: parsed };
 }
 
+// ============================================================================
+// buildDoc(cfg) — build one document (base + chronological amendments) into the
+// window-data shape. Runs once per document; the Declaration output is unchanged.
+//   cfg = { parts, baseKey, relatedKey, amendmentsMeta, chrono, baseAmend,
+//           meta:{title,subtitle}, sectionLabel }
+// ============================================================================
+function buildDoc(cfg) {
+  const parts = cfg.parts;
+  warnings = [];
 // ---- build base tree ----
-const base = parseBase(parts['V'].lines);
+const base = parseBase(parts[cfg.baseKey].lines);
 base.appendices.forEach(a => { a.blocks = parseAppendixBlocks(a.rawLines); delete a.rawLines; });
 
 const flat = {};
 base.sections.forEach(s => (function w(ns) { ns.forEach(n => { if (n.id) flat[n.id] = n; if (n.children) w(n.children); }); })(s.nodes));
 base.sections.forEach(s => { if (s.nodes.length === 0 && s.preamble) { const n = { id: s.num, num: s.num, md: s.preamble, kind: 'sectionBody', children: [] }; s.nodes.push(n); flat[s.num] = n; s.preamble = ''; } });
-Object.values(flat).forEach(n => { n.base = n.md; n.revisions = [{ amend: '1980', md: n.md }]; });
+Object.values(flat).forEach(n => { n.base = n.md; n.revisions = [{ amend: cfg.baseAmend.id, md: n.md }]; });
 
-const amendmentsMeta = {
-  '2001': { part: 'III', year: 2001, label: '2001 Amendment No. 1', short: 'Amendment No. 1 (2001)' },
-  '2006': { part: 'II', year: 2006, label: '2006 Amendment No. 2', short: 'Amendment No. 2 (2006)' },
-  '2016': { part: 'I', year: 2016, label: '2016 Amendment (Loan Authority)', short: 'Amendment (2016)' },
-};
-const CHRONO = ['2001', '2006', '2016'];
+const amendmentsMeta = cfg.amendmentsMeta;
+const CHRONO = cfg.chrono;
 
 const workMd = {};
 Object.values(flat).forEach(n => { workMd[n.id] = n.md; });
@@ -404,7 +424,7 @@ function parse1992(L) {
   }
   return { id: '1992', year: 1992, label: '1992 Short Plat Covenants', kind: 'related', recording: meta, blocks };
 }
-const related = [parse1992(parts['IV'].lines)];
+const related = cfg.relatedKey && parts[cfg.relatedKey] ? [parse1992(parts[cfg.relatedKey].lines)] : [];
 
 // ---- finalize tree ----
 function numKey(id) { return (id || '').split(/[.()]/).filter(Boolean).map(x => x.padStart(4, '0')).join('.'); }
@@ -431,12 +451,13 @@ function emitRawNode(n) {
 // ---- assemble + emit ----
 const DECL = {
   meta: {
-    title: 'Glendale Estates, A Condominium',
-    subtitle: 'Declaration & Recorded Amendments',
+    title: cfg.meta.title,
+    subtitle: cfg.meta.subtitle,
     generated: new Date().toISOString().slice(0, 10),
   },
+  sectionLabel: cfg.sectionLabel || 'SECTION',
   amendments: [
-    { id: '1980', year: 1980, label: '1980 Original Declaration', short: 'Original (1980)', kind: 'base', recording: parseMeta(parts['V'].lines) },
+    { id: cfg.baseAmend.id, year: cfg.baseAmend.year, label: cfg.baseAmend.label, short: cfg.baseAmend.short, kind: 'base', recording: parseMeta(parts[cfg.baseKey].lines) },
     ...amendmentsOut.map(a => ({ id: a.id, year: a.year, label: a.label, short: a.short, kind: a.kind, recording: a.recording, operations: a.operations })),
   ],
   sections: base.sections.map(s => ({ num: s.num, title: s.title, preamble: s.preamble || '', nodes: s.nodes.map(emitRawNode) })),
@@ -445,7 +466,16 @@ const DECL = {
   related,
 };
 
-fs.writeFileSync(OUT, '// AUTO-GENERATED by tools/build-data.js — do not edit by hand.\n' + 'window.DECL_DATA = ' + JSON.stringify(DECL, null, 2) + ';\n', 'utf8');
+  const totalNodes = Object.keys(flat).length;
+  const added = Object.values(flat).filter(n => n.addedBy).length;
+  const deleted = Object.values(flat).filter(n => n.deletedBy).length;
+  return {
+    DECL,
+    composed: composeForVerify(DECL.sections, DECL.amendments),
+    warnings: warnings.slice(),
+    stats: { sections: base.sections.length, appendices: base.appendices.length, totalNodes, added, deleted, flat },
+  };
+}
 
 // ---- COMPOSE VERIFICATION: reconstruct revisions from raw base+operations and compare to golden ----
 // This mirrors composeData() in the runtime renderer — proving JSON is complete & renderer-derivable.
@@ -483,14 +513,17 @@ function composeForVerify(sections, amendments) {
   });
   return out;
 }
-const goldenPath = path.join(__dirname, 'golden.json');
-const composedGolden = composeForVerify(DECL.sections, DECL.amendments);
-if (process.env.GEC_WRITE_GOLDEN === '1') {
-  fs.writeFileSync(goldenPath, JSON.stringify(composedGolden, null, 0), 'utf8');
-  console.log('COMPOSE VERIFY: golden regenerated (' + Object.keys(composedGolden).length + ' nodes)');
-} else if (fs.existsSync(goldenPath)) {
+// ============================================================================
+// DRIVER — build each configured document, emit window.GEC_DOCS, verify goldens.
+// ============================================================================
+function verifyGolden(goldenPath, composed) {
+  if (process.env.GEC_WRITE_GOLDEN === '1') {
+    fs.writeFileSync(goldenPath, JSON.stringify(composed, null, 0), 'utf8');
+    console.log('COMPOSE VERIFY: golden regenerated (' + Object.keys(composed).length + ' nodes)');
+    return;
+  }
+  if (!fs.existsSync(goldenPath)) { console.log('COMPOSE VERIFY: (no golden ' + path.basename(goldenPath) + ' — skipped)'); return; }
   const golden = JSON.parse(fs.readFileSync(goldenPath, 'utf8'));
-  const composed = composedGolden;
   const allIds = new Set([...Object.keys(golden), ...Object.keys(composed)]);
   let mism = 0;
   for (const id of allIds) {
@@ -502,18 +535,64 @@ if (process.env.GEC_WRITE_GOLDEN === '1') {
   console.log('COMPOSE VERIFY: ' + (mism === 0 ? 'PASS' : 'FAIL (' + mism + ' mismatches)') + ' over ' + allIds.size + ' nodes');
 }
 
-// ---- verification ----
-const totalNodes = Object.keys(flat).length;
-const added = Object.values(flat).filter(n => n.addedBy).length;
-const deleted = Object.values(flat).filter(n => n.deletedBy).length;
-console.log('=== BUILD COMPLETE ===');
-console.log('sections:', base.sections.length, '| appendices:', base.appendices.length, '| total nodes:', totalNodes, '| added:', added, '| deleted:', deleted);
-console.log('amendments:', DECL.amendments.map(a => a.id + '(' + a.kind + ')').join(', '));
+const DOC_CONFIGS = [
+  {
+    key: 'declaration',
+    md: process.env.GEC_MD || path.join(__dirname, 'source', 'GEC-Declaration-Full.md'),
+    golden: path.join(__dirname, 'golden.json'),
+    baseKey: 'V', relatedKey: 'IV',
+    baseAmend: { id: '1980', year: 1980, label: '1980 Original Declaration', short: 'Original (1980)' },
+    meta: { title: 'Glendale Estates, A Condominium', subtitle: 'Declaration & Recorded Amendments' },
+    sectionLabel: 'SECTION',
+    amendmentsMeta: {
+      '2001': { part: 'III', year: 2001, label: '2001 Amendment No. 1', short: 'Amendment No. 1 (2001)' },
+      '2006': { part: 'II', year: 2006, label: '2006 Amendment No. 2', short: 'Amendment No. 2 (2006)' },
+      '2016': { part: 'I', year: 2016, label: '2016 Amendment (Loan Authority)', short: 'Amendment (2016)' },
+    },
+    chrono: ['2001', '2006', '2016'],
+    spot: ['1.1', '12.4', '12.4.5', '14.9', '1.26', '12.5.14', '19.7.2', '25', '9.2'],
+  },
+  {
+    key: 'bylaws',
+    md: path.join(__dirname, 'source', 'GEC-Bylaws-Full.md'),
+    golden: path.join(__dirname, 'golden-bylaws.json'),
+    baseKey: 'V', relatedKey: null,
+    baseAmend: { id: '1980', year: 1980, label: '1980 Original Bylaws', short: 'Original (1980)' },
+    meta: { title: 'Glendale Estates, A Condominium', subtitle: 'Bylaws & Recorded Amendments' },
+    sectionLabel: 'ARTICLE',
+    amendmentsMeta: {
+      '2001': { part: 'II', year: 2001, label: '2001 First Amendment', short: 'First Amendment (2001)' },
+      '2006': { part: 'I', year: 2006, label: '2006 Second Amendment', short: 'Second Amendment (2006)' },
+    },
+    chrono: ['2001', '2006'],
+    spot: ['III.5', 'IV.1', 'V.8', 'VII.2', 'X', 'XI.1', 'XII.1'],
+  },
+];
+
+const GEC_DOCS = {};
+for (const cfg of DOC_CONFIGS) {
+  if (!fs.existsSync(cfg.md)) { console.log('=== SKIP ' + cfg.key + ' (no source ' + path.basename(cfg.md) + ') ==='); continue; }
+  cfg.parts = loadParts(fs.readFileSync(cfg.md, 'utf8'));
+  const res = buildDoc(cfg);
+  GEC_DOCS[cfg.key] = res.DECL;
+  console.log('\n=== ' + cfg.key.toUpperCase() + ' ===');
+  console.log('sections:', res.stats.sections, '| appendices:', res.stats.appendices, '| total nodes:', res.stats.totalNodes, '| added:', res.stats.added, '| deleted:', res.stats.deleted);
+  console.log('amendments:', res.DECL.amendments.map(a => a.id + '(' + a.kind + ')').join(', '));
+  verifyGolden(cfg.golden, res.composed);
+  console.log('--- spot checks (current text) ---');
+  (cfg.spot || []).forEach(id => {
+    const n = res.stats.flat[id];
+    console.log('[' + id + '] revs=' + (n ? n.revisions.map(r => r.amend).join('>') : '?') + '  ' + (n && n.current ? n.current.slice(0, 85) : '(deleted/none)'));
+  });
+  if (res.warnings.length) { console.log('--- warnings (' + res.warnings.length + ') ---'); res.warnings.forEach(w => console.log('  ! ' + w)); }
+}
+
+const defaultDoc = GEC_DOCS.declaration ? 'declaration' : Object.keys(GEC_DOCS)[0];
+fs.writeFileSync(OUT,
+  '// AUTO-GENERATED by tools/build-data.js — do not edit by hand.\n' +
+  'window.GEC_DOCS = ' + JSON.stringify(GEC_DOCS, null, 2) + ';\n' +
+  'window.DECL_DATA = window.GEC_DOCS[' + JSON.stringify(defaultDoc) + '];\n',
+  'utf8');
+console.log('\n=== BUILD COMPLETE ===');
+console.log('docs:', Object.keys(GEC_DOCS).join(', '), '| default:', defaultDoc);
 console.log('output:', OUT, '(' + (fs.statSync(OUT).size / 1024).toFixed(1) + ' KB)');
-console.log('\n--- spot checks (current text) ---');
-['1.1', '12.4', '12.4.5', '14.9', '1.26', '12.5.14', '19.7.2', '25', '9.2'].forEach(id => {
-  const n = flat[id];
-  console.log('[' + id + '] revs=' + (n ? n.revisions.map(r => r.amend).join('>') : '?') + '  ' + (n && n.current ? n.current.slice(0, 85) : '(deleted/none)'));
-});
-console.log('\n--- warnings (' + warnings.length + ') ---');
-warnings.forEach(w => console.log('  ! ' + w));

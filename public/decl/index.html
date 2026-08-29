@@ -19,14 +19,19 @@
     <h1>Glendale Estates</h1>
     <div class="sub">Declaration &amp; Amendments</div>
     <div class="header-actions">
-      <button class="header-btn" id="pdfToggleBtn" onclick="togglePdf()" aria-label="Toggle original document" title="Original document (PDF)">&#128196;</button>
+      <button class="header-btn" id="docToggleBtn" onclick="toggleDocs()" aria-label="Choose document" title="Choose document">&#128196;</button>
       <button class="header-btn" id="searchToggleBtn" onclick="toggleSearch()" aria-label="Toggle search" title="Search">&#128269;</button>
       <button class="header-btn" id="bookmarksToggleBtn" onclick="toggleBookmarks()" aria-label="Toggle bookmarks" title="Bookmarked">&#11088;</button>
+      <button class="header-btn" id="pdfToggleBtn" onclick="togglePdf()" aria-label="Download original document" title="Download original (PDF)">&#10515;</button>
     </div>
   </div>
 
+  <div class="doc-box doc-hidden" id="docBox">
+    <div class="doc-list" id="docList"></div>
+  </div>
+
   <div class="pdf-box pdf-hidden" id="pdfBox">
-    <a class="pdf-download-link" href="GEC-Declaration.pdf" download>&#128196; Download original document (PDF)</a>
+    <a class="pdf-download-link" id="pdfDownloadLink" href="GEC-Declaration.pdf" download>&#10515; Download original document (PDF)</a>
   </div>
 
   <div class="search-box search-hidden" id="searchBox">
@@ -156,6 +161,7 @@
   // Handle direct page load / refresh
   window.addEventListener('DOMContentLoaded', () => {
     applyReadingScale();
+    applyActiveDoc();
     initSidebarResize();
     renderAll();
     buildTOC();
@@ -203,8 +209,8 @@
 
   function prettySectionTitle(raw) {
     let t = (raw || '').replace(/\s+/g, ' ').trim();
-    let m = t.match(/^SECTION\s+(\S+?):?\s+(.*)$/i);
-    if (m) return 'Sec ' + m[1] + ': ' + titleCase(m[2]);
+    let m = t.match(/^(SECTION|ARTICLE)\s+(\S+?):?\s+(.*)$/i);
+    if (m) return (/^A/i.test(m[1]) ? 'Art ' : 'Sec ') + m[2] + ': ' + titleCase(m[3]);
     m = t.match(/^(APPENDIX|EXHIBIT)\s+"?([A-Z0-9]+)"?:?\s*(.*)$/i);
     if (m) {
       const kind = m[1].charAt(0).toUpperCase() + m[1].slice(1).toLowerCase();
@@ -455,6 +461,56 @@
     if (!box) return;
     const hidden = box.classList.toggle('pdf-hidden');
     if (btn) btn.classList.toggle('active', !hidden);
+  }
+
+  /* --- DOCUMENT PICKER (Declaration / Bylaws / ...) --- */
+  const DOC_LABELS = { declaration: 'Declaration', bylaws: 'Bylaws' };
+  const DOC_PDF = { declaration: 'GEC-Declaration.pdf', bylaws: 'GEC-Bylaws.pdf' };
+  function docLabel(key, doc) {
+    if (DOC_LABELS[key]) return DOC_LABELS[key];
+    if (doc && doc.meta && doc.meta.subtitle) return doc.meta.subtitle.split('&')[0].trim();
+    return key.charAt(0).toUpperCase() + key.slice(1);
+  }
+  function toggleDocs() {
+    const box = document.getElementById('docBox');
+    const btn = document.getElementById('docToggleBtn');
+    if (!box) return;
+    const hidden = box.classList.toggle('doc-hidden');
+    if (btn) btn.classList.toggle('active', !hidden);
+  }
+  function renderDocList() {
+    const list = document.getElementById('docList');
+    if (!list) return;
+    const docs = window.GEC_DOCS || {};
+    const active = window.GEC_ACTIVE_DOC;
+    let html = '';
+    Object.keys(docs).forEach(key => {
+      const isActive = key === active;
+      html += '<button type="button" class="doc-item' + (isActive ? ' active' : '') + '" data-doc="' + key + '">'
+            + '<span class="doc-item-check">' + (isActive ? '\u2713' : '') + '</span>'
+            + '<span>' + docLabel(key, docs[key]) + '</span></button>';
+    });
+    list.innerHTML = html;
+    list.querySelectorAll('.doc-item').forEach(btn => {
+      btn.addEventListener('click', () => switchDoc(btn.getAttribute('data-doc')));
+    });
+  }
+  function switchDoc(key) {
+    if (!key || key === window.GEC_ACTIVE_DOC) { toggleDocs(); return; }
+    try { localStorage.setItem('gec_doc', key); } catch (_) {}
+    location.hash = '';
+    location.reload();
+  }
+  function applyActiveDoc() {
+    const key = window.GEC_ACTIVE_DOC;
+    const doc = (window.GEC_DOCS || {})[key] || window.DECL_DATA || {};
+    const meta = doc.meta || {};
+    const subEl = document.querySelector('.sidebar-header .sub');
+    if (subEl && meta.subtitle) subEl.textContent = meta.subtitle;
+    if (meta.title) document.title = meta.title + (meta.subtitle ? ' — ' + meta.subtitle : '');
+    const link = document.getElementById('pdfDownloadLink');
+    if (link) link.setAttribute('href', DOC_PDF[key] || 'GEC-Declaration.pdf');
+    renderDocList();
   }
   function toggleSearch() {
     const box = document.getElementById('searchBox');

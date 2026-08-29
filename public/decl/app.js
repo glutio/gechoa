@@ -3,8 +3,17 @@
    the reusable navigation/TOC/favorites/diff code expects. */
 (function () {
   'use strict';
-  var D = window.DECL_DATA;
+  var DOCS = window.GEC_DOCS || (window.DECL_DATA ? { declaration: window.DECL_DATA } : null);
+  if (!DOCS) { console.error('GEC_DOCS / DECL_DATA not loaded'); return; }
+  var DOC_KEY = (function () {
+    try { var k = localStorage.getItem('gec_doc'); if (k && DOCS[k]) return k; } catch (_) {}
+    return DOCS.declaration ? 'declaration' : Object.keys(DOCS)[0];
+  })();
+  var D = DOCS[DOC_KEY];
+  window.DECL_DATA = D;
+  window.GEC_ACTIVE_DOC = DOC_KEY;
   if (!D) { console.error('DECL_DATA not loaded'); return; }
+  var SEC_LABEL = (D.sectionLabel || 'SECTION');
 
   /* ---------- compose: raw (base + operations) -> per-node revision timeline ----------
      JSON is raw data; the renderer applies each amendment operation in order to build
@@ -384,7 +393,7 @@
   function renderSection(sec) {
     var secId = 'sec-' + sec.num;
     var h = '<section class="doc-section" id="' + secId + '">';
-    h += '<div class="section-header"><h2><span>SECTION ' + esc(sec.num) + ': ' + esc(sec.title) + '</span></h2></div>';
+    h += '<div class="section-header"><h2><span>' + esc(SEC_LABEL) + ' ' + esc(sec.num) + ': ' + esc(sec.title) + '</span></h2></div>';
     h += '<div class="section-body">';
     if (sec.preamble) h += '<p>' + mdInline(sec.preamble) + '</p>';
     h += renderNodes(sec.nodes, 0);

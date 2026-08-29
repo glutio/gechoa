@@ -53,3 +53,30 @@ const seg = html.slice(nStart, nStart + 2200);
 const brNum = seg.match(/<br>\d+\./g) || [];
 console.log('9.2.1.1 <br>N. markers:', JSON.stringify(brNum));
 assert(brNum.length >= 6, '9.2.1.1 list items 1..6 on their own lines');
+
+// --- BYLAWS (second document) ---
+console.log('\n--- BYLAWS ---');
+const dom2 = new JSDOM('<!DOCTYPE html><html><body><div id="docRoot"></div><nav id="toc"></nav></body></html>', {
+  runScripts: 'outside-only', pretendToBeVisual: true, url: 'https://localhost/',
+});
+const w2 = dom2.window;
+w2.matchMedia = w2.matchMedia || function () { return { matches: false, addEventListener() {}, removeEventListener() {}, addListener() {}, removeListener() {} }; };
+const errs2 = [];
+w2.addEventListener('error', e => errs2.push(e.message));
+try { w2.localStorage.setItem('gec_doc', 'bylaws'); } catch (_) {}
+w2.eval(data);
+w2.eval(app);
+if (typeof w2.renderAll === 'function') w2.renderAll();
+
+console.log('JS errors:', errs2.length);
+errs2.forEach(e => console.log('  ! ' + e));
+assert(w2.GEC_ACTIVE_DOC === 'bylaws', 'active doc is bylaws (' + w2.GEC_ACTIVE_DOC + ')');
+const bHtml = w2.document.getElementById('docRoot').innerHTML;
+const bBody = bHtml.replace(/<[^>]+>/g, ' ');
+assert(bHtml.length > 5000, 'bylaws rendered (' + bHtml.length + ' chars)');
+assert(/ARTICLE\s+III/i.test(bBody), 'bylaws uses ARTICLE label');
+assert(/A five \(5\) person Board of Directors/.test(bBody), 'IV.1 shows five (5) person board (2006)');
+assert(/Step One - Pick A Hearing Board/.test(bBody), 'XII.1 (2001-added) present');
+const bStray = (bBody.match(/\*\*/g) || []).length;
+assert(bStray === 0, 'no stray ** in bylaws body (' + bStray + ')');
+

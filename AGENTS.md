@@ -74,12 +74,22 @@ Local preview: `npm run dev` (wrangler), then open `/decl/`.
 
 ---
 
-## 3. Data model (`window.DECL_DATA`)
+## 3. Data model (`window.GEC_DOCS` / `window.DECL_DATA`)
 
-`data.js` assigns `window.DECL_DATA`, shaped roughly:
+`data.js` now assigns **`window.GEC_DOCS`** — a map of document key → document object
+(`declaration`, `bylaws`, …) — and sets `window.DECL_DATA = window.GEC_DOCS['declaration']`
+for back-compat. `app.js` picks the active document at load from `localStorage 'gec_doc'`
+(validated against `GEC_DOCS`, default `declaration`), assigns it to `window.DECL_DATA`,
+and exposes `window.GEC_ACTIVE_DOC`. Switching documents is **reload-based**: the shell
+writes `localStorage.gec_doc` and calls `location.reload()` (the renderer is a stateful
+IIFE whose derived vars are computed once at load).
+
+Each document object is shaped roughly:
 
 ```jsonc
 {
+  "meta": { "title": "...", "subtitle": "..." },
+  "sectionLabel": "SECTION",   // or "ARTICLE" for the Bylaws — used for section headers/TOC
   "amendments": [
     { "id": "1980", "year": 1980, "kind": "base" },
     { "id": "2001", "year": 2001, "label": "...", "kind": "modifying",
@@ -87,7 +97,7 @@ Local preview: `npm run dev` (wrangler), then open `/decl/`.
     { "id": "2006", "year": 2006, "kind": "modifying", "operations": [ ... ] },
     { "id": "2016", "year": 2016, "kind": "additive",  "operations": [ ... ] }
   ],
-  "sections":  [ /* base 1980 tree: nested nodes with id, num, md, children */ ],
+  "sections":  [ /* base tree: nested nodes with id, num, md, children */ ],
   "appendices": [ ... ],
   "exhibits":  [ ... ]
 }
@@ -211,11 +221,23 @@ removed; keep `app.js` to this single deterministic path.
 1. Put the clean text as Markdown in `tools/source/<doc>.md`: original document first,
    then each amendment as a section with `**A.** … **B.** …` items and verbatim
    `> blockquote` text for any new/replacement language.
-2. Annotate non‑default operations with `<!--op-->` directives (Section 4).
-3. Point `build-data.js`'s `MD`/parsing at the new source (or parameterize it), build,
-   and iterate until `COMPOSE VERIFY: PASS` with 0 warnings.
-4. Add a few assertions to `render-check.js` for that document's tricky sections.
-5. Commit the source `.md` (canonical), the generated `data.js`, and the golden.
+2. Annotate non‑default operations with `<!--op-->` directives (Section 4). If the
+   document's section numbers restart per article/part (so bare "5." isn't globally
+   unique), give each node a unique id with the `{#id}` marker at the start of the base
+   bullet or amendment blockquote node (e.g. `{#III.5} **5. Quorum.** …`). The marker is
+   stripped from the displayed heading — the heading stays verbatim.
+3. Add a config entry to `DOC_CONFIGS` in `build-data.js` (parts source, `baseKey`,
+   `amendmentsMeta`/`chrono`, `baseAmend`, `meta.title`/`meta.subtitle`, and
+   `sectionLabel` — `"SECTION"`, `"ARTICLE"`, …). Build and iterate until that doc's
+   `COMPOSE VERIFY: PASS` with 0 warnings. Each doc has its own golden
+   (`golden-<doc>.json`); regenerate with `GEC_WRITE_GOLDEN=1`.
+4. Register the doc in the shell picker: add its key→label in `DOC_LABELS` and
+   key→pdf in `DOC_PDF` (`app.js`/`index.html`), and copy its PDF to
+   `public/decl/<Doc>.pdf`. The picker (leftmost 📄 header button) lists every
+   `GEC_DOCS` key; selecting one writes `localStorage.gec_doc` and reloads.
+5. Add a few assertions to `render-check.js` for that document's tricky sections (open a
+   second jsdom with `url` set + `localStorage.gec_doc` to render the non-default doc).
+6. Commit the source `.md` (canonical), the generated `data.js`, the golden, and the PDF.
 
 ### Generalizing beyond year‑based amendments
 
@@ -238,6 +260,11 @@ render out.**
 ## 7. Conventions & gotchas
 
 - `data.js` is generated — never hand‑edit; change the `.md` + directives and rebuild.
+  It emits `window.GEC_DOCS` (all docs) + `window.DECL_DATA` (the declaration, back-compat).
+- Per-article numbering: use the `{#id}` marker to assign a globally-unique node id while
+  keeping the displayed heading verbatim (Section 6). Ids may be roman (`III.5`, `XII.1`).
+- Each document has its own compose golden (`golden.json`, `golden-bylaws.json`, …);
+  `build-data.js` verifies each and only rewrites them under `GEC_WRITE_GOLDEN=1`.
 - Legal text is authored **once** in the source Markdown; code never contains verbatim
   clause text.
 - `stripNotes` collapses runs of spaces but preserves `\n`; a blockquote list line
