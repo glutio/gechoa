@@ -391,11 +391,26 @@
     update();
   }
 
-  /* --- FAVORITES MANAGEMENT --- */
-  let favorites = JSON.parse(localStorage.getItem('gec_favorites') || '[]');
+  /* --- FAVORITES MANAGEMENT (namespaced per document) --- */
+  function favoritesKey() {
+    return 'gec_favorites:' + (window.GEC_ACTIVE_DOC || 'declaration');
+  }
+  let favorites = (function () {
+    let raw = localStorage.getItem(favoritesKey());
+    if (raw == null) {
+      // One-time migration: adopt the legacy shared key for the default document.
+      const legacy = localStorage.getItem('gec_favorites');
+      if (legacy != null && (window.GEC_ACTIVE_DOC || 'declaration') === 'declaration') {
+        localStorage.setItem(favoritesKey(), legacy);
+        localStorage.removeItem('gec_favorites');
+        raw = legacy;
+      }
+    }
+    return JSON.parse(raw || '[]');
+  })();
 
   function saveFavorites() {
-    localStorage.setItem('gec_favorites', JSON.stringify(favorites));
+    localStorage.setItem(favoritesKey(), JSON.stringify(favorites));
     renderFavorites();
   }
 
