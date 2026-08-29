@@ -63,6 +63,29 @@
     user-select: none;
   }
 
+  /* Desktop drag handle to resize the sidebar/TOC. Sits between sidebar and
+     main as a thin flex item; hidden on mobile (sidebar becomes an overlay). */
+  #sidebarResizer {
+    flex-shrink: 0;
+    width: 6px;
+    margin-left: -3px;
+    cursor: col-resize;
+    background: transparent;
+    position: relative;
+    z-index: 50;
+  }
+  #sidebarResizer::before {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0; left: 2px;
+    width: 2px;
+    background: transparent;
+    transition: background 0.15s;
+  }
+  #sidebarResizer:hover::before,
+  body.sidebar-resizing #sidebarResizer::before { background: var(--primary-light); }
+  body.sidebar-resizing { cursor: col-resize; user-select: none; }
+
   .sidebar-header {
     padding: 16px 20px;
     border-bottom: 1px solid #334155;
@@ -709,6 +732,7 @@
   .diff-subnodes p { font-size: 14px; line-height: 1.7; margin: 6px 0; }
 
   @media (max-width: 880px) {
+    #sidebarResizer { display: none; }
     #sidebar {
       position: fixed;
       top: 0; left: 0; bottom: 0;

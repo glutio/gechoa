@@ -44,6 +44,9 @@
   </div>
 </div>
 
+<!-- SIDEBAR RESIZE HANDLE (desktop only) -->
+<div id="sidebarResizer" role="separator" aria-orientation="vertical" aria-label="Resize sidebar" title="Drag to resize"></div>
+
 <!-- MAIN CONTENT -->
 <div id="main">
   <div class="topbar">
@@ -73,6 +76,47 @@
   function toggleNav(force) {
     const open = force === undefined ? !document.body.classList.contains('nav-open') : force;
     document.body.classList.toggle('nav-open', open);
+  }
+
+  /* --- DESKTOP SIDEBAR RESIZE --- */
+  const SIDEBAR_MIN = 220, SIDEBAR_MAX = 640;
+  function setSidebarWidth(px, persist) {
+    const w = Math.round(Math.min(SIDEBAR_MAX, Math.max(SIDEBAR_MIN, px)));
+    document.documentElement.style.setProperty('--sidebar-w', w + 'px');
+    if (persist) localStorage.setItem('gec_sidebar_w', String(w));
+  }
+  function initSidebarResize() {
+    const saved = parseFloat(localStorage.getItem('gec_sidebar_w'));
+    if (isFinite(saved) && saved > 0) setSidebarWidth(saved, false);
+    const handle = document.getElementById('sidebarResizer');
+    const sidebar = document.getElementById('sidebar');
+    if (!handle || !sidebar) return;
+    let dragging = false;
+    handle.addEventListener('pointerdown', (e) => {
+      // Only meaningful on desktop layout (handle is hidden on mobile).
+      if (window.matchMedia('(max-width: 880px)').matches) return;
+      dragging = true;
+      handle.setPointerCapture(e.pointerId);
+      document.body.classList.add('sidebar-resizing');
+      e.preventDefault();
+    });
+    handle.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      // Sidebar starts at the viewport's left edge, so its width == pointer X.
+      setSidebarWidth(e.clientX - sidebar.getBoundingClientRect().left, false);
+    });
+    function end(e) {
+      if (!dragging) return;
+      dragging = false;
+      document.body.classList.remove('sidebar-resizing');
+      try { handle.releasePointerCapture(e.pointerId); } catch (_) {}
+      const cur = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sidebar-w'));
+      if (isFinite(cur)) localStorage.setItem('gec_sidebar_w', String(Math.round(cur)));
+    }
+    handle.addEventListener('pointerup', end);
+    handle.addEventListener('pointercancel', end);
+    // Double-click resets to the default width.
+    handle.addEventListener('dblclick', () => { localStorage.removeItem('gec_sidebar_w'); setSidebarWidth(330, true); });
   }
 
   // Unified single point of navigation logic
@@ -112,6 +156,7 @@
   // Handle direct page load / refresh
   window.addEventListener('DOMContentLoaded', () => {
     applyReadingScale();
+    initSidebarResize();
     renderAll();
     buildTOC();
     loadFavorites();
