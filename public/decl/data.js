@@ -3759,7 +3759,7 @@ window.DECL_DATA = {
         {
           "type": "li",
           "letter": "D",
-          "md": "Maintenance of the private water system, storm sewer system as well as the entry lands shall be paid equally on an annual basis by Lots 1, 2, 3 and 4 of Glendale Estates. A homeowners association consisting of the owners of the four lots shall be established to defray costs of maintenance for these items. The association may establish reserve fund for any purpose as it may choose from time-to-time considered necessary or appropriate. These reserve funds shall be appropriated by assessments in equal sums on each lot in Glendale Estates."
+          "md": "Maintenance of the private water system, storm sewer system as well as the entry lands shall be paid equally on an annual basis by Lots 1, 2, 3 and 4 of Glendale Estates. A homeowners association consisting of the owners of the four lots shall be established to defray costs of maintenance for these items. The association may establish a reserve fund for any purpose as it may choose from time-to-time considered necessary or appropriate. These reserve funds shall be appropriated by assessments in equal sums on each lot in Glendale Estates."
         },
         {
           "type": "li",

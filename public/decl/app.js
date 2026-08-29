@@ -218,12 +218,12 @@
     var baseIsAdd = (node.base == null);
     var first = revs[0], fy = YR[first.amend];
     tokensOf(first.md).forEach(function (t) {
-      items.push({ tok: t, alive: true, origin: baseIsAdd ? 'ins' : 'base', year: fy, fb: baseIsAdd });
+      items.push({ tok: t, alive: true, origin: baseIsAdd ? 'ins' : 'base', year: baseIsAdd ? fy : null, fb: baseIsAdd });
     });
     for (var r = 1; r < revs.length; r++) {
       var rev = revs[r], y = YR[rev.amend];
       if (rev.deleted) {
-        items.forEach(function (it) { if (it.alive) { it.alive = false; it.origin = 'del'; it.year = y; it.fb = true; } });
+        items.forEach(function (it) { if (it.alive) { it.alive = false; it.origin = 'del'; it.fb = true; } });
         continue;
       }
       var newToks = tokensOf(rev.md);
@@ -246,7 +246,7 @@
           var insToks = tokensOf(rev.op.text);
           if (opType === 'replace-sentence') {
             for (var q = start; q < start + slen; q++) {
-              var itd = items[aIx[q]]; itd.alive = false; itd.origin = 'del'; itd.year = y;
+              var itd = items[aIx[q]]; itd.alive = false; itd.origin = 'del';
             }
           }
           var outS = [];
@@ -261,8 +261,11 @@
         opType = 'replace';
       }
       // Whole-block replacement: strike the entire live text, insert the new text.
+      // A struck token keeps its ORIGIN tag (the amendment that introduced it, or
+      // none for base) — the strike is orthogonal. The replacing amendment's year
+      // is carried by the inserted span below.
       if (opType === 'replace') {
-        items.forEach(function (it) { if (it.alive) { it.alive = false; it.origin = 'del'; it.year = y; it.fb = true; } });
+        items.forEach(function (it) { if (it.alive) { it.alive = false; it.origin = 'del'; it.fb = true; } });
         newToks.forEach(function (t) { items.push({ tok: t, alive: true, origin: 'ins', year: y, fb: true }); });
         continue;
       }
@@ -272,7 +275,7 @@
         continue;
       }
       // Any other/unknown op: treat as a whole-block replacement (safe, no diffing).
-      items.forEach(function (it) { if (it.alive) { it.alive = false; it.origin = 'del'; it.year = y; it.fb = true; } });
+      items.forEach(function (it) { if (it.alive) { it.alive = false; it.origin = 'del'; it.fb = true; } });
       newToks.forEach(function (t) { items.push({ tok: t, alive: true, origin: 'ins', year: y, fb: true }); });
     }
     return items;
@@ -298,8 +301,10 @@
       if (s.kind === 'eq') return inner;
       var tag = s.kind === 'ins' ? 'ins' : 'del';
       var blk = s.block ? ' amend-block' : '';
-      var chip = '<sup class="amend-chip">' + esc(s.year) + '</sup>';
-      return '<' + tag + ' class="amend-' + s.kind + ' amend-y' + s.year + blk + '" data-year="' + esc(s.year) + '">'
+      var hasYear = (s.year != null && s.year !== '');
+      var chip = hasYear ? '<sup class="amend-chip">' + esc(s.year) + '</sup>' : '';
+      var ycls = hasYear ? ' amend-y' + s.year : '';
+      return '<' + tag + ' class="amend-' + s.kind + ycls + blk + '" data-year="' + esc(hasYear ? s.year : '') + '">'
         + inner + chip + '</' + tag + '>';
     }).join(' ');
   }
