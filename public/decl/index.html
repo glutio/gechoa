@@ -138,19 +138,27 @@
   }
 
   // Unified single point of navigation logic
+  let spyLockId = null, spyLockTop = null;
   function performScroll(targetId) {
     if (window.matchMedia('(max-width: 880px)').matches) toggleNav(false);
+    const main = document.getElementById('main');
     if (!targetId) {
-      document.getElementById('main').scrollTop = 0;
+      spyLockId = null;
+      main.scrollTop = 0;
       updateActiveNavItem('');
       return;
     }
     const el = document.getElementById(targetId);
     if (el) {
       revealNavFor(targetId);
-      const main = document.getElementById('main');
       main.scrollTop = el.offsetTop - 70;
       updateActiveNavItem(targetId);
+      scrollTocActiveIntoView();
+      // Keep this selection until the user actually scrolls away. A short last
+      // section can't reach the top of the pane, so without this the scroll spy
+      // would immediately re-pick whatever sits at the top and steal the highlight.
+      spyLockId = targetId;
+      spyLockTop = main.scrollTop;
     }
   }
 
@@ -389,6 +397,13 @@
     let ticking = false, lastId = null;
     function update() {
       ticking = false;
+      if (spyLockId !== null) {
+        // Parked at a click/deep-link target: hold the selection until the user
+        // scrolls away from that position (tolerate sub-pixel scroll noise).
+        if (Math.abs(main.scrollTop - spyLockTop) <= 2) return;
+        spyLockId = null;
+        lastId = null; // force a fresh sync now that the user is scrolling
+      }
       const mainTop = main.getBoundingClientRect().top;
       const probe = 96; // px below the top of the reading pane
       let currentId = targets[0].id;
