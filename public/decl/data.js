@@ -3,7 +3,7 @@ window.DECL_DATA = {
   "meta": {
     "title": "Glendale Estates, A Condominium",
     "subtitle": "Declaration & Recorded Amendments",
-    "generated": "2026-08-24"
+    "generated": "2026-08-29"
   },
   "amendments": [
     {
@@ -1404,7 +1404,7 @@ window.DECL_DATA = {
               "id": "12.5.1",
               "num": "12.5.1",
               "kind": "num",
-              "base": "**12.5.1** To adopt such reasonable rules and regulations as may be permitted by this Declaration or the Act and which the Association may deem necessary or advisable to administer the Association and properly manage and administer the property."
+              "base": "**12.5.1** To adopt such reasonable rules and regulations as may be permitted by this Declaration or the Act and which the Association may deem necessary or advisable to administer the Association and properly manage and administer the property. The rules and regulations shall be adopted and may be amended from time to time in the same manner as the Bylaws, and shall be deemed part of the Bylaws."
             },
             {
               "id": "12.5.2",
@@ -1490,7 +1490,7 @@ window.DECL_DATA = {
               "id": "12.5.13",
               "num": "12.5.13",
               "kind": "num",
-              "base": "**12.5.13** To exercise and perform all other rights and duties which are authorized or required by the Act or are reasonably necessary or incidental to the management and administration of Glendale Estates, a Condominium, and in accomplishing the purposes of the Association."
+              "base": "**12.5.13** To exercise and perform all other rights and duties which are authorized or required by the Act or are reasonably necessary or incidental to the management and administration of Glendale Estates, a Condominium, and in accomplishing the purposes of the Association. Nothing herein shall be construed to authorize the Association or Board of Directors to conduct an active business for profit on behalf of the unit owners."
             },
             {
               "id": "12.5.14",
@@ -1511,7 +1511,7 @@ window.DECL_DATA = {
           "id": "13.1",
           "num": "13.1",
           "kind": "num",
-          "base": "**13.1 Liability for Utility Failure, Etc.** Except to the extent covered by insurance obtained by the Board pursuant to Section 15, neither the Association nor the Board (or the Declarant or the managing agent exercising the powers of the Board) shall be liable for: any failure of any utility or other service to be obtained and paid for by the Board; or for injury or damage to person or property caused by the elements, or resulting from electricity, water, rain, dust, or sand which may leak or flow from outside or from any parts of the buildings, or from any of its pipes, drains, conduits, appliances, or equipment, or from any other place; or for inconvenience or discomfort resulting from any action taken to comply with any law, ordinance, or orders of a governmental authority. No diminution or abatement of common expense assessments shall be claimed or allowed for any such utility or service failure, or for such injury or damage, or for such inconvenience or discomfort."
+          "base": "**13.1 Liability for Utility Failure, Etc.** Except to the extent covered by insurance obtained by the Board pursuant to Section 15, neither the Association nor the Board (or the Declarant or the managing agent exercising the powers of the Board) shall be liable for: any failure of any utility or other service to be obtained and paid for by the Board; or for injury or damage to person or property caused by the elements, or resulting from electricity, water, rain, dust, or sand which may lead or flow from outside or from any parts of the buildings, or from any of its pipes, drains, conduits, appliances, or equipment, or from any other place; or for inconvenience or discomfort resulting from any action taken to comply with any law, ordinance, or orders of a governmental authority. No diminution or abatement of common expense assessments shall be claimed or allowed for any such utility or service failure, or for such injury or damage, or for such inconvenience or discomfort."
         },
         {
           "id": "13.2",
