@@ -78,6 +78,18 @@ assert(/ARTICLE\s+III/i.test(bBody), 'bylaws uses ARTICLE label');
 assert(/BYLAWS OF GLENDALE ESTATES/i.test(bBody), 'bylaws main heading is doc-specific');
 assert(/A five \(5\) person Board of Directors/.test(bBody), 'IV.1 shows five (5) person board (2006)');
 assert(/Step One - Pick A Hearing Board/.test(bBody), 'XII.1 (2001-added) present');
+// TOC labels must keep the heading's leading word (regression: "Step"/"Other" were
+// mis-stripped as enumerators, yielding "One - ..." / "Details").
+const xii14 = w2.document.getElementById('sub-XII-14');
+assert(xii14 && xii14.getAttribute('data-toc-label') === 'XII.14 Other Details',
+  'XII.14 toc-label is "XII.14 Other Details" (' + (xii14 && xii14.getAttribute('data-toc-label')) + ')');
+const xii1 = w2.document.getElementById('sub-XII-1');
+assert(xii1 && /^XII\.1 Step One - Pick A Hearing Board/.test(xii1.getAttribute('data-toc-label') || ''),
+  'XII.1 toc-label keeps "Step One" (' + (xii1 && xii1.getAttribute('data-toc-label')) + ')');
+// Headingless intro node (XII.0) gets a prose-snippet label, not a bare number.
+const xii0 = w2.document.getElementById('sub-XII-0');
+assert(xii0 && /^XII\.0 This procedure establishes/.test(xii0.getAttribute('data-toc-label') || ''),
+  'XII.0 toc-label has prose snippet (' + (xii0 && xii0.getAttribute('data-toc-label')) + ')');
 const bStray = (bBody.match(/\*\*/g) || []).length;
 assert(bStray === 0, 'no stray ** in bylaws body (' + bStray + ')');
 

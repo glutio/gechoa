@@ -111,8 +111,12 @@
   function headingText(md) {
     var m = String(md || '').match(/^\*\*(.+?)\*\*/);
     var h = m ? m[1] : '';
+    // Strip a leading *enumerator* (e.g. "5.", "12.4.5", "(a)", "A.") — the number is
+    // shown separately. Must NOT eat a plain leading word like "Step" or "Other", so we
+    // only strip tokens that start with a digit, are parenthesized, or are a lone letter
+    // followed by a delimiter.
     h = h.replace(/\*/g, '')
-         .replace(/^\s*\(?[0-9A-Za-z]+(?:\.[0-9A-Za-z]+)*\)?[.:)]?\s*/, '')
+         .replace(/^\s*(?:\([0-9A-Za-z]+\)|\d[0-9A-Za-z.]*[.:)]?|[A-Za-z][.:)])\s+/, '')
          .trim().replace(/[.:]\s*$/, '');
     return h;
   }
@@ -375,6 +379,9 @@
       var m = String(md).match(/^\*\*[^*]+\*\*\s*(.+)$/);
       if (m) t = m[1].replace(/\*/g, '').trim();
     }
+    // Headingless node (e.g. an intro paragraph like XII.0): use a prose snippet so the
+    // TOC entry is meaningful and findable instead of a bare number.
+    if (!t) t = String(md || '').replace(/\*+/g, '').replace(/\s+/g, ' ').trim();
     var lbl = node.num + (t ? ' ' + t : '');
     return lbl.length > 72 ? lbl.slice(0, 70) + '\u2026' : lbl;
   }
