@@ -377,6 +377,12 @@
 
   // TOC label for a subtree descendant: number plus any heading or leading prose.
   function descLabel(node, md) {
+    // A derived TOC title (authored in tools/source/toc-titles.json) wins — it gives
+    // number-only nodes a meaningful label without touching the verbatim body text.
+    if (node.title) {
+      var lt = node.num + ' ' + String(node.title).trim();
+      return lt.length > 72 ? lt.slice(0, 70) + '\u2026' : lt;
+    }
     var t = headingText(md);
     if (!t) {
       var m = String(md).match(/^\*\*[^*]+\*\*\s*(.+)$/);

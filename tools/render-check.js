@@ -44,6 +44,21 @@ const ins = (html.match(/class="[^"]*ins[^"]*"|<ins\b/g) || []).length;
 console.log('inline redline markers -> del:', del, 'ins:', ins);
 assert(del > 0 && ins > 0, 'inline redline del/ins markers present');
 
+// Derived TOC titles (tools/source/toc-titles.json) give number-only nodes a real
+// label. Verify a couple resolved and that none are left as "N.N N.N".
+const doc0 = window.document;
+const lbl151 = (doc0.getElementById('sub-15-1-1') || {}).getAttribute
+  ? doc0.getElementById('sub-15-1-1').getAttribute('data-toc-label') : null;
+assert(lbl151 === '15.1.1 Fire Insurance', '15.1.1 TOC title is "Fire Insurance" (' + lbl151 + ')');
+let numOnly = 0;
+doc0.querySelectorAll('.toc-node').forEach(el => {
+  const l = el.getAttribute('data-toc-label') || '';
+  const n = l.split(' ')[0];
+  const rest = l.slice(n.length).trim();
+  if (!rest || rest === n) numOnly++;
+});
+assert(numOnly === 0, 'no number-only TOC labels remain (' + numOnly + ')');
+
 // 9.2.1.1's embedded ordered list must render as line breaks, not inline.
 const br = (html.match(/<br>/g) || []).length;
 console.log('br count:', br);

@@ -1,0 +1,105 @@
+{
+  "_comment": "Derived TOC navigation labels (NOT legal text). Concise titles for nodes whose heading is a bare number. Used only for the sidebar Table of Contents; the reader body still renders the verbatim source. Edit freely — build-data.js merges these onto nodes as `title`. Keyed by document, then node id.",
+  "declaration": {
+    "5.1": "The Land",
+    "5.2": "Structural Elements",
+    "5.3": "Stairs, Halls & Entrances",
+    "5.4": "Yards & Landscaping",
+    "5.5": "Walkways & Driveways",
+    "5.6": "Swimming Pool",
+    "5.7": "Bath House",
+    "5.8": "Bar-B-Que",
+    "5.9": "Other Common Parts",
+
+    "6.1": "Balcony or Patio",
+    "6.2": "Assigned Parking Space",
+    "6.3": "Assigned Storage Space",
+    "6.4": "Fireplace Flue",
+
+    "9.1.1": "Not Apparent Externally",
+    "9.1.2": "Zoning Compliance",
+    "9.1.3": "No Visitor Traffic",
+    "9.1.4": "No Insurance Increase",
+    "9.1.5": "No Utility Increase",
+    "9.1.6": "Residential Character",
+
+    "9.6.1": "Interior Unit Upkeep",
+    "9.6.2": "Fixtures & Appliances",
+    "9.6.3": "Limited Common Area Upkeep",
+
+    "12.4.5": "Board Quorum & Voting",
+
+    "12.5.1": "Adopt Rules & Regulations",
+    "12.5.2": "Enforcement",
+    "12.5.3": "Utility Services",
+    "12.5.4": "Maintenance & Repairs",
+    "12.5.5": "Purchase Personal Property",
+    "12.5.6": "Additions & Improvements",
+    "12.5.7": "Assessments & Reserves",
+    "12.5.8": "Special Assessments",
+    "12.5.9": "Payment Of Common Expenses",
+    "12.5.10": "Obtain Insurance",
+    "12.5.11": "Employ Manager & Professionals",
+    "12.5.12": "Legal Actions",
+    "12.5.13": "Other Powers & Duties",
+    "12.5.14": "Borrow Funds",
+
+    "15.1.1": "Fire Insurance",
+    "15.1.2": "General Liability Insurance",
+    "15.1.3": "Workers' Compensation",
+    "15.1.4": "Personal Property Insurance",
+    "15.1.5": "Directors & Officers Coverage",
+    "15.1.6": "Other Insurance",
+
+    "15.5.1": "No Insurer Set-Off",
+    "15.5.2": "Coverage Despite Increased Hazard",
+    "15.5.3": "Cancellation Notice",
+    "15.5.4": "Waiver Of Subrogation",
+    "15.5.5": "Cross-Liability Endorsement",
+    "15.5.6": "Mortgagee Clause",
+
+    "15.6.1": "Damage To Owner's Unit",
+    "15.6.2": "Shared Damage Responsibility",
+    "15.6.3": "Owner Insurance Duty",
+
+    "16.1.1": "Extent Of Damage",
+    "16.1.2": "Repair Cost Estimate",
+    "16.1.3": "Anticipated Insurance Proceeds",
+    "16.1.4": "Shortfall & Special Assessment",
+    "16.1.5": "Repair Recommendation",
+
+    "16.4.1": "Duty To Repair",
+    "16.4.2": "Board Repair Authority",
+    "16.4.3": "Insurance Trustee",
+
+    "16.5.1": "Call Special Meeting",
+    "16.5.2": "Delay Pending Meeting",
+    "16.5.3": "Unanimous Vote Not To Repair",
+
+    "16.6.1": "Special Meeting Required",
+    "16.6.2": "Work Deferred To Meeting",
+    "16.6.3": "Two-Thirds Vote Not To Repair",
+
+    "16.7.1": "Ownership In Common",
+    "16.7.2": "Undivided Interests",
+    "16.7.3": "Mortgages & Liens",
+    "16.7.4": "Partition & Sale",
+
+    "17.4.1": "Allocate Condemnation Award",
+    "17.4.2": "Common Area Apportionment",
+    "17.4.3": "Severance Damages",
+    "17.4.4": "Unit Taking Compensation",
+    "17.4.5": "Consequential Damages",
+    "17.4.6": "Pre-Established Allocation",
+    "17.4.7": "Distribution Of Proceeds",
+
+    "19.7.1": "Cast Pledged Vote",
+    "19.7.2": "Receive Notices",
+    "19.7.3": "Examine Books & Records",
+    "19.7.4": "Insurance Endorsements",
+    "19.7.5": "Attend Meetings",
+
+    "24.3.1": "Correct Boundaries",
+    "24.3.2": "Mortgagee-Required Changes"
+  }
+}

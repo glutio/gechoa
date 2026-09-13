@@ -44,6 +44,8 @@ tools/
     GEC-Declaration.txt          CANONICAL original text (pristine, unannotated)
     GEC-Declaration-Full.md      BUILD SOURCE: the canonical text in Markdown,
                                  annotated with <!--op--> directives
+    toc-titles.json              DERIVED (not legal text): docKey -> nodeId -> short
+                                 TOC label for number-only nodes. Editable; sidebar only.
   build-data.js                  .md  ->  public/decl/data.js
   render-check.js                Headless jsdom render assertions (regression safety net)
   golden.json                    Golden snapshot of composed node text (regression baseline)

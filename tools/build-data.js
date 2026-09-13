@@ -8,6 +8,15 @@ const path = require('path');
 
 const OUT = path.join(__dirname, '..', 'public', 'decl', 'data.js');
 
+// ---- derived TOC navigation labels (NOT legal text) -------------------------
+// Sidecar map: docKey -> nodeId -> short title, for nodes whose heading is a bare
+// number. Merged onto nodes as `title` and used only by the sidebar TOC; the
+// reader body still renders the verbatim source. Missing file is non-fatal.
+let TOC_TITLES = {};
+try {
+  TOC_TITLES = JSON.parse(fs.readFileSync(path.join(__dirname, 'source', 'toc-titles.json'), 'utf8'));
+} catch (_) { TOC_TITLES = {}; }
+
 let warnings = [];
 const warn = m => warnings.push(m);
 
@@ -441,9 +450,11 @@ function finalize(nodes) {
 }
 base.sections.forEach(s => finalize(s.nodes));
 
-// ---- raw emit: nodes carry only {id,num,kind,base,children}; changes live in operations ----
+// ---- raw emit: nodes carry only {id,num,kind,base,title?,children}; changes live in operations ----
+const titleMap = (TOC_TITLES[cfg.key] || {});
 function emitRawNode(n) {
   const o = { id: n.id, num: n.num, kind: n.kind, base: (n.base === undefined ? null : n.base) };
+  if (titleMap[n.id]) o.title = titleMap[n.id];
   if (n.children && n.children.length) o.children = n.children.map(emitRawNode);
   return o;
 }

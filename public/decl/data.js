@@ -5,7 +5,7 @@ window.GEC_DOCS = {
       "title": "Glendale Estates, A Condominium",
       "subtitle": "Declaration & Recorded Amendments",
       "heading": "DECLARATION FOR GLENDALE ESTATES, A CONDOMINIUM",
-      "generated": "2026-08-29"
+      "generated": "2026-09-13"
     },
     "sectionLabel": "SECTION",
     "amendments": [
@@ -882,55 +882,64 @@ window.GEC_DOCS = {
             "id": "5.1",
             "num": "5.1",
             "kind": "num",
-            "base": "**5.1** The land on which the buildings are situated (as described in Section 2 herein)."
+            "base": "**5.1** The land on which the buildings are situated (as described in Section 2 herein).",
+            "title": "The Land"
           },
           {
             "id": "5.2",
             "num": "5.2",
             "kind": "num",
-            "base": "**5.2** The foundations, columns, girders, beams, supports, main walls (excluding non-bearing interior partitions of the units) and roofs of the buildings."
+            "base": "**5.2** The foundations, columns, girders, beams, supports, main walls (excluding non-bearing interior partitions of the units) and roofs of the buildings.",
+            "title": "Structural Elements"
           },
           {
             "id": "5.3",
             "num": "5.3",
             "kind": "num",
-            "base": "**5.3** The stairs and stairways, all halls and corridors outside of the units and entrances and exits to the buildings."
+            "base": "**5.3** The stairs and stairways, all halls and corridors outside of the units and entrances and exits to the buildings.",
+            "title": "Stairs, Halls & Entrances"
           },
           {
             "id": "5.4",
             "num": "5.4",
             "kind": "num",
-            "base": "**5.4** The yards, gardens, landscaped areas which surround and provide access to the buildings."
+            "base": "**5.4** The yards, gardens, landscaped areas which surround and provide access to the buildings.",
+            "title": "Yards & Landscaping"
           },
           {
             "id": "5.5",
             "num": "5.5",
             "kind": "num",
-            "base": "**5.5** The walkways and driveways, including all parking spaces described in Section 7 which are not assigned to individual units and which are to be utilized for guest parking or other purposes."
+            "base": "**5.5** The walkways and driveways, including all parking spaces described in Section 7 which are not assigned to individual units and which are to be utilized for guest parking or other purposes.",
+            "title": "Walkways & Driveways"
           },
           {
             "id": "5.6",
             "num": "5.6",
             "kind": "num",
-            "base": "**5.6** The swimming pool and the room containing all the pool machinery."
+            "base": "**5.6** The swimming pool and the room containing all the pool machinery.",
+            "title": "Swimming Pool"
           },
           {
             "id": "5.7",
             "num": "5.7",
             "kind": "num",
-            "base": "**5.7** The bath house located adjacent to the swimming pool."
+            "base": "**5.7** The bath house located adjacent to the swimming pool.",
+            "title": "Bath House"
           },
           {
             "id": "5.8",
             "num": "5.8",
             "kind": "num",
-            "base": "**5.8** The Bar-B-Que."
+            "base": "**5.8** The Bar-B-Que.",
+            "title": "Bar-B-Que"
           },
           {
             "id": "5.9",
             "num": "5.9",
             "kind": "num",
-            "base": "**5.9** All other parts of the property necessary or convenient to its existence, maintenance and safety, and normally in common use."
+            "base": "**5.9** All other parts of the property necessary or convenient to its existence, maintenance and safety, and normally in common use.",
+            "title": "Other Common Parts"
           }
         ]
       },
@@ -943,25 +952,29 @@ window.GEC_DOCS = {
             "id": "6.1",
             "num": "6.1",
             "kind": "num",
-            "base": "**6.1** The balcony or patio adjacent to each unit."
+            "base": "**6.1** The balcony or patio adjacent to each unit.",
+            "title": "Balcony or Patio"
           },
           {
             "id": "6.2",
             "num": "6.2",
             "kind": "num",
-            "base": "**6.2** The parking space assigned to each unit."
+            "base": "**6.2** The parking space assigned to each unit.",
+            "title": "Assigned Parking Space"
           },
           {
             "id": "6.3",
             "num": "6.3",
             "kind": "num",
-            "base": "**6.3** The storage space assigned to each unit."
+            "base": "**6.3** The storage space assigned to each unit.",
+            "title": "Assigned Storage Space"
           },
           {
             "id": "6.4",
             "num": "6.4",
             "kind": "num",
-            "base": "**6.4** The interior of the fireplace flue serving each unit."
+            "base": "**6.4** The interior of the fireplace flue serving each unit.",
+            "title": "Fireplace Flue"
           }
         ]
       },
@@ -1018,37 +1031,43 @@ window.GEC_DOCS = {
                 "id": "9.1.1",
                 "num": "9.1.1",
                 "kind": "num",
-                "base": null
+                "base": null,
+                "title": "Not Apparent Externally"
               },
               {
                 "id": "9.1.2",
                 "num": "9.1.2",
                 "kind": "num",
-                "base": null
+                "base": null,
+                "title": "Zoning Compliance"
               },
               {
                 "id": "9.1.3",
                 "num": "9.1.3",
                 "kind": "num",
-                "base": null
+                "base": null,
+                "title": "No Visitor Traffic"
               },
               {
                 "id": "9.1.4",
                 "num": "9.1.4",
                 "kind": "num",
-                "base": null
+                "base": null,
+                "title": "No Insurance Increase"
               },
               {
                 "id": "9.1.5",
                 "num": "9.1.5",
                 "kind": "num",
-                "base": null
+                "base": null,
+                "title": "No Utility Increase"
               },
               {
                 "id": "9.1.6",
                 "num": "9.1.6",
                 "kind": "num",
-                "base": null
+                "base": null,
+                "title": "Residential Character"
               }
             ]
           },
@@ -1176,19 +1195,22 @@ window.GEC_DOCS = {
                 "id": "9.6.1",
                 "num": "9.6.1",
                 "kind": "num",
-                "base": "**9.6.1** Each unit owner shall, at his sole expense, have the right and the duty to keep the interior of his unit and its equipment, appliances, and appurtenances in good order, condition and repair and shall do all redecorating and painting at any time necessary to maintain the good appearance and condition of his unit. Each unit owner shall be responsible for the maintenance, repair or replacement of any plumbing fixtures, water heaters, fans, heating or other equipment, fireplace flues, electrical fixtures or appliances which may be in or connected with his unit. In addition, each unit owner shall maintain his parking space and storage space."
+                "base": "**9.6.1** Each unit owner shall, at his sole expense, have the right and the duty to keep the interior of his unit and its equipment, appliances, and appurtenances in good order, condition and repair and shall do all redecorating and painting at any time necessary to maintain the good appearance and condition of his unit. Each unit owner shall be responsible for the maintenance, repair or replacement of any plumbing fixtures, water heaters, fans, heating or other equipment, fireplace flues, electrical fixtures or appliances which may be in or connected with his unit. In addition, each unit owner shall maintain his parking space and storage space.",
+                "title": "Interior Unit Upkeep"
               },
               {
                 "id": "9.6.2",
                 "num": "9.6.2",
                 "kind": "num",
-                "base": "**9.6.2** Without limiting the generality of the foregoing, each unit owner shall have the right and the duty, at his sole cost and expense, to maintain, repair, paint, paper, panel, plaster, tile, and finish the interior surfaces of the ceilings, floors, window frames, door frames, trim, and the perimeter walls of his unit and the surfaces of the bearing walls located within his unit, and shall not permit or commit waste of his unit or the common areas and facilities. Each unit owner shall have the right to substitute new finished surfaces for the finished surfaces then existing on said ceilings, floors and walls, provided that hard surface flooring, other than that installed by the Developer during construction, may not be installed without the prior written approval of the Board of Directors. Each unit owner shall have the right to maintain, repair, paint, finish, alter, substitute, add or remove any fixtures attached to said ceilings, floors or walls. This section shall not be construed to permit interference with or damage to the structural integrity of the buildings or interference with the use and enjoyment of the common areas and facilities or of the other units."
+                "base": "**9.6.2** Without limiting the generality of the foregoing, each unit owner shall have the right and the duty, at his sole cost and expense, to maintain, repair, paint, paper, panel, plaster, tile, and finish the interior surfaces of the ceilings, floors, window frames, door frames, trim, and the perimeter walls of his unit and the surfaces of the bearing walls located within his unit, and shall not permit or commit waste of his unit or the common areas and facilities. Each unit owner shall have the right to substitute new finished surfaces for the finished surfaces then existing on said ceilings, floors and walls, provided that hard surface flooring, other than that installed by the Developer during construction, may not be installed without the prior written approval of the Board of Directors. Each unit owner shall have the right to maintain, repair, paint, finish, alter, substitute, add or remove any fixtures attached to said ceilings, floors or walls. This section shall not be construed to permit interference with or damage to the structural integrity of the buildings or interference with the use and enjoyment of the common areas and facilities or of the other units.",
+                "title": "Fixtures & Appliances"
               },
               {
                 "id": "9.6.3",
                 "num": "9.6.3",
                 "kind": "num",
-                "base": "**9.6.3** Unit owners shall be responsible for care and maintenance of the limited common areas and facilities reserved for or assigned to their units; provided, that a unit owner of a unit having a patio/yard area shall not be required to provide and maintain landscaping for such yard area; and provided further, that the Association may provide and maintain landscaping with the cost constituting a common expense. Unit owners may not, however, modify, paint, or otherwise decorate, or in any way alter their respective limited common areas and facilities without prior approval of the Board of Directors or pursuant to the rules and regulations adopted thereby."
+                "base": "**9.6.3** Unit owners shall be responsible for care and maintenance of the limited common areas and facilities reserved for or assigned to their units; provided, that a unit owner of a unit having a patio/yard area shall not be required to provide and maintain landscaping for such yard area; and provided further, that the Association may provide and maintain landscaping with the cost constituting a common expense. Unit owners may not, however, modify, paint, or otherwise decorate, or in any way alter their respective limited common areas and facilities without prior approval of the Board of Directors or pursuant to the rules and regulations adopted thereby.",
+                "title": "Limited Common Area Upkeep"
               }
             ]
           },
@@ -1381,7 +1403,8 @@ window.GEC_DOCS = {
                 "id": "12.4.5",
                 "num": "12.4.5",
                 "kind": "num",
-                "base": "**12.4.5 Quorum.** Five (5) members of the Board of Directors shall constitute a quorum. The Board of Directors shall act by majority vote of those present at its meetings where a quorum exists. Meetings may be called, held and conducted in accordance with the Bylaws."
+                "base": "**12.4.5 Quorum.** Five (5) members of the Board of Directors shall constitute a quorum. The Board of Directors shall act by majority vote of those present at its meetings where a quorum exists. Meetings may be called, held and conducted in accordance with the Bylaws.",
+                "title": "Board Quorum & Voting"
               },
               {
                 "id": "12.4.6",
@@ -1407,37 +1430,43 @@ window.GEC_DOCS = {
                 "id": "12.5.1",
                 "num": "12.5.1",
                 "kind": "num",
-                "base": "**12.5.1** To adopt such reasonable rules and regulations as may be permitted by this Declaration or the Act and which the Association may deem necessary or advisable to administer the Association and properly manage and administer the property. The rules and regulations shall be adopted and may be amended from time to time in the same manner as the Bylaws, and shall be deemed part of the Bylaws."
+                "base": "**12.5.1** To adopt such reasonable rules and regulations as may be permitted by this Declaration or the Act and which the Association may deem necessary or advisable to administer the Association and properly manage and administer the property. The rules and regulations shall be adopted and may be amended from time to time in the same manner as the Bylaws, and shall be deemed part of the Bylaws.",
+                "title": "Adopt Rules & Regulations"
               },
               {
                 "id": "12.5.2",
                 "num": "12.5.2",
                 "kind": "num",
-                "base": "**12.5.2** To enforce the provisions of this Declaration, the Bylaws and such rules and regulations as may be adopted by the Association, together with any revisions thereof or amendments thereto."
+                "base": "**12.5.2** To enforce the provisions of this Declaration, the Bylaws and such rules and regulations as may be adopted by the Association, together with any revisions thereof or amendments thereto.",
+                "title": "Enforcement"
               },
               {
                 "id": "12.5.3",
                 "num": "12.5.3",
                 "kind": "num",
-                "base": "**12.5.3** To arrange for all utility services serving the common areas and facilities, and the units (except utility services separately metered and charged to the individual units)."
+                "base": "**12.5.3** To arrange for all utility services serving the common areas and facilities, and the units (except utility services separately metered and charged to the individual units).",
+                "title": "Utility Services"
               },
               {
                 "id": "12.5.4",
                 "num": "12.5.4",
                 "kind": "num",
-                "base": "**12.5.4** To arrange for and supervise the maintenance, repair and replacement of all common areas and facilities and limited common areas and facilities."
+                "base": "**12.5.4** To arrange for and supervise the maintenance, repair and replacement of all common areas and facilities and limited common areas and facilities.",
+                "title": "Maintenance & Repairs"
               },
               {
                 "id": "12.5.5",
                 "num": "12.5.5",
                 "kind": "num",
-                "base": "**12.5.5** To purchase such furniture, furnishings, supplies, equipment, goods or other personal property which may be necessary or incidental to the maintenance and operation of the common areas and facilities."
+                "base": "**12.5.5** To purchase such furniture, furnishings, supplies, equipment, goods or other personal property which may be necessary or incidental to the maintenance and operation of the common areas and facilities.",
+                "title": "Purchase Personal Property"
               },
               {
                 "id": "12.5.6",
                 "num": "12.5.6",
                 "kind": "num",
                 "base": "**12.5.6** To arrange for and supervise any additions or improvements to the property subject to the following limitations:",
+                "title": "Additions & Improvements",
                 "children": [
                   {
                     "id": "12.5.6(a)",
@@ -1457,49 +1486,57 @@ window.GEC_DOCS = {
                 "id": "12.5.7",
                 "num": "12.5.7",
                 "kind": "num",
-                "base": "**12.5.7** To determine the amount of assessments to be collected from the unit owners for the common expenses of the property, to establish reserves, to collect the assessments and enforce the collection thereof, as authorized by or provided in Section 14 of this Declaration, the Bylaws, the Act or other laws of the State of Washington."
+                "base": "**12.5.7** To determine the amount of assessments to be collected from the unit owners for the common expenses of the property, to establish reserves, to collect the assessments and enforce the collection thereof, as authorized by or provided in Section 14 of this Declaration, the Bylaws, the Act or other laws of the State of Washington.",
+                "title": "Assessments & Reserves"
               },
               {
                 "id": "12.5.8",
                 "num": "12.5.8",
                 "kind": "num",
-                "base": "**12.5.8** To determine the amount of special assessments to be levied against a particular unit or units for expenses incurred in enforcing the provisions of this Declaration or the Bylaws against the residents or owners of that unit or units, and to collect such special assessments and enforce the collection thereof in the manner authorized in Section 14 of this Declaration, the Bylaws, the Act or other laws of the State of Washington."
+                "base": "**12.5.8** To determine the amount of special assessments to be levied against a particular unit or units for expenses incurred in enforcing the provisions of this Declaration or the Bylaws against the residents or owners of that unit or units, and to collect such special assessments and enforce the collection thereof in the manner authorized in Section 14 of this Declaration, the Bylaws, the Act or other laws of the State of Washington.",
+                "title": "Special Assessments"
               },
               {
                 "id": "12.5.9",
                 "num": "12.5.9",
                 "kind": "num",
-                "base": "**12.5.9** To pay or provide for the payment of all common expenses out of assessments paid by the unit owners or by such other means as may be permitted by this Declaration, the Bylaws, the Act or other laws of the State of Washington."
+                "base": "**12.5.9** To pay or provide for the payment of all common expenses out of assessments paid by the unit owners or by such other means as may be permitted by this Declaration, the Bylaws, the Act or other laws of the State of Washington.",
+                "title": "Payment Of Common Expenses"
               },
               {
                 "id": "12.5.10",
                 "num": "12.5.10",
                 "kind": "num",
-                "base": "**12.5.10** To obtain and maintain the insurance coverage required or authorized by Section 15 of this Declaration and the Act."
+                "base": "**12.5.10** To obtain and maintain the insurance coverage required or authorized by Section 15 of this Declaration and the Act.",
+                "title": "Obtain Insurance"
               },
               {
                 "id": "12.5.11",
                 "num": "12.5.11",
                 "kind": "num",
-                "base": "**12.5.11** To employ a manager, and to employ attorneys, accountants, real estate firms, consultants, specialists, or such other persons as may be reasonably necessary or convenient to assist the Association and the Board of Directors in the management and administration of Glendale Estates, a Condominium."
+                "base": "**12.5.11** To employ a manager, and to employ attorneys, accountants, real estate firms, consultants, specialists, or such other persons as may be reasonably necessary or convenient to assist the Association and the Board of Directors in the management and administration of Glendale Estates, a Condominium.",
+                "title": "Employ Manager & Professionals"
               },
               {
                 "id": "12.5.12",
                 "num": "12.5.12",
                 "kind": "num",
-                "base": "**12.5.12** To institute or defend actions at law, in equity or before administrative bodies, to further or protect the interests of the Association, the unit owners, and the property and to incur such expenses and attorneys fees as may be reasonable, necessary or convenient for the accomplishment thereof."
+                "base": "**12.5.12** To institute or defend actions at law, in equity or before administrative bodies, to further or protect the interests of the Association, the unit owners, and the property and to incur such expenses and attorneys fees as may be reasonable, necessary or convenient for the accomplishment thereof.",
+                "title": "Legal Actions"
               },
               {
                 "id": "12.5.13",
                 "num": "12.5.13",
                 "kind": "num",
-                "base": "**12.5.13** To exercise and perform all other rights and duties which are authorized or required by the Act or are reasonably necessary or incidental to the management and administration of Glendale Estates, a Condominium, and in accomplishing the purposes of the Association. Nothing herein shall be construed to authorize the Association or Board of Directors to conduct an active business for profit on behalf of the unit owners."
+                "base": "**12.5.13** To exercise and perform all other rights and duties which are authorized or required by the Act or are reasonably necessary or incidental to the management and administration of Glendale Estates, a Condominium, and in accomplishing the purposes of the Association. Nothing herein shall be construed to authorize the Association or Board of Directors to conduct an active business for profit on behalf of the unit owners.",
+                "title": "Other Powers & Duties"
               },
               {
                 "id": "12.5.14",
                 "num": "12.5.14",
                 "kind": "num",
-                "base": null
+                "base": null,
+                "title": "Borrow Funds"
               }
             ]
           }
@@ -1672,37 +1709,43 @@ window.GEC_DOCS = {
                 "id": "15.1.1",
                 "num": "15.1.1",
                 "kind": "num",
-                "base": "**15.1.1** Fire insurance, with extended coverage endorsements, in an amount as near as practicable to the full insurable replacement value (without deduction for depreciation, but less any other deductions which the Board may find reasonable after consultation with insurance consultants), covering the units and common and limited common areas and facilities, with the Board or an insurance trustee designated by the Board named as insured, as trustee for the benefit of the unit owners and mortgagees as their respective interest may appear, or such other fire and casualty insurance as the Board in its discretion shall determine to give substantially equal or greater protection. Said policy or policies shall provide for separate protection for each unit to the full insurable replacement value thereof (limited as above provided), and a separate loss payable endorsement in favor of any mortgagee entitled to request the same."
+                "base": "**15.1.1** Fire insurance, with extended coverage endorsements, in an amount as near as practicable to the full insurable replacement value (without deduction for depreciation, but less any other deductions which the Board may find reasonable after consultation with insurance consultants), covering the units and common and limited common areas and facilities, with the Board or an insurance trustee designated by the Board named as insured, as trustee for the benefit of the unit owners and mortgagees as their respective interest may appear, or such other fire and casualty insurance as the Board in its discretion shall determine to give substantially equal or greater protection. Said policy or policies shall provide for separate protection for each unit to the full insurable replacement value thereof (limited as above provided), and a separate loss payable endorsement in favor of any mortgagee entitled to request the same.",
+                "title": "Fire Insurance"
               },
               {
                 "id": "15.1.2",
                 "num": "15.1.2",
                 "kind": "num",
-                "base": "**15.1.2** General comprehensive liability insurance insuring the unit owners, the Association, the Board, the Developer, and such others as may be designated by the Board against liability to the public or to the unit owners, and their invitees, guests, or tenants, incident to the ownership or use of the units and common and limited common areas and facilities (including but not limited to owned and non-owned automobile liability) with coverage limits which may substantially exceed, but shall not be less than $1,000,000 for personal injuries and deaths arising out of a single occurrence, and $50,000 (per accident) for property damage. Each such policy shall contain a Severability of Interest Endorsement or its equivalent which would preclude the insurer from denying a claim of the negligent acts or omissions of the Owners' Association or another unit owner. Each such policy shall contain protection against water damage liability, liability for non-owned and hired automobiles, liability for the property of others and any other coverage which may, from time to time, be required by regulations of the Federal National Mortgage Association (FNMA)."
+                "base": "**15.1.2** General comprehensive liability insurance insuring the unit owners, the Association, the Board, the Developer, and such others as may be designated by the Board against liability to the public or to the unit owners, and their invitees, guests, or tenants, incident to the ownership or use of the units and common and limited common areas and facilities (including but not limited to owned and non-owned automobile liability) with coverage limits which may substantially exceed, but shall not be less than $1,000,000 for personal injuries and deaths arising out of a single occurrence, and $50,000 (per accident) for property damage. Each such policy shall contain a Severability of Interest Endorsement or its equivalent which would preclude the insurer from denying a claim of the negligent acts or omissions of the Owners' Association or another unit owner. Each such policy shall contain protection against water damage liability, liability for non-owned and hired automobiles, liability for the property of others and any other coverage which may, from time to time, be required by regulations of the Federal National Mortgage Association (FNMA).",
+                "title": "General Liability Insurance"
               },
               {
                 "id": "15.1.3",
                 "num": "15.1.3",
                 "kind": "num",
-                "base": "**15.1.3** Workmen's compensation insurance to the extent required by applicable laws."
+                "base": "**15.1.3** Workmen's compensation insurance to the extent required by applicable laws.",
+                "title": "Workers' Compensation"
               },
               {
                 "id": "15.1.4",
                 "num": "15.1.4",
                 "kind": "num",
-                "base": "**15.1.4** Insurance against loss of personal property of the Association by fire, theft and other losses, with such deductible provisions as the Board deems advisable."
+                "base": "**15.1.4** Insurance against loss of personal property of the Association by fire, theft and other losses, with such deductible provisions as the Board deems advisable.",
+                "title": "Personal Property Insurance"
               },
               {
                 "id": "15.1.5",
                 "num": "15.1.5",
                 "kind": "num",
-                "base": "**15.1.5** Insurance coverage, in such amounts as the Board may in its discretion determine, to indemnify the directors, officers and agents of the Association pursuant to Section 13.3."
+                "base": "**15.1.5** Insurance coverage, in such amounts as the Board may in its discretion determine, to indemnify the directors, officers and agents of the Association pursuant to Section 13.3.",
+                "title": "Directors & Officers Coverage"
               },
               {
                 "id": "15.1.6",
                 "num": "15.1.6",
                 "kind": "num",
-                "base": "**15.1.6** Such other insurance as the Board deems advisable."
+                "base": "**15.1.6** Such other insurance as the Board deems advisable.",
+                "title": "Other Insurance"
               }
             ]
           },
@@ -1734,37 +1777,43 @@ window.GEC_DOCS = {
                 "id": "15.5.1",
                 "num": "15.5.1",
                 "kind": "num",
-                "base": "**15.5.1** Provide that the liability of the insurer thereunder shall not be affected by, and that the insurer shall not claim any right of set-off, counterclaim, apportionment, proration, or contribution by reason of, any other insurance obtained by or for any unit owner;"
+                "base": "**15.5.1** Provide that the liability of the insurer thereunder shall not be affected by, and that the insurer shall not claim any right of set-off, counterclaim, apportionment, proration, or contribution by reason of, any other insurance obtained by or for any unit owner;",
+                "title": "No Insurer Set-Off"
               },
               {
                 "id": "15.5.2",
                 "num": "15.5.2",
                 "kind": "num",
-                "base": "**15.5.2** Contain no provision relieving the insurer from liability for loss occurring while the hazard to such buildings is increased, whether or not within the knowledge or control of the Board, or because of any breach of warranty or condition or any other act or neglect by the Board, the unit owners or any other persons acting under authority of any of them;"
+                "base": "**15.5.2** Contain no provision relieving the insurer from liability for loss occurring while the hazard to such buildings is increased, whether or not within the knowledge or control of the Board, or because of any breach of warranty or condition or any other act or neglect by the Board, the unit owners or any other persons acting under authority of any of them;",
+                "title": "Coverage Despite Increased Hazard"
               },
               {
                 "id": "15.5.3",
                 "num": "15.5.3",
                 "kind": "num",
-                "base": "**15.5.3** Provide that the policy may not be cancelled (whether or not requested by the Board) except by the insurer giving at least sixty (60) days' prior written notice thereof to the Board and every other person in interest who shall have requested such notice of the insurer;"
+                "base": "**15.5.3** Provide that the policy may not be cancelled (whether or not requested by the Board) except by the insurer giving at least sixty (60) days' prior written notice thereof to the Board and every other person in interest who shall have requested such notice of the insurer;",
+                "title": "Cancellation Notice"
               },
               {
                 "id": "15.5.4",
                 "num": "15.5.4",
                 "kind": "num",
-                "base": "**15.5.4** Contain a waiver by the insurer of any right of subrogation to any right of the Board, the Association, the unit owners, or the lessee or renter of any unit;"
+                "base": "**15.5.4** Contain a waiver by the insurer of any right of subrogation to any right of the Board, the Association, the unit owners, or the lessee or renter of any unit;",
+                "title": "Waiver Of Subrogation"
               },
               {
                 "id": "15.5.5",
                 "num": "15.5.5",
                 "kind": "num",
-                "base": "**15.5.5** Contain a cross liability endorsement wherein the rights of an insured party under the policy or policies shall not be prejudiced as respects actions against another insured party thereunder, or other equivalent coverage in cases of liability of the Association or unit owners to other unit owners;"
+                "base": "**15.5.5** Contain a cross liability endorsement wherein the rights of an insured party under the policy or policies shall not be prejudiced as respects actions against another insured party thereunder, or other equivalent coverage in cases of liability of the Association or unit owners to other unit owners;",
+                "title": "Cross-Liability Endorsement"
               },
               {
                 "id": "15.5.6",
                 "num": "15.5.6",
                 "kind": "num",
                 "base": "**15.5.6** Contain a standard mortgagee clause which shall:",
+                "title": "Mortgagee Clause",
                 "children": [
                   {
                     "id": "15.5.6(a)",
@@ -1804,19 +1853,22 @@ window.GEC_DOCS = {
                 "id": "15.6.1",
                 "num": "15.6.1",
                 "kind": "num",
-                "base": null
+                "base": null,
+                "title": "Damage To Owner's Unit"
               },
               {
                 "id": "15.6.2",
                 "num": "15.6.2",
                 "kind": "num",
-                "base": null
+                "base": null,
+                "title": "Shared Damage Responsibility"
               },
               {
                 "id": "15.6.3",
                 "num": "15.6.3",
                 "kind": "num",
-                "base": null
+                "base": null,
+                "title": "Owner Insurance Duty"
               }
             ]
           }
@@ -1837,31 +1889,36 @@ window.GEC_DOCS = {
                 "id": "16.1.1",
                 "num": "16.1.1",
                 "kind": "num",
-                "base": "**16.1.1** The nature and extent of the damage or destruction, together with an inventory of the improvements and property directly affected thereby."
+                "base": "**16.1.1** The nature and extent of the damage or destruction, together with an inventory of the improvements and property directly affected thereby.",
+                "title": "Extent Of Damage"
               },
               {
                 "id": "16.1.2",
                 "num": "16.1.2",
                 "kind": "num",
-                "base": "**16.1.2** An estimate of the cost to repair and restore the damage and destruction, which estimate shall, if practicable, be based upon two or more firm bids obtained from responsible contractors."
+                "base": "**16.1.2** An estimate of the cost to repair and restore the damage and destruction, which estimate shall, if practicable, be based upon two or more firm bids obtained from responsible contractors.",
+                "title": "Repair Cost Estimate"
               },
               {
                 "id": "16.1.3",
                 "num": "16.1.3",
                 "kind": "num",
-                "base": "**16.1.3** The anticipated insurance proceeds, if any, which will be available from insurance covering the loss, based on the amount paid or initially offered by the insurer."
+                "base": "**16.1.3** The anticipated insurance proceeds, if any, which will be available from insurance covering the loss, based on the amount paid or initially offered by the insurer.",
+                "title": "Anticipated Insurance Proceeds"
               },
               {
                 "id": "16.1.4",
                 "num": "16.1.4",
                 "kind": "num",
-                "base": "**16.1.4** The amount, if any, that the estimated cost of repair and restoration will exceed the anticipated insurance proceeds, and the amount of any special assessment which will be necessary in such event."
+                "base": "**16.1.4** The amount, if any, that the estimated cost of repair and restoration will exceed the anticipated insurance proceeds, and the amount of any special assessment which will be necessary in such event.",
+                "title": "Shortfall & Special Assessment"
               },
               {
                 "id": "16.1.5",
                 "num": "16.1.5",
                 "kind": "num",
-                "base": "**16.1.5** The Board's recommendations as to whether such damage or destruction should be repaired or restored."
+                "base": "**16.1.5** The Board's recommendations as to whether such damage or destruction should be repaired or restored.",
+                "title": "Repair Recommendation"
               }
             ]
           },
@@ -1887,19 +1944,22 @@ window.GEC_DOCS = {
                 "id": "16.4.1",
                 "num": "16.4.1",
                 "kind": "num",
-                "base": "**16.4.1** Unless prior to the commencement of repair and restoration work (other than emergency work) the unit owners shall have decided not to repair and reconstruct in accordance with the provisions of either subsection 16.5.3 or 16.6.3, the Board shall promptly repair and restore the damage and destruction, use the available insurance proceeds therefor, and pay for the actual cost of repair and restoration in excess of insurance proceeds secured as a common expense which shall be specially assessed against all units in proportion to their percentages of interest in the common areas and facilities."
+                "base": "**16.4.1** Unless prior to the commencement of repair and restoration work (other than emergency work) the unit owners shall have decided not to repair and reconstruct in accordance with the provisions of either subsection 16.5.3 or 16.6.3, the Board shall promptly repair and restore the damage and destruction, use the available insurance proceeds therefor, and pay for the actual cost of repair and restoration in excess of insurance proceeds secured as a common expense which shall be specially assessed against all units in proportion to their percentages of interest in the common areas and facilities.",
+                "title": "Duty To Repair"
               },
               {
                 "id": "16.4.2",
                 "num": "16.4.2",
                 "kind": "num",
-                "base": "**16.4.2** The Board shall have the authority to employ architects and attorneys, advertise for bids, let contracts to contractors and others, and to take such other action as is reasonably necessary to accomplish the repair and restoration. The Board may in its discretion authorize the insurance carrier involved to proceed with the repair and restoration."
+                "base": "**16.4.2** The Board shall have the authority to employ architects and attorneys, advertise for bids, let contracts to contractors and others, and to take such other action as is reasonably necessary to accomplish the repair and restoration. The Board may in its discretion authorize the insurance carrier involved to proceed with the repair and restoration.",
+                "title": "Board Repair Authority"
               },
               {
                 "id": "16.4.3",
                 "num": "16.4.3",
                 "kind": "num",
-                "base": "**16.4.3** The Board may authorize an agreement with any reputable financial institution or trust or escrow company to act as an insurance trustee to adjust and settle claims for losses exceeding $25,000.00, to collect the insurance proceeds, and to carry out the provisions of this section."
+                "base": "**16.4.3** The Board may authorize an agreement with any reputable financial institution or trust or escrow company to act as an insurance trustee to adjust and settle claims for losses exceeding $25,000.00, to collect the insurance proceeds, and to carry out the provisions of this section.",
+                "title": "Insurance Trustee"
               }
             ]
           },
@@ -1913,19 +1973,22 @@ window.GEC_DOCS = {
                 "id": "16.5.1",
                 "num": "16.5.1",
                 "kind": "num",
-                "base": "**16.5.1** Either the Board or a requisite number of unit owners, within fifteen (15) days after the notice required under Section 16.2 has been given, may, but shall not be required to, call a special meeting of the Association to consider such repair and restoration work."
+                "base": "**16.5.1** Either the Board or a requisite number of unit owners, within fifteen (15) days after the notice required under Section 16.2 has been given, may, but shall not be required to, call a special meeting of the Association to consider such repair and restoration work.",
+                "title": "Call Special Meeting"
               },
               {
                 "id": "16.5.2",
                 "num": "16.5.2",
                 "kind": "num",
-                "base": "**16.5.2** Except for emergency work, no repair and restoration work shall be commenced until after said 15-day period and until after the conclusion of said special meeting if such meeting is called within said 15 days."
+                "base": "**16.5.2** Except for emergency work, no repair and restoration work shall be commenced until after said 15-day period and until after the conclusion of said special meeting if such meeting is called within said 15 days.",
+                "title": "Delay Pending Meeting"
               },
               {
                 "id": "16.5.3",
                 "num": "16.5.3",
                 "kind": "num",
-                "base": "**16.5.3** A unanimous decision of the unit owners will be required to avoid the provisions of subsection 16.4.1 and to determine not to repair and restore the damage and destruction; provided, that the failure of the Board or the unit owners within said 15-day period to call for said special meeting shall be conclusively deemed a unanimous decision to undertake such work."
+                "base": "**16.5.3** A unanimous decision of the unit owners will be required to avoid the provisions of subsection 16.4.1 and to determine not to repair and restore the damage and destruction; provided, that the failure of the Board or the unit owners within said 15-day period to call for said special meeting shall be conclusively deemed a unanimous decision to undertake such work.",
+                "title": "Unanimous Vote Not To Repair"
               }
             ]
           },
@@ -1939,19 +2002,22 @@ window.GEC_DOCS = {
                 "id": "16.6.1",
                 "num": "16.6.1",
                 "kind": "num",
-                "base": "**16.6.1** The Board shall promptly, and in all events within thirty (30) days after the date of damage or destruction, call a special meeting of the Association to consider repair and restoration of such damage or destruction. If the Board fails to do so within said 30-day period, then any unit owner or mortgagee may convene and conduct the meeting required under this subsection 16.6.1."
+                "base": "**16.6.1** The Board shall promptly, and in all events within thirty (30) days after the date of damage or destruction, call a special meeting of the Association to consider repair and restoration of such damage or destruction. If the Board fails to do so within said 30-day period, then any unit owner or mortgagee may convene and conduct the meeting required under this subsection 16.6.1.",
+                "title": "Special Meeting Required"
               },
               {
                 "id": "16.6.2",
                 "num": "16.6.2",
                 "kind": "num",
-                "base": "**16.6.2** Except for emergency work, no repair and restoration work shall be commenced until the conclusion of the special meeting of the Association required under subsection 16.6.1."
+                "base": "**16.6.2** Except for emergency work, no repair and restoration work shall be commenced until the conclusion of the special meeting of the Association required under subsection 16.6.1.",
+                "title": "Work Deferred To Meeting"
               },
               {
                 "id": "16.6.3",
                 "num": "16.6.3",
                 "kind": "num",
-                "base": "**16.6.3** A concurring vote of two-thirds (2/3) or more of the total voting power will be required to avoid the provision of subsection 16.4.1 and to determine not to repair and restore the damage and destruction; provided, that failure of the Board, the unit owners, or mortgagees to convene the special meeting required under subsection 16.6.1 within ninety (90) days after the date of damage or destruction shall be deemed a unanimous decision not to undertake such repair and restoration work."
+                "base": "**16.6.3** A concurring vote of two-thirds (2/3) or more of the total voting power will be required to avoid the provision of subsection 16.4.1 and to determine not to repair and restore the damage and destruction; provided, that failure of the Board, the unit owners, or mortgagees to convene the special meeting required under subsection 16.6.1 within ninety (90) days after the date of damage or destruction shall be deemed a unanimous decision not to undertake such repair and restoration work.",
+                "title": "Two-Thirds Vote Not To Repair"
               }
             ]
           },
@@ -1965,25 +2031,29 @@ window.GEC_DOCS = {
                 "id": "16.7.1",
                 "num": "16.7.1",
                 "kind": "num",
-                "base": "**16.7.1** The property shall be owned in common by the unit owners and shall no longer be subject to this Declaration or to condominium ownership;"
+                "base": "**16.7.1** The property shall be owned in common by the unit owners and shall no longer be subject to this Declaration or to condominium ownership;",
+                "title": "Ownership In Common"
               },
               {
                 "id": "16.7.2",
                 "num": "16.7.2",
                 "kind": "num",
-                "base": "**16.7.2** The undivided interest in the property owned in common which appertains to each unit owner shall be the percentage of undivided interest previously owned by such unit owner in the common areas and facilities;"
+                "base": "**16.7.2** The undivided interest in the property owned in common which appertains to each unit owner shall be the percentage of undivided interest previously owned by such unit owner in the common areas and facilities;",
+                "title": "Undivided Interests"
               },
               {
                 "id": "16.7.3",
                 "num": "16.7.3",
                 "kind": "num",
-                "base": "**16.7.3** Any mortgages or liens affecting any of the units shall be deemed transferred in accordance with the existing priorities to the percentage of the undivided interest of the unit owner in the property as provided herein; and"
+                "base": "**16.7.3** Any mortgages or liens affecting any of the units shall be deemed transferred in accordance with the existing priorities to the percentage of the undivided interest of the unit owner in the property as provided herein; and",
+                "title": "Mortgages & Liens"
               },
               {
                 "id": "16.7.4",
                 "num": "16.7.4",
                 "kind": "num",
-                "base": "**16.7.4** The property shall be subject to an action for partition at the suit of any unit owner, in which event the net proceeds of sale, together with the net proceeds of the insurance on the property, if any, shall be considered as one fund; such fund shall be divided into separate shares, one for each unit owner, in a percentage equal to the percentage of undivided interest owned by each such owner in the property; then, after first paying out of the respective share of each unit owner, to the extent sufficient for the purpose, all mortgages and liens on the interest of such owner, the balance remaining in each share shall then be distributed to each owner respectively."
+                "base": "**16.7.4** The property shall be subject to an action for partition at the suit of any unit owner, in which event the net proceeds of sale, together with the net proceeds of the insurance on the property, if any, shall be considered as one fund; such fund shall be divided into separate shares, one for each unit owner, in a percentage equal to the percentage of undivided interest owned by each such owner in the property; then, after first paying out of the respective share of each unit owner, to the extent sufficient for the purpose, all mortgages and liens on the interest of such owner, the balance remaining in each share shall then be distributed to each owner respectively.",
+                "title": "Partition & Sale"
               }
             ]
           },
@@ -2028,43 +2098,50 @@ window.GEC_DOCS = {
                 "id": "17.4.1",
                 "num": "17.4.1",
                 "kind": "num",
-                "base": "**17.4.1** As soon as practicable the Board shall, reasonably and in good faith, allocate the Condemnation Award between compensation, damages, or other proceeds."
+                "base": "**17.4.1** As soon as practicable the Board shall, reasonably and in good faith, allocate the Condemnation Award between compensation, damages, or other proceeds.",
+                "title": "Allocate Condemnation Award"
               },
               {
                 "id": "17.4.2",
                 "num": "17.4.2",
                 "kind": "num",
-                "base": "**17.4.2** The Board shall apportion the amounts so allocated to taking of or injury to the common areas which in turn shall be apportioned among owners in proportion to their respective undivided interests in the common areas."
+                "base": "**17.4.2** The Board shall apportion the amounts so allocated to taking of or injury to the common areas which in turn shall be apportioned among owners in proportion to their respective undivided interests in the common areas.",
+                "title": "Common Area Apportionment"
               },
               {
                 "id": "17.4.3",
                 "num": "17.4.3",
                 "kind": "num",
-                "base": "**17.4.3** The total amount allocated to severance damages shall be apportioned to those units which were not taken or condemned."
+                "base": "**17.4.3** The total amount allocated to severance damages shall be apportioned to those units which were not taken or condemned.",
+                "title": "Severance Damages"
               },
               {
                 "id": "17.4.4",
                 "num": "17.4.4",
                 "kind": "num",
-                "base": "**17.4.4** The respective amounts allocated to the taking of or injury to a particular unit and/or improvements an owner had made within his own unit shall be apportioned to the particular unit involved."
+                "base": "**17.4.4** The respective amounts allocated to the taking of or injury to a particular unit and/or improvements an owner had made within his own unit shall be apportioned to the particular unit involved.",
+                "title": "Unit Taking Compensation"
               },
               {
                 "id": "17.4.5",
                 "num": "17.4.5",
                 "kind": "num",
-                "base": "**17.4.5** The amount allocated to consequential damages and any other takings or injuries shall be apportioned as the Board determines to be equitable in the circumstances."
+                "base": "**17.4.5** The amount allocated to consequential damages and any other takings or injuries shall be apportioned as the Board determines to be equitable in the circumstances.",
+                "title": "Consequential Damages"
               },
               {
                 "id": "17.4.6",
                 "num": "17.4.6",
                 "kind": "num",
-                "base": "**17.4.6** If an allocation of the Condemnation Award is already established in negotiation, judicial decree, or otherwise, then in allocating the Condemnation Award the Board shall employ such allocation to the extent it is relevant and applicable."
+                "base": "**17.4.6** If an allocation of the Condemnation Award is already established in negotiation, judicial decree, or otherwise, then in allocating the Condemnation Award the Board shall employ such allocation to the extent it is relevant and applicable.",
+                "title": "Pre-Established Allocation"
               },
               {
                 "id": "17.4.7",
                 "num": "17.4.7",
                 "kind": "num",
-                "base": "**17.4.7** Distribution of apportioned proceeds shall be made to the respective owners and their respective mortgagees in the manner provided in Section 17.3."
+                "base": "**17.4.7** Distribution of apportioned proceeds shall be made to the respective owners and their respective mortgagees in the manner provided in Section 17.3.",
+                "title": "Distribution Of Proceeds"
               }
             ]
           },
@@ -2184,13 +2261,15 @@ window.GEC_DOCS = {
                 "id": "19.7.1",
                 "num": "19.7.1",
                 "kind": "num",
-                "base": "**19.7.1** In the event a unit owner shall have pledged his vote to a mortgagee, to cast the vote pursuant to the authority given under the terms of the pledge involved; provided, however, that a unit owner may only pledge his vote to a mortgagee during the period of foreclosure."
+                "base": "**19.7.1** In the event a unit owner shall have pledged his vote to a mortgagee, to cast the vote pursuant to the authority given under the terms of the pledge involved; provided, however, that a unit owner may only pledge his vote to a mortgagee during the period of foreclosure.",
+                "title": "Cast Pledged Vote"
               },
               {
                 "id": "19.7.2",
                 "num": "19.7.2",
                 "kind": "num",
                 "base": "**19.7.2** To receive written notice contemporaneous with notice sent to the unit owner at the address designated by the mortgagee of:",
+                "title": "Receive Notices",
                 "children": [
                   {
                     "id": "19.7.2(a)",
@@ -2222,19 +2301,22 @@ window.GEC_DOCS = {
                 "id": "19.7.3",
                 "num": "19.7.3",
                 "kind": "num",
-                "base": "**19.7.3** To examine the books and records of the Association and to be given a copy of the annual financial statement and report of the Association, as provided in Section 14.8."
+                "base": "**19.7.3** To examine the books and records of the Association and to be given a copy of the annual financial statement and report of the Association, as provided in Section 14.8.",
+                "title": "Examine Books & Records"
               },
               {
                 "id": "19.7.4",
                 "num": "19.7.4",
                 "kind": "num",
-                "base": "**19.7.4** To be given the endorsements of insurance policies and the notices, and to exercise all other rights and privileges with respect to insurance matters which are specified in Section 15 for the benefit of mortgagees."
+                "base": "**19.7.4** To be given the endorsements of insurance policies and the notices, and to exercise all other rights and privileges with respect to insurance matters which are specified in Section 15 for the benefit of mortgagees.",
+                "title": "Insurance Endorsements"
               },
               {
                 "id": "19.7.5",
                 "num": "19.7.5",
                 "kind": "num",
-                "base": "**19.7.5** To be permitted to designate a representative to attend all meetings of the Association."
+                "base": "**19.7.5** To be permitted to designate a representative to attend all meetings of the Association.",
+                "title": "Attend Meetings"
               }
             ]
           },
@@ -2343,13 +2425,15 @@ window.GEC_DOCS = {
                 "id": "24.3.1",
                 "num": "24.3.1",
                 "kind": "num",
-                "base": "**24.3.1** To correct or revise the boundaries or descriptions of the buildings, units and common areas and facilities to reflect their locations as built."
+                "base": "**24.3.1** To correct or revise the boundaries or descriptions of the buildings, units and common areas and facilities to reflect their locations as built.",
+                "title": "Correct Boundaries"
               },
               {
                 "id": "24.3.2",
                 "num": "24.3.2",
                 "kind": "num",
-                "base": "**24.3.2** To make such reasonable changes as may from time to time be required by a mortgagee; provided, that any such changes shall not affect the values or percentages of interest stated in Appendix \"C\" nor materially adversely affect the rights of the unit owners or other mortgagees."
+                "base": "**24.3.2** To make such reasonable changes as may from time to time be required by a mortgagee; provided, that any such changes shall not affect the values or percentages of interest stated in Appendix \"C\" nor materially adversely affect the rights of the unit owners or other mortgagees.",
+                "title": "Mortgagee-Required Changes"
               }
             ]
           },
@@ -3782,7 +3866,7 @@ window.GEC_DOCS = {
       "title": "Glendale Estates, A Condominium",
       "subtitle": "Bylaws & Recorded Amendments",
       "heading": "BYLAWS OF GLENDALE ESTATES CONDOMINIUM ASSOCIATION",
-      "generated": "2026-08-29"
+      "generated": "2026-09-13"
     },
     "sectionLabel": "ARTICLE",
     "amendments": [
